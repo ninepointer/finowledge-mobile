@@ -97,15 +97,16 @@ class _DashboardViewState extends State<DashboardView> {
                     //     ],
                     //   ),
                     // ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Flexible(
-                        child: Text(
-                          "You have not participated in any finance olympiads yet.",
-                          style: AppStyles.tsBlackMedium14,
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: Flexible(
+                    //     child: Text(
+                    //       "You have not participated in any finance olympiads yet.",
+                    //       style: AppStyles.tsBlackMedium14,
+                    //     ),
+                    //   ),
+                    // ),
+                    noOlympiad(),
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
                     CommonTile(
@@ -180,10 +181,10 @@ Widget noOlympiad() {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.blue, // Change the color as needed
+        color: AppColors.grey, // Change the color as needed
       ),
       child: Text(
-        'Sorry, You don\'t have any finance olympiad, keep checking this space!',
+        'You have not participated in any finance olympiads yet.',
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,

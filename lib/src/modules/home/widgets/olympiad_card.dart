@@ -136,7 +136,8 @@ class OlympiadCard extends GetView<FinowledgeController> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text('Registration'),
-                              content: Text('Registration does not start yet.'),
+                              content:
+                                  Text('Registration has not started yet.'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {

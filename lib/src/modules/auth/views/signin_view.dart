@@ -69,9 +69,7 @@ class _SigninViewState extends State<SigninView> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .tsMedium20
-                                      .copyWith(
-                                          color:
-                                              AppColors.finowledgeAccentColors),
+                                      .copyWith(color: AppColors.black),
                                   textAlign: TextAlign.center,
                                 )
                               ],
