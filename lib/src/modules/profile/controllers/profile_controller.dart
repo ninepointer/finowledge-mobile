@@ -391,6 +391,9 @@ class ProfileController extends BaseController<ProfileRepository> {
     isProfileLoading(true);
     DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
     Map<String, dynamic> data = {
+      "student_name": studentNameTextController.text,
+      "parents_name": parentsNameTextController.text,
+      "school": schoolNameTextController.text,
       "first_name": firstNameTextController.text,
       "last_name": lastNameTextController.text,
       "email": emailTextController.text,

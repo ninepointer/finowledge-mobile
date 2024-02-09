@@ -176,40 +176,40 @@ List<OnBoardingContent> contents = [
   //   title: 'Battle Ground',
   //   description: 'Enter trading battles, show your skills, and win \n exciting gifts and cash prizes!',
   // ),
-  OnBoardingContent(
-    image: AppImages.virtualTrade,
-    title: 'Experience the real F&O market',
-    description:
-        'Participate in different TestZones to test your strategies & win cash rewards!',
-  ),
-  OnBoardingContent(
-    image: AppImages.workshop,
-    title: 'Future & Options (F&O)',
-    description:
-        "Learn the basics of options trading by executing your strategies for free!",
-  ),
-  OnBoardingContent(
-    image: AppImages.tenx,
-    title: 'Subscribe to StoxHero TenX plans',
-    description:
-        'Subscribe to TenX plans and apply your learning to earn cash reward!',
-  ),
-  OnBoardingContent(
-    image: AppImages.job,
-    title: 'Get your real market readiness tested!',
-    description:
-        'Participate in MarginX with virtual money at a very low investment and check your market readiness!',
-  ),
+  // OnBoardingContent(
+  //   image: AppImages.virtualTrade,
+  //   title: 'Experience the real F&O market',
+  //   description:
+  //       'Participate in different TestZones to test your strategies & win cash rewards!',
+  // ),
+  // OnBoardingContent(
+  //   image: AppImages.workshop,
+  //   title: 'Future & Options (F&O)',
+  //   description:
+  //       "Learn the basics of options trading by executing your strategies for free!",
+  // ),
+  // OnBoardingContent(
+  //   image: AppImages.tenx,
+  //   title: 'Subscribe to StoxHero TenX plans',
+  //   description:
+  //       'Subscribe to TenX plans and apply your learning to earn cash reward!',
+  // ),
+  // OnBoardingContent(
+  //   image: AppImages.job,
+  //   title: 'Get your real market readiness tested!',
+  //   description:
+  //       'Participate in MarginX with virtual money at a very low investment and check your market readiness!',
+  // ),
   OnBoardingContent(
     image: AppImages.referral,
     title: 'Refer your friends and win ',
     description:
-        'Refer your friend & get \u{20B9}15 in your StoxHero wallet, your friend gets \u{20B9}100 as signup bonus',
+        'Refer your friend & get \u{20B9}15 in your wallet, your friend gets \u{20B9}100 as signup bonus',
   ),
-  OnBoardingContent(
-    image: AppImages.contestLeaderboard,
-    title: 'Check TestZone Weekly Earning Leaderboard',
-    description:
-        'Check the TestZone profiles of top TestZone traders of the week along with their recent TestZone participations!',
-  ),
+  // OnBoardingContent(
+  //   image: AppImages.contestLeaderboard,
+  //   title: 'Check TestZone Weekly Earning Leaderboard',
+  //   description:
+  //       'Check the TestZone profiles of top TestZone traders of the week along with their recent TestZone participations!',
+  // ),
 ];

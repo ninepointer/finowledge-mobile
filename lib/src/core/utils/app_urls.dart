@@ -42,4 +42,5 @@ class AppUrls {
   static const String activeCities = "$apiURL/cities/active";
   static const String signup = "$apiURL/schoolsignup";
   static const String userActiveQuizOlympiad = "$apiURL/quiz/user";
+  static String bookingQuizSlot(String id) => "$apiURL/quiz/user/slots/$id";
 }
