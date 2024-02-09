@@ -23,6 +23,7 @@ class HomeController extends BaseController<DashboardRepository> {
 
   final dashboardCarouselList = <DashboardCarousel>[].obs;
   final myActiveOlympiadList = <MyActiveOlympiadList>[].obs;
+  final timeSlotForQuizRegistrationList = <TimeSlotForQuizList>[].obs;
 
   String selectedTradeType = 'virtual';
   String selectedTimeFrame = 'this month';
@@ -144,6 +145,24 @@ class HomeController extends BaseController<DashboardRepository> {
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
           myActiveOlympiadList(response.data?.data ?? []);
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getTimeSlotForQuizRegistrationDetails(String id) async {
+    isLoading(true);
+    try {
+      final RepoResponse<TimeSlotForQuizRegistrationResponse> response =
+          await repository.getTimeSlotForQuizRegistration(id);
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          timeSlotForQuizRegistrationList(response.data?.data ?? []);
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
