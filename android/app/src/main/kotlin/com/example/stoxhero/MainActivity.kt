@@ -1,4 +1,4 @@
-package com.stoxhero.app
+package com.finowledge.app
 
 import io.flutter.embedding.android.FlutterActivity
 

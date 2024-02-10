@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "74859915433",
-    "project_id": "stoxhero-app-2023",
-    "storage_bucket": "stoxhero-app-2023.appspot.com"
+    "project_number": "159807192231",
+    "project_id": "finowledge-35551",
+    "storage_bucket": "finowledge-35551.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:74859915433:android:6e5eea7c977d31d1dc61b8",
+        "mobilesdk_app_id": "1:159807192231:android:8295b6d15107f245feaf82",
         "android_client_info": {
-          "package_name": "com.stoxhero.app"
+          "package_name": "com.finowledge.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCrdCTvM4CCoZpWEnOlufzCr2ykpNqbF3I"
+          "current_key": "AIzaSyBJyUvFG21vTpPSf5D_EKUSrEHicYEDhNw"
         }
       ],
       "services": {

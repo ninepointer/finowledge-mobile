@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '74859915433',
     projectId: 'stoxhero-app-2023',
     storageBucket: 'stoxhero-app-2023.appspot.com',
-    iosBundleId: 'com.stoxhero.app',
+    iosBundleId: 'com.finowledge.app',
   );
 }
