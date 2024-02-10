@@ -137,24 +137,27 @@ class OlympiadCard extends GetView<FinowledgeController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Registration'),
-                              content:
-                                  Text('Registration has not started yet.'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
+                        Get.to(
+                          () => RegistrationView(),
                         );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title: Text('Registration'),
+                        //       content:
+                        //           Text('Registration has not started yet.'),
+                        //       actions: <Widget>[
+                        //         TextButton(
+                        //           onPressed: () {
+                        //             Navigator.of(context).pop();
+                        //           },
+                        //           child: Text('OK'),
+                        //         ),
+                        //       ],
+                        //     );
+                        // },
+                        //  );
                       },
                       child: Text('REGISTER'),
                       style: ElevatedButton.styleFrom(
