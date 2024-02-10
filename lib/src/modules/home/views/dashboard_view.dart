@@ -70,6 +70,11 @@ class _DashboardViewState extends State<DashboardView> {
                                       String userId =
                                           controller.userDetailsData.sId ?? '';
                                       return Container(
+                                        margin: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.0408),
                                         width: controller.myActiveOlympiadList
                                                     .length ==
                                                 1
@@ -86,7 +91,7 @@ class _DashboardViewState extends State<DashboardView> {
                                                 MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.1403,
+                                                    0.1603,
                                         child: ActiveOlympiadCard(
                                           //userId: userId,
                                           myOlympiad: contest,
@@ -136,7 +141,12 @@ class _DashboardViewState extends State<DashboardView> {
                                       String userId =
                                           controller.userDetailsData.sId ?? '';
                                       return Container(
-                                        width: controller.myActiveOlympiadList
+                                        margin: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.0408),
+                                        width: controller.userAllOlympiadList
                                                     .length ==
                                                 1
                                             ? MediaQuery.of(context)
@@ -152,7 +162,7 @@ class _DashboardViewState extends State<DashboardView> {
                                                 MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.1403,
+                                                    0.1603,
                                         child: OlympiadCard(
                                           //userId: userId,
                                           myOlympiad: contest,
