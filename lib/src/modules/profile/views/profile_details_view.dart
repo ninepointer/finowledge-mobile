@@ -107,21 +107,6 @@ class ProfileDetailsView extends GetView<ProfileController> {
                       ],
                     ),
                     Text(
-                      'Email',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0102,
-                    ),
-                    CommonTextField(
-                      isDisabled: controller.isKYCApproved,
-                      controller: controller.emailTextController,
-                      hintText: 'Email',
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.width * 0.0204,
-                      ),
-                    ),
-                    Text(
                       'Mobile',
                       style: Theme.of(context).textTheme.tsGreyMedium12,
                     ),
@@ -244,139 +229,139 @@ class ProfileDetailsView extends GetView<ProfileController> {
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0306,
                     ),
-                    Text(
-                      'Location',
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.tsMedium16,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0306,
-                    ),
-                    Text(
-                      'Address',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.0102),
-                    CommonTextField(
-                      prefixIcon: Icon(Icons.home),
-                      controller: controller.addressTextController,
-                      hintText: 'Address',
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.width * 0.0204),
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'City',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.0204,
-                              ),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.location_city),
-                                controller: controller.cityTextController,
-                                hintText: 'City',
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.0306,
-                        ),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pin Code',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.0102),
-                              CommonTextField(
-                                controller: controller.pincodeTextController,
-                                hintText: 'Pincode',
-                                prefixIcon: Icon(Icons.pin),
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(6),
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'State',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.0102),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.location_on),
-                                controller: controller.stateTextController,
-                                hintText: 'State',
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.0306,
-                        ),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Country',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.0102),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.public),
-                                controller: controller.countryTextController,
-                                hintText: 'Country',
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Text(
+                    //   'Location',
+                    //   textAlign: TextAlign.start,
+                    //   style: Theme.of(context).textTheme.tsMedium16,
+                    // ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.width * 0.0306,
+                    // ),
+                    // Text(
+                    //   'Address',
+                    //   style: Theme.of(context).textTheme.tsGreyMedium12,
+                    // ),
+                    // SizedBox(
+                    //     height: MediaQuery.of(context).size.width * 0.0102),
+                    // CommonTextField(
+                    //   prefixIcon: Icon(Icons.home),
+                    //   controller: controller.addressTextController,
+                    //   hintText: 'Address',
+                    //   padding: EdgeInsets.only(
+                    //       bottom: MediaQuery.of(context).size.width * 0.0204),
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'City',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(
+                    //             height:
+                    //                 MediaQuery.of(context).size.width * 0.0204,
+                    //           ),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.location_city),
+                    //             controller: controller.cityTextController,
+                    //             hintText: 'City',
+                    //             padding: EdgeInsets.only(
+                    //                 bottom: MediaQuery.of(context).size.width *
+                    //                     0.0204),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: MediaQuery.of(context).size.width * 0.0306,
+                    //     ),
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Pin Code',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(
+                    //               height: MediaQuery.of(context).size.width *
+                    //                   0.0102),
+                    //           CommonTextField(
+                    //             controller: controller.pincodeTextController,
+                    //             hintText: 'Pincode',
+                    //             prefixIcon: Icon(Icons.pin),
+                    //             keyboardType: TextInputType.number,
+                    //             inputFormatters: [
+                    //               LengthLimitingTextInputFormatter(6),
+                    //               FilteringTextInputFormatter.digitsOnly,
+                    //             ],
+                    //             padding: EdgeInsets.only(
+                    //                 bottom: MediaQuery.of(context).size.width *
+                    //                     0.0204),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'State',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(
+                    //               height: MediaQuery.of(context).size.width *
+                    //                   0.0102),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.location_on),
+                    //             controller: controller.stateTextController,
+                    //             hintText: 'State',
+                    //             padding: EdgeInsets.only(
+                    //                 bottom: MediaQuery.of(context).size.width *
+                    //                     0.0204),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: MediaQuery.of(context).size.width * 0.0306,
+                    //     ),
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Country',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(
+                    //               height: MediaQuery.of(context).size.width *
+                    //                   0.0102),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.public),
+                    //             controller: controller.countryTextController,
+                    //             hintText: 'Country',
+                    //             padding: EdgeInsets.only(
+                    //                 bottom: MediaQuery.of(context).size.width *
+                    //                     0.0204),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

@@ -66,7 +66,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "${controller.userDetails.value.studentName}",
+                        "${controller.userDetails.value.studentName ?? ''}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "Class: ${controller.userDetails.value.schoolDetails?.grade}",
+                        "Class: ${controller.userDetails.value.schoolDetails?.grade ?? ''}",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey,
@@ -82,7 +82,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "${controller.userDetails.value.schoolDetails?.school}",
+                        "${controller.userDetails.value.schoolDetails?.school ?? ''}",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey,

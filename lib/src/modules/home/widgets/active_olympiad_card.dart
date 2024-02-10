@@ -35,8 +35,8 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 0.102,
+            height: MediaQuery.of(context).size.width / 2 -
+                MediaQuery.of(context).size.width * 0.051,
             width: MediaQuery.of(context).size.width -
                 MediaQuery.of(context).size.width * 0.102,
             decoration: BoxDecoration(
