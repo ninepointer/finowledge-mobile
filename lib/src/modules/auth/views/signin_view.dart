@@ -120,7 +120,6 @@ class _SigninViewState extends State<SigninView> {
                               isLoading: controller.isLoadingStatus,
                               label: 'Continue',
                               onPressed: () {
-                                controller.getActiveCities();
                                 bool isValid =
                                     formKey.currentState?.validate() ?? false;
                                 if (isValid) controller.userSignin();

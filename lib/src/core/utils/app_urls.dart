@@ -39,7 +39,8 @@ class AppUrls {
 
   static const String phoneLogin = "$apiURL/schoollogin";
 
-  static const String activeCities = "$apiURL/cities/active";
+  // static const String activeCities = "$apiURL/cities/active";
+  static String activeCities(String state) => "$apiURL/cities/bystate/$state";
   static const String signup = "$apiURL/schoolsignup";
   static const String userActiveQuizOlympiad = "$apiURL/quiz/user/my";
   static const String userAllQuizOlympiad = "$apiURL/quiz/user";

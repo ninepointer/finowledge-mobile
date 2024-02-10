@@ -4,7 +4,7 @@ import 'package:stoxhero/src/app/app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OlympiadCard extends GetView<FinowledgeController> {
+class OlympiadCard extends GetView<HomeController> {
   final MyActiveOlympiadList? myOlympiad;
 
   OlympiadCard({
@@ -137,8 +137,12 @@ class OlympiadCard extends GetView<FinowledgeController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        controller.getTimeSlotForQuizRegistrationDetails(
+                            myOlympiad?.sId ?? '');
                         Get.to(
-                          () => RegistrationView(),
+                          () => RegistrationView(
+                            myOlympiad: myOlympiad,
+                          ),
                         );
                         // showDialog(
                         //   context: context,

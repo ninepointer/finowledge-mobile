@@ -461,15 +461,26 @@ class LoginDetailsResponse {
 class SchoolDetails {
   String? parentsName;
   String? grade;
-  String? school;
+  School? school;
   City? city;
+  String? state;
+  String? dob;
 
-  SchoolDetails({this.parentsName, this.grade, this.school, this.city});
+  SchoolDetails(
+      {this.parentsName,
+      this.grade,
+      this.school,
+      this.city,
+      this.state,
+      this.dob});
 
   SchoolDetails.fromJson(Map<String, dynamic> json) {
     parentsName = json['parents_name'];
     grade = json['grade'];
-    school = json['school'];
+    state = json['state'];
+    dob = json['dob'];
+    school =
+        json['school'] != null ? new School.fromJson(json['school']) : null;
     city = json['city'] != null ? new City.fromJson(json['city']) : null;
   }
 
@@ -477,10 +488,32 @@ class SchoolDetails {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['parents_name'] = this.parentsName;
     data['grade'] = this.grade;
-    data['school'] = this.school;
+    data['state'] = this.state;
+    data['dob'] = this.dob;
+    if (this.school != null) {
+      data['school'] = this.school!.toJson();
+    }
     if (this.city != null) {
       data['city'] = this.city!.toJson();
     }
+    return data;
+  }
+}
+
+class School {
+  String? sId;
+  String? schoolName;
+  School({this.sId, this.schoolName});
+
+  School.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    schoolName = json['school_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['school_name'] = this.schoolName;
     return data;
   }
 }

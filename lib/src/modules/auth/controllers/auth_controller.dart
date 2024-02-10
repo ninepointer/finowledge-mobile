@@ -211,6 +211,7 @@ class AuthController extends BaseController<AuthRepository> {
   Future createUserAccount() async {
     isLoading(true);
     DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
+
     SignupRequest data = SignupRequest(
       studentName: fullNameTextController.text,
       parentName: parentNameTextController.text,
@@ -219,6 +220,7 @@ class AuthController extends BaseController<AuthRepository> {
       school: selectedSchoolName.value,
       grade: selectedClass,
       city: selectedCity,
+      state: selectedState,
 
       // referrerCode: hasCampaignCode.value
       //     ? campaignCode.value
@@ -248,11 +250,11 @@ class AuthController extends BaseController<AuthRepository> {
     isLoading(false);
   }
 
-  Future getActiveCities() async {
+  Future getActiveCities(String state) async {
     isLoading(true);
     try {
       final RepoResponse<ActiveCitiesResponse> response =
-          await repository.getActiveCities();
+          await repository.getActiveCities(state);
       if (response.data != null) {
         activeCities(response.data?.data);
       }
@@ -339,7 +341,7 @@ class AuthController extends BaseController<AuthRepository> {
         if (navigate) Get.offAllNamed(AppRoutes.signin);
         SnackbarHelper.showSnackbar(response.error?.message);
         log('App ${AppStorage.getToken()}');
-        log('App ${AppStorage.getUserDetails().toJson()}');
+        //log('App ${AppStorage.getUserDetails().toJson()}');
       }
     } catch (e) {
       log(e.toString());
