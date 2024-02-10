@@ -290,6 +290,43 @@ class _SignupViewState extends State<SignupView> {
                                 ),
                               ),
 
+                              // DropdownSearch<String>(
+                              //   popupProps: PopupProps.menu(
+                              //     showSelectedItems: true,
+                              //     disabledItemFn: (String s) =>
+                              //         s.startsWith('I'),
+                              //     showSearchBox: true,
+                              //   ),
+                              //   items: controller.activeCities
+                              //       .map<String>((ActiveCitiesList city) =>
+                              //           city.name ?? '')
+                              //       .toList(),
+                              //   dropdownDecoratorProps: DropDownDecoratorProps(
+                              //     dropdownSearchDecoration: InputDecoration(
+                              //       // labelText: "Select City",
+                              //       hintText: "Search city here",
+                              //     ),
+                              //   ),
+                              //   onChanged: (String? newValue) {
+                              //     setState(() {
+                              //       // Find the city object corresponding to the selected ID
+                              //       final selectedCityObject =
+                              //           controller.activeCities.firstWhere(
+                              //         (city) => city.sId == newValue,
+                              //         orElse: () => ActiveCitiesList(
+                              //           sId: '',
+                              //           name:
+                              //               '', // Provide a default value if not found
+                              //         ),
+                              //       );
+                              //       controller.selectedCity =
+                              //           selectedCityObject.sId ??
+                              //               ''; // Set the selected city's ID
+                              //     });
+                              //   },
+                              //   selectedItem: controller.selectedCity,
+                              // ),
+
                               // CommonDropdown(hint: hint, value: value, dropdownItems: dropdownItems, onChanged: onChanged)
                               CommonFilledButton(
                                 backgroundColor: Get.isDarkMode

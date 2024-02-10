@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
-
 import '../../../app/app.dart';
 
 class DashboardView extends StatefulWidget {
