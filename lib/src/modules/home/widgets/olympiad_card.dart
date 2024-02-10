@@ -63,12 +63,15 @@ class OlympiadCard extends GetView<FinowledgeController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title
-                Text(
-                  myOlympiad?.title ?? '',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                Container(
+                  height: MediaQuery.of(context).size.width * 0.14,
+                  child: Text(
+                    myOlympiad?.title ?? '',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
                 SizedBox(height: 8),
@@ -122,8 +125,11 @@ class OlympiadCard extends GetView<FinowledgeController> {
                       child: Text('INVITE FRIENDS'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.0408,
+                            vertical:
+                                MediaQuery.of(context).size.width * 0.0306),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -153,8 +159,11 @@ class OlympiadCard extends GetView<FinowledgeController> {
                       child: Text('REGISTER'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.0408,
+                            vertical:
+                                MediaQuery.of(context).size.width * 0.0306),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
