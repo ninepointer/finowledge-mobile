@@ -222,13 +222,11 @@ class _SignupViewState extends State<SignupView> {
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
                                     dropdownSearchDecoration: InputDecoration(
-                                      // labelText: "Select City",
-
+                                      labelText: "Choose State",
                                       hintText: "Search state here",
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 16, vertical: 8),
                                       isDense: true,
-
                                       border: OutlineInputBorder(),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
@@ -289,13 +287,11 @@ class _SignupViewState extends State<SignupView> {
                                     dropdownDecoratorProps:
                                         DropDownDecoratorProps(
                                       dropdownSearchDecoration: InputDecoration(
-                                        //  labelText: "Choose school",
-
+                                        labelText: "Choose school",
                                         hintText: "Choose school",
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 16, vertical: 8),
                                         isDense: true,
-
                                         border: OutlineInputBorder(),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
@@ -454,13 +450,11 @@ class _SignupViewState extends State<SignupView> {
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
                                     dropdownSearchDecoration: InputDecoration(
-                                      // labelText: "Select City",
-
+                                      labelText: "Choose city",
                                       hintText: "Search city here",
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 16, vertical: 8),
                                       isDense: true,
-
                                       border: OutlineInputBorder(),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
