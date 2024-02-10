@@ -100,12 +100,18 @@ class ReferFriendContent extends GetView<HomeController> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "Register with ${contest?.title}"
-                                        .capitalize
-                                        .toString(),
-                                    style: AppStyles.tsSecondaryMedium16
-                                        .copyWith(color: AppColors.white),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width -
+                                        MediaQuery.of(context).size.width *
+                                            0.0612,
+                                    child: Text(
+                                      "Register with ${contest?.title}"
+                                          .capitalize
+                                          .toString(),
+                                      style: AppStyles.tsSecondaryMedium16
+                                          .copyWith(color: AppColors.white),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   )
                                 ],
                               ),
