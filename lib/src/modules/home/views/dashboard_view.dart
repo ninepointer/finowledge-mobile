@@ -56,47 +56,51 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   child: Row(
-                    //     children: [
-                    //       controller.myActiveOlympiadList.isEmpty
-                    //           ? Container()
-                    //           : Obx(
-                    //               () => Row(
-                    //                 children: controller.myActiveOlympiadList
-                    //                     .map((contest) {
-                    //                   String userId =
-                    //                       controller.userDetailsData.sId ?? '';
-                    //                   return Container(
-                    //                     width: controller.myActiveOlympiadList
-                    //                                 .length ==
-                    //                             1
-                    //                         ? MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width -
-                    //                             MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.102
-                    //                         : MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width -
-                    //                             MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.1403,
-                    //                     child: OlympiadCard(
-                    //                       //userId: userId,
-                    //                       myOlympiad: contest,
-                    //                     ),
-                    //                   );
-                    //                 }).toList(),
-                    //               ),
-                    //             ),
-                    //     ],
-                    //   ),
-                    // ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          controller.myActiveOlympiadList.isEmpty
+                              ? Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      MediaQuery.of(context).size.width * 0.102,
+                                  child: noOlympiad(),
+                                )
+                              : Obx(
+                                  () => Row(
+                                    children: controller.myActiveOlympiadList
+                                        .map((contest) {
+                                      String userId =
+                                          controller.userDetailsData.sId ?? '';
+                                      return Container(
+                                        width: controller.myActiveOlympiadList
+                                                    .length ==
+                                                1
+                                            ? MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.102
+                                            : MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.1403,
+                                        child: ActiveOlympiadCard(
+                                          //userId: userId,
+                                          myOlympiad: contest,
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
                     // Container(
                     //   width: MediaQuery.of(context).size.width,
                     //   child: Flexible(
@@ -106,7 +110,7 @@ class _DashboardViewState extends State<DashboardView> {
                     //     ),
                     //   ),
                     // ),
-                    noOlympiad(),
+
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
                     CommonTile(
@@ -123,11 +127,14 @@ class _DashboardViewState extends State<DashboardView> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          controller.myActiveOlympiadList.isEmpty
-                              ? noOlympiad()
+                          controller.userAllOlympiadList.isEmpty
+                              ? Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      MediaQuery.of(context).size.width * 0.102,
+                                  child: noUpcomingOlympiad())
                               : Obx(
                                   () => Row(
-                                    children: controller.myActiveOlympiadList
+                                    children: controller.userAllOlympiadList
                                         .map((contest) {
                                       String userId =
                                           controller.userDetailsData.sId ?? '';
@@ -185,6 +192,31 @@ Widget noOlympiad() {
       ),
       child: Text(
         'You have not participated in any finance olympiads yet.',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.white, // Change the text color as needed
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
+}
+
+Widget noUpcomingOlympiad() {
+  return Card(
+    elevation: 4,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: AppColors.grey, // Change the color as needed
+      ),
+      child: Text(
+        'No upcoming finance olympiad, keep checking this space!',
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,

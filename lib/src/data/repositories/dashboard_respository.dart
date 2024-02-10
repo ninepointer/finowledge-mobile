@@ -28,4 +28,12 @@ class DashboardRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: MyActiveOlympiadResponse.fromJson(response));
   }
+
+  Future<RepoResponse<MyActiveOlympiadResponse>> getuserAllOlympiad() async {
+    String apiURL = AppUrls.userAllQuizOlympiad;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: MyActiveOlympiadResponse.fromJson(response));
+  }
 }

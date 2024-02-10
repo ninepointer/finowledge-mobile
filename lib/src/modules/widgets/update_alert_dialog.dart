@@ -24,7 +24,8 @@ class UpdateAlertDialog extends StatefulWidget {
 
 class _UpdateAlertDialogState extends State<UpdateAlertDialog> {
   void openAppPage() {
-    final appId = Platform.isAndroid ? 'com.stoxhero.app' : 'com.stoxhero.app';
+    final appId =
+        Platform.isAndroid ? 'com.finowledge.app' : 'com.finowledge.app';
     final url = Uri.parse(
       Platform.isAndroid
           ? "market://details?id=$appId"
