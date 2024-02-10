@@ -44,4 +44,5 @@ class AppUrls {
   static const String userActiveQuizOlympiad = "$apiURL/quiz/user/my";
   static const String userAllQuizOlympiad = "$apiURL/quiz/user";
   static String bookingQuizSlot(String id) => "$apiURL/quiz/user/slots/$id";
+  static const String schoollist = "$apiURL/fetchschools";
 }

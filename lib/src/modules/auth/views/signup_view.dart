@@ -41,6 +41,7 @@ class _SignupViewState extends State<SignupView> {
 
   @override
   Widget build(BuildContext context) {
+    print("statesss ${controller.selectedState} ");
     return Obx(
       () => Scaffold(
         body: Form(
@@ -204,25 +205,292 @@ class _SignupViewState extends State<SignupView> {
                                 ),
                               ),
 
-                              CommonTextField(
-                                controller: controller.schoolNameTextController,
-                                hintText: 'Enter your school name',
-                                prefixIcon: Icon(
-                                  Icons.school,
-                                  color: AppColors.grey,
-                                ),
-                              ),
+                              //state dropdown
+
                               Container(
                                 padding: EdgeInsets.only(bottom: 16),
-                                child: DropdownButtonFormField<String>(
-                                  // iconSize:
-                                  //     12, // Set the size of the dropdown icon
-                                  // itemHeight: 50,
-                                  menuMaxHeight: 200,
-                                  value: controller.selectedCity.isNotEmpty
-                                      ? controller.selectedCity
-                                      : null,
+                                child: DropdownSearch<String>(
+                                  popupProps: PopupProps.menu(
+                                    showSelectedItems: true,
+                                    // disabledItemFn: (String s) =>
+                                    //     s.startsWith('I'),
+                                    showSearchBox: true,
+                                  ),
+                                  items: controller.states
+                                      .map<String>((states) => states)
+                                      .toList(),
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    dropdownSearchDecoration: InputDecoration(
+                                      // labelText: "Select City",
 
+                                      hintText: "Search state here",
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      isDense: true,
+
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.lightGreen,
+                                        ),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.primary.shade700,
+                                        ),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.danger.shade700,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      fillColor: AppColors.grey.withOpacity(.1),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      controller.selectedState = newValue ?? '';
+                                      controller.fetchSchoolListDetails();
+                                    });
+                                  },
+                                  selectedItem: controller.selectedState,
+                                ),
+                              ),
+
+                              ///school
+
+                              Obx(
+                                () => Container(
+                                  padding: EdgeInsets.only(bottom: 16),
+                                  child: DropdownSearch<String>(
+                                    popupProps: PopupProps.menu(
+                                      showSelectedItems: true,
+                                      // disabledItemFn: (String s) =>
+                                      //     s.startsWith('I'),
+                                      showSearchBox: true,
+                                    ),
+                                    items: controller.fetchschool
+                                        .map<String>(
+                                            (FetchSchoolResponse school) =>
+                                                school.schoolString ?? '')
+                                        .toList(),
+                                    dropdownDecoratorProps:
+                                        DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                        //  labelText: "Choose school",
+
+                                        hintText: "Choose school",
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        isDense: true,
+
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          borderSide: BorderSide(
+                                            width: 2,
+                                            color: AppColors.lightGreen,
+                                          ),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          borderSide: BorderSide(
+                                            width: 2,
+                                            color: AppColors.primary.shade700,
+                                          ),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          borderSide: BorderSide(
+                                            width: 2,
+                                            color: AppColors.danger.shade700,
+                                          ),
+                                        ),
+                                        filled: true,
+                                        fillColor:
+                                            AppColors.grey.withOpacity(.1),
+                                      ),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        // Access the actual data from the Rx object
+                                        final schoolList =
+                                            controller.fetchschool;
+
+                                        // Find the school object corresponding to the selected ID
+                                        final selectedSchool =
+                                            schoolList.firstWhere(
+                                          (school) => school.sId == newValue,
+                                          orElse: () => FetchSchoolResponse(
+                                            sId: '',
+                                            schoolString:
+                                                '', // Provide a default value if not found
+                                          ),
+                                        );
+
+                                        controller.selectedSchoolName.value =
+                                            selectedSchool.schoolString ?? '';
+
+                                        controller.fetchSchoolListDetails();
+                                      });
+                                    },
+                                    selectedItem:
+                                        controller.selectedSchoolName.value,
+                                  ),
+                                ),
+                              ),
+
+                              // Container(
+                              //   padding: EdgeInsets.only(bottom: 16),
+                              //   child: DropdownButtonFormField<String>(
+                              //     // iconSize:
+                              //     //     12, // Set the size of the dropdown icon
+                              //     // itemHeight: 50,
+                              //     menuMaxHeight: 200,
+                              //     value: controller.selectedCity.isNotEmpty
+                              //         ? controller.selectedCity
+                              //         : null,
+
+                              //     onChanged: (String? newValue) {
+                              //       setState(() {
+                              //         // Find the city object corresponding to the selected ID
+                              //         final selectedCityObject =
+                              //             controller.activeCities.firstWhere(
+                              //           (city) => city.sId == newValue,
+                              //           orElse: () => ActiveCitiesList(
+                              //               sId: '',
+                              //               name:
+                              //                   ''), // Provide a default value if not found
+                              //         );
+                              //         controller.selectedCity =
+                              //             selectedCityObject.sId ??
+                              //                 ''; // Set the selected city's ID
+                              //       });
+                              //     },
+                              //     decoration: InputDecoration(
+                              //       // labelText: 'Select Class',
+                              //       isDense: true,
+
+                              //       border: OutlineInputBorder(),
+                              //       enabledBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         borderSide: BorderSide.none,
+                              //       ),
+                              //       focusedBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         borderSide: BorderSide(
+                              //           width: 2,
+                              //           color: AppColors.lightGreen,
+                              //         ),
+                              //       ),
+                              //       focusedErrorBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         borderSide: BorderSide(
+                              //           width: 2,
+                              //           color: AppColors.primary.shade700,
+                              //         ),
+                              //       ),
+                              //       errorBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         borderSide: BorderSide(
+                              //           width: 2,
+                              //           color: AppColors.danger.shade700,
+                              //         ),
+                              //       ),
+                              //       filled: true,
+                              //       fillColor: AppColors.grey.withOpacity(.1),
+                              //     ),
+                              //     items: controller.activeCities
+                              //         .map<DropdownMenuItem<String>>(
+                              //             (ActiveCitiesList city) {
+                              //       return DropdownMenuItem<String>(
+                              //         value: city.sId,
+                              //         child: Text(
+                              //           city.name ?? '',
+                              //           maxLines: 1,
+                              //           style: Theme.of(context)
+                              //               .textTheme
+                              //               .tsRegular16,
+                              //           overflow: TextOverflow.ellipsis,
+                              //         ),
+                              //       );
+                              //     }).toList(),
+                              //   ),
+                              // ),
+
+                              Container(
+                                padding: EdgeInsets.only(bottom: 16),
+                                child: DropdownSearch<String>(
+                                  popupProps: PopupProps.menu(
+                                    showSelectedItems: true,
+                                    // disabledItemFn: (String s) =>
+                                    //     s.startsWith('I'),
+                                    showSearchBox: true,
+                                  ),
+                                  items: controller.activeCities
+                                      .map<String>((ActiveCitiesList city) =>
+                                          city.name ?? '')
+                                      .toList(),
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    dropdownSearchDecoration: InputDecoration(
+                                      // labelText: "Select City",
+
+                                      hintText: "Search city here",
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      isDense: true,
+
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.lightGreen,
+                                        ),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.primary.shade700,
+                                        ),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.danger.shade700,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      fillColor: AppColors.grey.withOpacity(.1),
+                                    ),
+                                  ),
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       // Find the city object corresponding to the selected ID
@@ -230,102 +498,19 @@ class _SignupViewState extends State<SignupView> {
                                           controller.activeCities.firstWhere(
                                         (city) => city.sId == newValue,
                                         orElse: () => ActiveCitiesList(
-                                            sId: '',
-                                            name:
-                                                ''), // Provide a default value if not found
+                                          sId: '',
+                                          name:
+                                              '', // Provide a default value if not found
+                                        ),
                                       );
                                       controller.selectedCity =
                                           selectedCityObject.sId ??
                                               ''; // Set the selected city's ID
                                     });
                                   },
-                                  decoration: InputDecoration(
-                                    // labelText: 'Select Class',
-                                    isDense: true,
-
-                                    border: OutlineInputBorder(),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.lightGreen,
-                                      ),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.primary.shade700,
-                                      ),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.danger.shade700,
-                                      ),
-                                    ),
-                                    filled: true,
-                                    fillColor: AppColors.grey.withOpacity(.1),
-                                  ),
-                                  items: controller.activeCities
-                                      .map<DropdownMenuItem<String>>(
-                                          (ActiveCitiesList city) {
-                                    return DropdownMenuItem<String>(
-                                      value: city.sId,
-                                      child: Text(
-                                        city.name ?? '',
-                                        maxLines: 1,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tsRegular16,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    );
-                                  }).toList(),
+                                  selectedItem: controller.selectedCity,
                                 ),
                               ),
-
-                              // DropdownSearch<String>(
-                              //   popupProps: PopupProps.menu(
-                              //     showSelectedItems: true,
-                              //     disabledItemFn: (String s) =>
-                              //         s.startsWith('I'),
-                              //     showSearchBox: true,
-                              //   ),
-                              //   items: controller.activeCities
-                              //       .map<String>((ActiveCitiesList city) =>
-                              //           city.name ?? '')
-                              //       .toList(),
-                              //   dropdownDecoratorProps: DropDownDecoratorProps(
-                              //     dropdownSearchDecoration: InputDecoration(
-                              //       // labelText: "Select City",
-                              //       hintText: "Search city here",
-                              //     ),
-                              //   ),
-                              //   onChanged: (String? newValue) {
-                              //     setState(() {
-                              //       // Find the city object corresponding to the selected ID
-                              //       final selectedCityObject =
-                              //           controller.activeCities.firstWhere(
-                              //         (city) => city.sId == newValue,
-                              //         orElse: () => ActiveCitiesList(
-                              //           sId: '',
-                              //           name:
-                              //               '', // Provide a default value if not found
-                              //         ),
-                              //       );
-                              //       controller.selectedCity =
-                              //           selectedCityObject.sId ??
-                              //               ''; // Set the selected city's ID
-                              //     });
-                              //   },
-                              //   selectedItem: controller.selectedCity,
-                              // ),
 
                               // CommonDropdown(hint: hint, value: value, dropdownItems: dropdownItems, onChanged: onChanged)
                               CommonFilledButton(

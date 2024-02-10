@@ -35,7 +35,8 @@ class AuthController extends BaseController<AuthRepository> {
   final token = ''.obs;
   final inviteCode = CampaignCodeData().obs;
   final activeCities = <ActiveCitiesList>[].obs;
-
+  final fetchschool = <FetchSchoolResponse>[].obs;
+  final selectedSchoolName = ''.obs;
   final campaignCode = ''.obs;
 
   String selectedClass = '6th';
@@ -43,6 +44,44 @@ class AuthController extends BaseController<AuthRepository> {
   List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
   String selectedCity = '';
 
+  List<String> states = [
+    'Andaman & Nicobar',
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    "Assam",
+    "Bihar",
+    "Chandigarh",
+    "Chhattisgarh",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu & Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Ladakh",
+    "Lakshadeep",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Pondicherry",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ];
+  String selectedState = "";
   void verifyOtp() => isSignup.value ? verifySignupOtp() : verifySigninOtp();
 
   void showDateRangePicker(BuildContext context) async {
@@ -177,7 +216,7 @@ class AuthController extends BaseController<AuthRepository> {
       parentName: parentNameTextController.text,
       mobile: mobileTextController.text,
       dob: DateFormat('yyyy-MM-dd').format(date),
-      school: schoolNameTextController.text,
+      school: selectedSchoolName.value,
       grade: selectedClass,
       city: selectedCity,
 
@@ -233,7 +272,7 @@ class AuthController extends BaseController<AuthRepository> {
       studentName: fullNameTextController.text,
       parentsName: parentNameTextController.text,
       grade: selectedClass,
-      school: schoolNameTextController.text,
+      school: selectedSchoolName.value,
       city: selectedCity,
       mobile: mobileTextController.text,
       mobileOtp: otpTextController.text,
@@ -329,6 +368,34 @@ class AuthController extends BaseController<AuthRepository> {
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future fetchSchoolListDetails() async {
+    isLoading(true);
+
+    FocusScope.of(Get.context!).unfocus();
+
+    FetchSchoolRequest data = FetchSchoolRequest(
+        inputString: selectedSchoolName.value, stateName: selectedState);
+
+    try {
+      final RepoResponse<List<FetchSchoolResponse>> response =
+          await repository.fetchSchoolList(
+        data.toJson(),
+      );
+
+      if (response.data != null && response.data!.isNotEmpty) {
+        // Assuming fetchschool is a function that handles a list of FetchSchoolResponse
+        fetchschool(response.data ?? []);
+      } else {
+        // Handle case when response.data is null or empty
+        // For example, show a message indicating no schools were found
       }
     } catch (e) {
       log(e.toString());

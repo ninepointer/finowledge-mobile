@@ -9,3 +9,4 @@ export 'withdrawal_request.dart';
 export 'fcm_toke_data_request.dart';
 export 'verify_kyc_genrate_otp_request.dart';
 export "verify_kyc_verify_otp_request.dart";
+export 'fetch_school_request.dart';
