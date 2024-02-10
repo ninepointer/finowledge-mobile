@@ -82,7 +82,8 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "${controller.userDetails.value.schoolDetails?.school}",
+                        // "${controller.userDetails.value.schoolDetails?.school}",
+                        "Dehli Public School, Jaipur",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey,

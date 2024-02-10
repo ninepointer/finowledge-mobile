@@ -9,6 +9,7 @@ const bool useTestToken = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'finowledge',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init();

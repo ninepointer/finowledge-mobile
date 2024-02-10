@@ -4,10 +4,10 @@ import 'package:stoxhero/src/app/app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OlympiadCard extends GetView<FinowledgeController> {
+class ActiveOlympiadCard extends GetView<FinowledgeController> {
   final MyActiveOlympiadList? myOlympiad;
 
-  OlympiadCard({
+  ActiveOlympiadCard({
     Key? key,
     this.myOlympiad,
   }) : super(key: key);
@@ -135,9 +135,8 @@ class OlympiadCard extends GetView<FinowledgeController> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Registration'),
-                              content:
-                                  Text('Registration has not started yet.'),
+                              title: Text('Start'),
+                              content: Text('Olympiad has not started yet.'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -150,7 +149,7 @@ class OlympiadCard extends GetView<FinowledgeController> {
                           },
                         );
                       },
-                      child: Text('REGISTER'),
+                      child: Text('START'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue,
                         padding:

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_dropdown_search/flutter_dropdown_search.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 import '../../../app/app.dart';
 
@@ -56,47 +58,51 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   child: Row(
-                    //     children: [
-                    //       controller.myActiveOlympiadList.isEmpty
-                    //           ? Container()
-                    //           : Obx(
-                    //               () => Row(
-                    //                 children: controller.myActiveOlympiadList
-                    //                     .map((contest) {
-                    //                   String userId =
-                    //                       controller.userDetailsData.sId ?? '';
-                    //                   return Container(
-                    //                     width: controller.myActiveOlympiadList
-                    //                                 .length ==
-                    //                             1
-                    //                         ? MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width -
-                    //                             MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.102
-                    //                         : MediaQuery.of(context)
-                    //                                 .size
-                    //                                 .width -
-                    //                             MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.1403,
-                    //                     child: OlympiadCard(
-                    //                       //userId: userId,
-                    //                       myOlympiad: contest,
-                    //                     ),
-                    //                   );
-                    //                 }).toList(),
-                    //               ),
-                    //             ),
-                    //     ],
-                    //   ),
-                    // ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          controller.myActiveOlympiadList.isEmpty
+                              ? Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      MediaQuery.of(context).size.width * 0.102,
+                                  child: noOlympiad(),
+                                )
+                              : Obx(
+                                  () => Row(
+                                    children: controller.myActiveOlympiadList
+                                        .map((contest) {
+                                      String userId =
+                                          controller.userDetailsData.sId ?? '';
+                                      return Container(
+                                        width: controller.myActiveOlympiadList
+                                                    .length ==
+                                                1
+                                            ? MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.102
+                                            : MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.1403,
+                                        child: ActiveOlympiadCard(
+                                          //userId: userId,
+                                          myOlympiad: contest,
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
                     // Container(
                     //   width: MediaQuery.of(context).size.width,
                     //   child: Flexible(
@@ -106,7 +112,7 @@ class _DashboardViewState extends State<DashboardView> {
                     //     ),
                     //   ),
                     // ),
-                    noOlympiad(),
+
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
                     CommonTile(
@@ -123,11 +129,14 @@ class _DashboardViewState extends State<DashboardView> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          controller.myActiveOlympiadList.isEmpty
-                              ? noOlympiad()
+                          controller.userAllOlympiadList.isEmpty
+                              ? Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      MediaQuery.of(context).size.width * 0.102,
+                                  child: noUpcomingOlympiad())
                               : Obx(
                                   () => Row(
-                                    children: controller.myActiveOlympiadList
+                                    children: controller.userAllOlympiadList
                                         .map((contest) {
                                       String userId =
                                           controller.userDetailsData.sId ?? '';
@@ -160,6 +169,7 @@ class _DashboardViewState extends State<DashboardView> {
                         ],
                       ),
                     ),
+                   SearchableDropdownWidget()
                   ],
                 ),
               ),
@@ -194,4 +204,58 @@ Widget noOlympiad() {
       ),
     ),
   );
+}
+
+Widget noUpcomingOlympiad() {
+  return Card(
+    elevation: 4,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: AppColors.grey, // Change the color as needed
+      ),
+      child: Text(
+        'No upcoming finance olympiad, keep checking this space!',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.white, // Change the text color as needed
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
+}
+
+class SearchableDropdownWidget extends StatefulWidget {
+  @override
+  _SearchableDropdownWidgetState createState() => _SearchableDropdownWidgetState();
+}
+
+class _SearchableDropdownWidgetState extends State<SearchableDropdownWidget> {
+  String? selectedValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownSearch<String>(
+      popupProps: PopupProps.menu(
+        showSelectedItems: true,
+        disabledItemFn: (String s) => s.startsWith('I'),
+        showSearchBox: true
+    ),
+    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+    dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+            labelText: "Menu mode",
+            hintText: "country in menu mode",
+        ),
+    ),
+    onChanged: print,
+    selectedItem: "Brazil",
+    );
+  }
 }

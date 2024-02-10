@@ -54,6 +54,8 @@ dependencies:
   animated_text_kit: ^4.2.1
   audioplayers: ^5.2.1
   font_awesome_flutter: ^10.7.0
+  dropdown_search: ^5.0.6
+  flutter_dropdown_search: ^0.0.4
 
 dev_dependencies:
   flutter_launcher_icons: any

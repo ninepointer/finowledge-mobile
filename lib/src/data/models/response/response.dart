@@ -13,3 +13,4 @@ export "verify_kyc_genrate_otp_response.dart";
 export 'create_new_user_signup_response.dart';
 export 'active_cities_response.dart';
 export 'my_active_olympiad_response.dart';
+export 'time_slot_for_quiz_respoonse.dart';

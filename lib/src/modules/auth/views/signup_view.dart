@@ -5,6 +5,7 @@ import 'package:stoxhero/src/app/app.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -202,6 +203,7 @@ class _SignupViewState extends State<SignupView> {
                                   }).toList(),
                                 ),
                               ),
+
                               CommonTextField(
                                 controller: controller.schoolNameTextController,
                                 hintText: 'Enter your school name',
@@ -210,83 +212,7 @@ class _SignupViewState extends State<SignupView> {
                                   color: AppColors.grey,
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.only(bottom: 16),
-                                child: DropdownButtonFormField<String>(
-                                  // iconSize:
-                                  //     12, // Set the size of the dropdown icon
-                                  // itemHeight: 50,
-                                  menuMaxHeight: 200,
-                                  value: controller.selectedCity.isNotEmpty
-                                      ? controller.selectedCity
-                                      : null,
 
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      // Find the city object corresponding to the selected ID
-                                      final selectedCityObject =
-                                          controller.activeCities.firstWhere(
-                                        (city) => city.sId == newValue,
-                                        orElse: () => ActiveCitiesList(
-                                            sId: '',
-                                            name:
-                                                ''), // Provide a default value if not found
-                                      );
-                                      controller.selectedCity =
-                                          selectedCityObject.sId ??
-                                              ''; // Set the selected city's ID
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                    // labelText: 'Select Class',
-                                    isDense: true,
-
-                                    border: OutlineInputBorder(),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.lightGreen,
-                                      ),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.primary.shade700,
-                                      ),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: AppColors.danger.shade700,
-                                      ),
-                                    ),
-                                    filled: true,
-                                    fillColor: AppColors.grey.withOpacity(.1),
-                                  ),
-                                  items: controller.activeCities
-                                      .map<DropdownMenuItem<String>>(
-                                          (ActiveCitiesList city) {
-                                    return DropdownMenuItem<String>(
-                                      value: city.sId,
-                                      child: Text(
-                                        city.name ?? '',
-                                        maxLines: 1,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tsRegular16,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
                               // CommonDropdown(hint: hint, value: value, dropdownItems: dropdownItems, onChanged: onChanged)
                               CommonFilledButton(
                                 backgroundColor: Get.isDarkMode

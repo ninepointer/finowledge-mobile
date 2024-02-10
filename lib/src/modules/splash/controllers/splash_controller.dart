@@ -56,7 +56,8 @@ class SplashController extends GetxController {
 
       _appVersion('$version+$build');
       if (isProd) {
-        final response = await Get.find<AuthController>().repository.getAppVersion();
+        final response =
+            await Get.find<AuthController>().repository.getAppVersion();
         if (response.data != null) {
           _storeAppVersion(response.data?.data ?? '');
         }
@@ -72,7 +73,7 @@ class SplashController extends GetxController {
     try {
       if (isNewUser) {
         FirebaseAnalytics.instance.logEvent(name: 'new_user_logged');
-        Get.offAllNamed(AppRoutes.onBoarding);
+        Get.offAllNamed(AppRoutes.signin);
         AppStorage.setNewUserStatus(false);
       } else {
         String? token = AppStorage.getToken();
@@ -83,7 +84,8 @@ class SplashController extends GetxController {
           if (token == null || token.isEmpty) {
             Get.offAllNamed(AppRoutes.signin);
           } else {
-            FirebaseAnalytics.instance.logEvent(name: 'user_login', parameters: {
+            FirebaseAnalytics.instance
+                .logEvent(name: 'user_login', parameters: {
               'id': AppStorage.getUserDetails().sId,
               'email': AppStorage.getUserDetails().email,
             });
