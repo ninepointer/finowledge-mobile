@@ -16,7 +16,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.signin,
-      page: () => SigninView(),
+      page: () => SignInView(),
       binding: AuthBinding(),
     ),
     GetPage(

@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 
 import '../../../app/app.dart';
 
-class SigninView extends StatefulWidget {
-  const SigninView({super.key});
+class SignInView extends StatefulWidget {
+  const SignInView({super.key});
 
   @override
-  State<SigninView> createState() => _SigninViewState();
+  State<SignInView> createState() => _SignInViewState();
 }
 
-class _SigninViewState extends State<SigninView> {
+class _SignInViewState extends State<SignInView> {
   late AuthController controller;
   late GlobalKey<FormState> formKey;
 

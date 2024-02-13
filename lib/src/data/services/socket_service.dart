@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../core/core.dart';
+import '../../env/environment.dart';
 
 class SocketService extends GetxController {
   static final SocketService _instance = SocketService._internal();
@@ -14,10 +15,12 @@ class SocketService extends GetxController {
 
   Future<void> initSocket() async {
     try {
-      socket = io.io(AppUrls.baseURL, <String, dynamic>{
-        'autoConnect': false,
-        'transports': ['websocket'],
-      }).connect();
+      socket = io.io(
+          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+          <String, dynamic>{
+            'autoConnect': false,
+            'transports': ['websocket'],
+          }).connect();
 
       socket.onConnect((_) {
         var userId = AppStorage.getUserDetails().sId;
@@ -30,7 +33,7 @@ class SocketService extends GetxController {
       socket.onAny((event, data) {
         // print('Socket : Event : $event with data: $data');
       });
-         
+
       socket.onConnectError((err) => print('Socket : onConnectError : $err'));
 
       socket.onDisconnect((_) => print('Socket : onDisconnect'));

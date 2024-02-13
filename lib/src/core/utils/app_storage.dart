@@ -45,6 +45,14 @@ class AppStorage {
   static void clearStorage() {
     _box.erase();
   }
+
+  static Future? setIsProd(bool isProd) {
+    return _box.write(AppStorageKeys.isProd, isProd);
+  }
+
+  static bool getIsProd() {
+    return _box.read(AppStorageKeys.isProd);
+  }
 }
 
 class AppStorageKeys {
@@ -52,4 +60,5 @@ class AppStorageKeys {
   static const String token = 'token';
   static const String userDetails = 'userDetails';
   static const String newUser = 'newUser';
+  static const String isProd = 'env';
 }

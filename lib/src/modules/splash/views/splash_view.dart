@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/main.dart';
 import 'package:stoxhero/src/core/core.dart';
 
+import '../../../utils/common_utils.dart';
 import '../splash_index.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -40,9 +40,9 @@ class SplashView extends GetView<SplashController> {
               child: Obx(
                 () => Column(
                   children: [
-                    if (!isProd)
+                    if (AppStorage.getIsProd() == true)
                       Text(
-                        'DEV',
+                        string("label_dev"),
                         style: Get.isDarkMode
                             ? AppStyles.tsGreyRegular14
                             : AppStyles.tsPrimaryMedium12

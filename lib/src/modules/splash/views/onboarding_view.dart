@@ -27,7 +27,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   void navigateToNextScreen() {
     if (currentIndex == contents.length - 1) {
-      navigateToSignin();
+      navigateToSignIn();
     } else {
       _pageController?.nextPage(
         duration: Duration(milliseconds: 300),
@@ -36,7 +36,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     }
   }
 
-  void navigateToSignin() {
+  void navigateToSignIn() {
     AppStorage.setNewUserStatus(false);
     Get.offAllNamed(AppRoutes.signin);
   }
@@ -130,7 +130,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
           SizedBox(height: 42),
           TextButton(
-            onPressed: navigateToSignin,
+            onPressed: navigateToSignIn,
             child: Text(
               currentIndex == contents.length - 1 ? '' : 'Skip',
               style: AppStyles.tsGreyMedium16,

@@ -15,6 +15,7 @@ class SplashBinding implements Bindings {
 
 class SplashController extends GetxController {
   final _appVersion = ''.obs;
+
   String get appVersion => 'v ${_appVersion.value}';
 
   final _storeAppVersion = ''.obs;
@@ -22,7 +23,7 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await getAppVersion();
-    if (isProd) await checkForUpdate();
+    if (AppStorage.getIsProd() == true) await checkForUpdate();
     _startOnBoarding();
     super.onInit();
   }

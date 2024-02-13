@@ -7,6 +7,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:stoxhero/main.dart';
 
 import '../../core/core.dart';
+import '../../env/environment.dart';
 import '../data.dart';
 
 class NetworkService {
@@ -17,11 +18,13 @@ class NetworkService {
     prepareRequest();
     prepareFormRequest();
   }
+
   static final NetworkService shared = NetworkService();
 
   void prepareRequest() {
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: AppUrls.baseURL,
+      baseUrl:
+          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
       headers: {
@@ -48,7 +51,7 @@ class NetworkService {
 
   void prepareFormRequest() {
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: AppUrls.baseURL,
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -353,7 +356,7 @@ class NetworkService {
     Dio _authFormDio = Dio();
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: AppUrls.baseURL,
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -397,7 +400,7 @@ class NetworkService {
     };
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: AppUrls.baseURL,
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );

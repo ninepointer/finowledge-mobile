@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../main.dart';
 import 'app.dart';
 import 'app_binding.dart';
 export 'app_controller.dart';
@@ -22,11 +23,14 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<App> with WidgetsBindingObserver {
+  /// We use WidgetsBindingObserver to notify the UI change in the device metrics (Media Query).
+
   @override
   void initState() {
     super.initState();
     _initializePushNotification();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   Future _initializePushNotification() async {
@@ -51,5 +55,29 @@ class _AppState extends State<App> {
       getPages: AppPages.pages,
       initialRoute: AppRoutes.splash,
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.detached:
+        break;
+      case AppLifecycleState.hidden:
+        break;
+    }
+    super.didChangeAppLifecycleState(state);
+    firebaseConfig.appState = state;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
