@@ -204,7 +204,7 @@ class ProfileController extends BaseController<ProfileRepository> {
     parentsNameTextController.text =
         userDetails.value.schoolDetails?.parentsName ?? '';
     schoolNameTextController.text =
-        userDetails.value.schoolDetails?.school ?? '';
+        userDetails.value.schoolDetails?.school?.schoolName ?? '';
     userNameTextController.text = userDetails.value.employeeid ?? '';
     positionTextController.text = userDetails.value.designation ?? '';
     firstNameTextController.text = userDetails.value.firstName ?? '';
@@ -212,13 +212,13 @@ class ProfileController extends BaseController<ProfileRepository> {
     emailTextController.text = userDetails.value.email ?? '';
     mobileTextController.text = userDetails.value.mobile ?? '';
     whatsAppTextController.text = userDetails.value.whatsAppNumber ?? '';
-    dobTextController.text =
-        FormatHelper.formatDateOfBirthToIST(userDetails.value.dob);
+    dobTextController.text = FormatHelper.formatDateOfBirthToIST(
+        userDetails.value.schoolDetails?.dob ?? '');
     genderValue = userDetails.value.gender ?? '';
     addressTextController.text = userDetails.value.address ?? '';
     cityTextController.text = userDetails.value.city ?? '';
     pincodeTextController.text = userDetails.value.pincode ?? '';
-    stateTextController.text = userDetails.value.state ?? '';
+    stateTextController.text = userDetails.value.schoolDetails?.state ?? '';
     countryTextController.text = userDetails.value.country ?? '';
     profilePhotoFile(
         await downloadFileAsPlatformFile(userDetails.value.profilePhoto));

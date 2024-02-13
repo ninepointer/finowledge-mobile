@@ -4,7 +4,7 @@ import 'package:stoxhero/src/app/app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OlympiadCard extends GetView<FinowledgeController> {
+class OlympiadCard extends GetView<HomeController> {
   final MyActiveOlympiadList? myOlympiad;
 
   OlympiadCard({
@@ -137,24 +137,31 @@ class OlympiadCard extends GetView<FinowledgeController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Registration'),
-                              content:
-                                  Text('Registration has not started yet.'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
+                        controller.getTimeSlotForQuizRegistrationDetails(
+                            myOlympiad?.sId ?? '');
+                        Get.to(
+                          () => RegistrationView(
+                            myOlympiad: myOlympiad,
+                          ),
                         );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title: Text('Registration'),
+                        //       content:
+                        //           Text('Registration has not started yet.'),
+                        //       actions: <Widget>[
+                        //         TextButton(
+                        //           onPressed: () {
+                        //             Navigator.of(context).pop();
+                        //           },
+                        //           child: Text('OK'),
+                        //         ),
+                        //       ],
+                        //     );
+                        // },
+                        //  );
                       },
                       child: Text('REGISTER'),
                       style: ElevatedButton.styleFrom(

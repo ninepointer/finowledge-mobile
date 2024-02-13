@@ -17,12 +17,14 @@ class SignupView extends StatefulWidget {
 class _SignupViewState extends State<SignupView> {
   late AuthController controller;
   late GlobalKey<FormState> formKey;
+  String schoolName = "";
+  String cityName = "";
 
   @override
   void initState() {
     super.initState();
     controller = Get.find<AuthController>();
-    controller.getActiveCities();
+
     if (controller.activeCities.isNotEmpty) {
       controller.selectedCity = controller.activeCities.first.sId ?? '';
     }
@@ -41,7 +43,7 @@ class _SignupViewState extends State<SignupView> {
 
   @override
   Widget build(BuildContext context) {
-    print("statesss ${controller.selectedState} ");
+    print("statesss ${controller.selectedSchoolName.value} ");
     return Obx(
       () => Scaffold(
         body: Form(
@@ -261,6 +263,12 @@ class _SignupViewState extends State<SignupView> {
                                     setState(() {
                                       controller.selectedState = newValue ?? '';
                                       controller.fetchSchoolListDetails();
+                                      controller.getActiveCities(
+                                          controller.selectedState);
+                                      controller.fetchschool
+                                          .clear(); // Clear existing school list
+                                      controller
+                                          .fetchSchoolListDetails(); // Fetch new school list based on selected state
                                     });
                                   },
                                   selectedItem: controller.selectedState,
@@ -328,30 +336,28 @@ class _SignupViewState extends State<SignupView> {
                                       ),
                                     ),
                                     onChanged: (String? newValue) {
+                                      controller.fetchSchoolListDetails();
                                       setState(() {
-                                        // Access the actual data from the Rx object
                                         final schoolList =
                                             controller.fetchschool;
-
-                                        // Find the school object corresponding to the selected ID
+                                        print("helllllll $newValue");
                                         final selectedSchool =
                                             schoolList.firstWhere(
-                                          (school) => school.sId == newValue,
+                                          (school) =>
+                                              school.schoolString == newValue,
                                           orElse: () => FetchSchoolResponse(
                                             sId: '',
-                                            schoolString:
-                                                '', // Provide a default value if not found
+                                            schoolString: '',
                                           ),
                                         );
 
                                         controller.selectedSchoolName.value =
+                                            selectedSchool.sId ?? '';
+                                        schoolName =
                                             selectedSchool.schoolString ?? '';
-
-                                        controller.fetchSchoolListDetails();
                                       });
                                     },
-                                    selectedItem:
-                                        controller.selectedSchoolName.value,
+                                    selectedItem: schoolName,
                                   ),
                                 ),
                               ),
@@ -490,19 +496,20 @@ class _SignupViewState extends State<SignupView> {
                                       // Find the city object corresponding to the selected ID
                                       final selectedCityObject =
                                           controller.activeCities.firstWhere(
-                                        (city) => city.sId == newValue,
+                                        (city) => city.name == newValue,
                                         orElse: () => ActiveCitiesList(
                                           sId: '',
                                           name:
                                               '', // Provide a default value if not found
                                         ),
                                       );
+                                      cityName = selectedCityObject.name ?? '';
                                       controller.selectedCity =
                                           selectedCityObject.sId ??
                                               ''; // Set the selected city's ID
                                     });
                                   },
-                                  selectedItem: controller.selectedCity,
+                                  selectedItem: cityName,
                                 ),
                               ),
 

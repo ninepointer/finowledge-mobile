@@ -54,6 +54,7 @@ class _DashboardViewState extends State<DashboardView> {
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
                     SingleChildScrollView(
+                      clipBehavior: Clip.none,
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
@@ -126,6 +127,7 @@ class _DashboardViewState extends State<DashboardView> {
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0408),
                     SingleChildScrollView(
+                      clipBehavior: Clip.none,
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
