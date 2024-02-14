@@ -248,13 +248,9 @@ class _SignupViewState extends State<SignupView> {
                                 onChanged: (String? newValue) {
                                   setState(() {
                                     controller.selectedState = newValue ?? '';
-                                    controller.fetchSchoolListDetails();
+
                                     controller.getActiveCities(
                                         controller.selectedState);
-                                    controller.fetchschool
-                                        .clear(); // Clear existing school list
-                                    controller
-                                        .fetchSchoolListDetails(); // Fetch new school list based on selected state
                                   });
                                 },
                                 selectedItem: controller.selectedState,
@@ -325,8 +321,11 @@ class _SignupViewState extends State<SignupView> {
                                     );
                                     cityName = selectedCityObject.name ?? '';
                                     controller.selectedCity =
-                                        selectedCityObject.sId ??
+                                        selectedCityObject.name ??
                                             ''; // Set the selected city's ID
+                                    controller.fetchschool
+                                        .clear(); // Clear existing school list
+                                    controller.fetchSchoolListDetails();
                                   });
                                 },
                                 selectedItem: cityName,

@@ -40,7 +40,9 @@ class AppUrls {
   static const String phoneLogin = "/schoollogin";
 
   // static const String activeCities = "/cities/active";
-  static String activeCities(String state) => "/cities/bystate/$state";
+
+  static const String activeCities =
+      "http://43.204.7.180/api/v1/cities/bystate";
   static const String signup = "/schoollogin";
   static const String userActiveQuizOlympiad = "/quiz/user/my";
   static const String userAllQuizOlympiad = "/quiz/user";

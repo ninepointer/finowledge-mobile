@@ -40,14 +40,14 @@ class SplashView extends GetView<SplashController> {
               child: Obx(
                 () => Column(
                   children: [
-                    if (AppStorage.getIsProd() == true)
-                      Text(
-                        string("label_dev"),
-                        style: Get.isDarkMode
-                            ? AppStyles.tsGreyRegular14
-                            : AppStyles.tsPrimaryMedium12
-                                .copyWith(color: AppColors.lightGreen),
-                      ),
+                    // if (AppStorage.getIsProd() == true)
+                    Text(
+                      string("label_dev"),
+                      style: Get.isDarkMode
+                          ? AppStyles.tsGreyRegular14
+                          : AppStyles.tsPrimaryMedium12
+                              .copyWith(color: AppColors.lightGreen),
+                    ),
                     Text(
                       controller.appVersion,
                       style: AppStyles.tsGreyRegular14,

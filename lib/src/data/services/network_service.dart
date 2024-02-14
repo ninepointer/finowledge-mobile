@@ -13,12 +13,10 @@ import '../data.dart';
 class NetworkService {
   late Dio _dio;
   late Dio _formDio;
-  late Dio _dioAuth;
 
   NetworkService() {
     prepareRequest();
     prepareFormRequest();
-    prepareRequestWithAuth();
   }
 
   static final NetworkService shared = NetworkService();
@@ -53,8 +51,7 @@ class NetworkService {
 
   void prepareFormRequest() {
     BaseOptions dioOptions = BaseOptions(
-      baseUrl:
-          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -72,34 +69,6 @@ class NetworkService {
       responseHeader: false,
       logPrint: _printLog,
     ));
-  }
-
-  void prepareRequestWithAuth() {
-    BaseOptions dioOptions = BaseOptions(
-      baseUrl:
-          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
-      contentType: Headers.jsonContentType,
-      responseType: ResponseType.json,
-      headers: {
-        'Accept': Headers.jsonContentType,
-      },
-    );
-
-    _dioAuth = Dio(dioOptions);
-
-    _dioAuth.interceptors.clear();
-
-    _dioAuth.interceptors.add(
-      PrettyDioLogger(
-        error: true,
-        request: true,
-        requestBody: true,
-        requestHeader: true,
-        responseBody: true,
-        responseHeader: true,
-        compact: false,
-      ),
-    );
   }
 
   _printLog(Object object) => log(object.toString());
@@ -121,21 +90,38 @@ class NetworkService {
     String? token,
   }) async {
     try {
+      final authDio = Dio();
+
+      authDio.interceptors.clear();
+
+      authDio.interceptors.add(
+        PrettyDioLogger(
+          error: true,
+          request: true,
+          requestBody: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: false,
+          compact: false,
+        ),
+      );
+
       final headers = {
         'Authorization':
             'Bearer ${useTestToken ? AppConstants.token : AppStorage.getToken()}',
       };
 
-      final response = await _dioAuth.get(
+      final response = await authDio.get(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
           responseType: ResponseType.json,
         ),
       );
+
       return response.data;
     } on Exception catch (error) {
       return ExceptionHandler.handleError(error);
@@ -149,21 +135,38 @@ class NetworkService {
     String? token,
   }) async {
     try {
+      final authDio = Dio();
+
+      authDio.interceptors.clear();
+
+      authDio.interceptors.add(
+        PrettyDioLogger(
+          error: true,
+          request: true,
+          requestBody: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: false,
+          compact: false,
+        ),
+      );
+
       final headers = {
         'Authorization':
             'Bearer ${useTestToken ? AppConstants.token : AppStorage.getToken()}',
       };
 
-      final response = await _dioAuth.post(
+      final response = await authDio.post(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
           responseType: ResponseType.json,
         ),
       );
+
       return response.data;
     } on Exception catch (error) {
       return ExceptionHandler.handleError(error);
@@ -177,21 +180,38 @@ class NetworkService {
     String? token,
   }) async {
     try {
+      final authDio = Dio();
+
+      authDio.interceptors.clear();
+
+      authDio.interceptors.add(
+        PrettyDioLogger(
+          error: true,
+          request: true,
+          requestBody: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: false,
+          compact: false,
+        ),
+      );
+
       final headers = {
         'Authorization':
             'Bearer ${useTestToken ? AppConstants.token : AppStorage.getToken()}',
       };
 
-      final response = await _dioAuth.patch(
+      final response = await authDio.patch(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
           responseType: ResponseType.json,
         ),
       );
+
       return response.data;
     } on Exception catch (error) {
       return ExceptionHandler.handleError(error);
@@ -205,15 +225,31 @@ class NetworkService {
     String? token,
   }) async {
     try {
+      final authDio = Dio();
+
+      authDio.interceptors.clear();
+
+      authDio.interceptors.add(
+        PrettyDioLogger(
+          error: true,
+          request: true,
+          requestBody: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: false,
+          compact: false,
+        ),
+      );
+
       final headers = {
         'Authorization':
             'Bearer ${useTestToken ? AppConstants.token : AppStorage.getToken()}',
       };
 
-      final response = await _dioAuth.put(
+      final response = await authDio.put(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
@@ -320,8 +356,7 @@ class NetworkService {
     Dio _authFormDio = Dio();
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl:
-          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -365,8 +400,7 @@ class NetworkService {
     };
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl:
-          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );

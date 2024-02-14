@@ -95,8 +95,9 @@ class AuthRepository extends BaseRepository {
 
   Future<RepoResponse<ActiveCitiesResponse>> getActiveCities(
       String state) async {
-    String apiURL = AppUrls.activeCities(state);
-    var response = await service.getAuth(path: apiURL);
+    String apiURL = "${AppUrls.activeCities}/$state";
+    var response = await service.getAuth(path: apiURL, data: {"state": state});
+
     return response is APIException
         ? RepoResponse(error: response)
         : RepoResponse(data: ActiveCitiesResponse.fromJson(response));
