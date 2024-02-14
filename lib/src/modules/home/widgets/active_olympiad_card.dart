@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/src/app/app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:stoxhero/src/app/app.dart';
 
 class ActiveOlympiadCard extends GetView<FinowledgeController> {
   final MyActiveOlympiadList? myOlympiad;
@@ -14,31 +14,16 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFFF0F0F0),
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 5,
-            offset: Offset(-5, -5),
-          ),
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            blurRadius: 5,
-            offset: Offset(5, 5),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: MediaQuery.of(context).size.width / 2 -
-                MediaQuery.of(context).size.width * 0.051,
-            width: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 0.102,
+            height: MediaQuery.of(context).size.width / 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -56,26 +41,20 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
               ),
             ),
           ),
-          // Content Section
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
-                Container(
-                  height: MediaQuery.of(context).size.width * 0.14,
-                  child: Text(
-                    myOlympiad?.title ?? '',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                Text(
+                  myOlympiad?.title ?? '',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 8),
-                // Grade
                 Text(
                   '${myOlympiad?.grade} Grade',
                   style: TextStyle(
@@ -84,7 +63,6 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                   ),
                 ),
                 SizedBox(height: 8),
-                // Starts and Seats Left
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -95,17 +73,9 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                         color: Colors.grey,
                       ),
                     ),
-                    Text(
-                      'Seats left: ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(height: 16),
-                // Action Buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -126,10 +96,9 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange,
                         padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.0408,
-                            vertical:
-                                MediaQuery.of(context).size.width * 0.0306),
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -159,10 +128,9 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue,
                         padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.0408,
-                            vertical:
-                                MediaQuery.of(context).size.width * 0.0306),
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),

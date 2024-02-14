@@ -63,7 +63,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   height: MediaQuery.of(context).size.width * 0.0510,
                 ),
                 Container(
-                  height: 500,
+                  height: MediaQuery.of(context).size.height * 0.70,
                   child: ListView.builder(
                     itemCount: controller.timeSlotForQuizRegistrationList
                         .length, // Replace myOlympiadList with your list of Olympiads
@@ -125,16 +125,18 @@ class _RegistrationViewState extends State<RegistrationView> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              if (selectedIndex == -1 ||
-                  controller.timeSlotForQuizRegistrationList[selectedIndex]
-                          .spotLeft ==
-                      0) {
-                SnackbarHelper.showSnackbar(
-                    "Please select a valid time slot for registration");
-              } else {
-                controller.timeSlotForQuizRegistrationList[selectedIndex];
-                Get.to(() => UploadProfileImageView());
-              }
+              // if (selectedIndex == -1 ||
+              //     controller.timeSlotForQuizRegistrationList[selectedIndex]
+              //             .spotLeft ==
+              //         0) {
+              //   SnackbarHelper.showSnackbar(
+              //       "Please select a valid time slot for registration");
+              // } else {
+              //   controller.timeSlotForQuizRegistrationList[selectedIndex];
+              //   Get.to(() => UploadProfileImageView());
+              // }
+              // controller.timeSlotForQuizRegistrationList[selectedIndex];
+              Get.to(() => UploadProfileImageView());
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.green,

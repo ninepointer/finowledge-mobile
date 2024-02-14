@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,10 +28,28 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
       appBar: AppBar(
         title: Text('Upload Profile Image'),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Column(
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.0306,
+            vertical: MediaQuery.of(context).size.width * 0.0520),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.0520,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Please upload your profile image",
+                  style: AppStyles.tsBlackMedium18,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.0520,
+            ),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -46,47 +63,88 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       ? CircleAvatar(
                           // Placeholder profile image when no image is selected
                           backgroundImage: AssetImage(AppImages.lightAppLogo),
-                          radius: 60, // Radius of the circle avatar
+                          radius: 60,
                         )
                       : CircleAvatar(
                           backgroundImage: FileImage(File(_imageFile!.path)),
-                          radius: 60, // Radius of the circle avatar
+                          radius: 60,
                         ),
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _pickImage,
-                  child: Text('Select Image'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Set border radius
+                    ),
+                  ),
+                  child: Text('Upload Profile Image'),
                 ),
               ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    "Please upload your image for better identification on the leaderboard and social media. Your image will enhance your presence and ensure clear recognition.",
+                    style: AppStyles.tsBlackRegular14,
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: AppColors.lightCardBackgroundColor,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
-                onPressed: () {
-                  // Handle skip action
-                },
-                child: Text('Skip'),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Handle skip action
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Set border radius
+                    ),
+                  ),
+                  child: Text('Skip'),
+                ),
               ),
               SizedBox(width: 16),
-              ElevatedButton(
-                onPressed: _imageFile == null
-                    ? null
-                    : () {
-                        // Handle save action
-                        if (_imageFile != null) {
-                          // Save the profile image
-                        }
-                      },
-                child: Text('Save'),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: _imageFile == null
+                      ? null
+                      : () {
+                          // Handle save action
+                          if (_imageFile != null) {
+                            // Save the profile image
+                          }
+                        },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Set border radius
+                    ),
+                  ),
+                  child: Text('Save'),
+                ),
               ),
             ],
           ),
