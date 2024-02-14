@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
+import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
 
 import '../core.dart';
 
@@ -24,15 +25,12 @@ class AppLogoWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 1.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    Get.isDarkMode
-                        ? AppImages.lightAppName
-                        : AppImages.dartAppName,
-                    height: logoSize ?? 100,
-                    width: logoSize ?? 250,
-                  ),
+                child: Image.asset(
+                  Get.isDarkMode
+                      ? AppImages.lightAppName
+                      : AppImages.finowedgeLogo,
+                  //height: logoSize ?? 0.4.sh,
+                  width: logoSize ?? 0.4.sw,
                 ),
               ),
               // if (hasLabel) SizedBox(height: 24),

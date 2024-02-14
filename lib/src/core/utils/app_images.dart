@@ -53,4 +53,7 @@ class AppImages {
   static const String hero = '$imagesDir/heroes.png';
   static const String shstory = '$imagesDir/rerewind.png';
   static const String hny = '$imagesDir/hny.png';
+
+  /// New Assets for finowledge
+  static const String finowedgeLogo = '$imagesDir/FinowledgeLogo.png';
 }

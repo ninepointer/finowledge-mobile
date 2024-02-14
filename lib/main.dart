@@ -37,6 +37,7 @@ void main() async {
     minimumFetchInterval: const Duration(seconds: 10),
   ));
 
+  /// To Activate and Fetch Remote config data
   await remoteConfig.fetchAndActivate();
 
   /// App Package

@@ -46,8 +46,8 @@ class AppStorage {
     _box.erase();
   }
 
-  static Future? setIsProd(bool isProd) {
-    return _box.write(AppStorageKeys.isProd, isProd);
+  static Future? setIsProd(bool? isProd) {
+    return _box.write(AppStorageKeys.isProd, isProd ?? false);
   }
 
   static bool getIsProd() {

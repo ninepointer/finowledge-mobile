@@ -25,9 +25,13 @@ class Environment {
   }
 
   BaseConfig _getConfig(String environment) {
+    if(environment == Environment.PROD){
+      AppStorage.setIsProd(true);
+    }else{
+      AppStorage.setIsProd(false);
+    }
     switch (environment) {
       case Environment.PROD:
-        AppStorage.setIsProd(true);
         return ProdConfig();
       case Environment.STAGING:
         return StagingConfig();

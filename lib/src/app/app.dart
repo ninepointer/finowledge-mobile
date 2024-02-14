@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
 
 import '../../main.dart';
 import 'app.dart';
@@ -44,16 +45,19 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
     );
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.rightToLeft,
-      title: AppConstants.appName,
-      themeMode: ThemeService().theme,
-      theme: AppTheme.lightThemeData(context),
-      darkTheme: AppTheme.darkThemeData(context),
-      initialBinding: AppBinding(),
-      getPages: AppPages.pages,
-      initialRoute: AppRoutes.splash,
+    return ScreenUtilInit(
+      designSize: Size(446, 960),
+      builder: () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        defaultTransition: Transition.rightToLeft,
+        title: AppConstants.appName,
+        themeMode: ThemeService().theme,
+        theme: AppTheme.lightThemeData(context),
+        darkTheme: AppTheme.darkThemeData(context),
+        initialBinding: AppBinding(),
+        getPages: AppPages.pages,
+        initialRoute: AppRoutes.otp,
+      ),
     );
   }
 

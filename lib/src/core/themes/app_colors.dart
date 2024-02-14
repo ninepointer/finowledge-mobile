@@ -3,9 +3,11 @@ import 'package:stoxhero/src/core/core.dart';
 
 extension CustomColors on ColorScheme {
   Color get lightScaffoldBackgroundColor => Color(0xFFF5F6FA);
+
   Color get darkScaffoldBackgroundColor => Color(0xFF171F2A);
 
   Color get lightCardBackgroundColor => Color(0xFFFFFFFF);
+
   Color get darkCardBackgroundColor => Color(0xFF1E2936);
 }
 
@@ -24,6 +26,7 @@ class AppColors {
   static final MaterialColor brandYellow = Color(0xFFFFC42A).toMaterialColor();
   static final MaterialColor danger = Color(0xFFFF5630).toMaterialColor();
   static final MaterialColor cyan = Color(0xFF68F5E3).toMaterialColor();
+
   // static final MaterialColor lightGreen = Color(0xFF65BA0D).toMaterialColor();
   static final MaterialColor lightGreen = Color(0xFF01B255).toMaterialColor();
   static final MaterialColor darkGreen = Color(0xFF315c45).toMaterialColor();

@@ -384,7 +384,7 @@ class AuthController extends BaseController<AuthRepository> {
     FocusScope.of(Get.context!).unfocus();
 
     FetchSchoolRequest data = FetchSchoolRequest(
-        inputString: selectedSchoolName.value, stateName: selectedState);
+        inputString: selectedSchoolName.value, stateName: selectedState,cityName: selectedCity);
 
     try {
       final RepoResponse<List<FetchSchoolResponse>> response =
