@@ -51,7 +51,8 @@ class NetworkService {
 
   void prepareFormRequest() {
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl:
+          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -356,7 +357,8 @@ class NetworkService {
     Dio _authFormDio = Dio();
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl:
+          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
@@ -400,7 +402,8 @@ class NetworkService {
     };
 
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
+      baseUrl:
+          "${Environment().config?.baseURL}${Environment().config?.apiUrl}${Environment().config?.apiVersion}",
       contentType: "multipart/form-data",
       responseType: ResponseType.json,
     );
