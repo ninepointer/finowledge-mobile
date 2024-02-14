@@ -340,7 +340,7 @@ class _SignupViewState extends State<SignupView> {
                                       setState(() {
                                         final schoolList =
                                             controller.fetchschool;
-                                        print("helllllll $newValue");
+
                                         final selectedSchool =
                                             schoolList.firstWhere(
                                           (school) =>

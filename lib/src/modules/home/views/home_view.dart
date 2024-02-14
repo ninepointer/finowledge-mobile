@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -103,20 +104,47 @@ class _HomeViewState extends State<HomeView> {
         if (isOpened) controller.userDetails(AppStorage.getUserDetails());
       },
       appBar: AppBar(
+        backgroundColor: AppColors.primary,
         title: Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Hello,',
-                  style: AppStyles.tsGreyRegular12,
+                Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.hand,
+                      size: 14,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.0102,
+                    ),
+                    Text(
+                      'Hello,',
+                      style: AppStyles.tsGreyRegular14
+                          .copyWith(color: Colors.white),
+                    ),
+                  ],
+                ),
+                // Text(
+                //   controller.userDetailsData.studentName?.capitalizeFirst ??
+                //       '-',
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .tsMedium16
+                //       .copyWith(color: Colors.white),
+                // ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.0102,
                 ),
                 Text(
-                  controller.userDetailsData.studentName?.capitalizeFirst ??
-                      '-',
-                  style: Theme.of(context).textTheme.tsMedium16,
+                  "Lets gear up to be future ready",
+                  style:
+                      AppStyles.tsBlackRegular12.copyWith(color: Colors.white),
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.0204,
+                )
               ],
             ),
           ],

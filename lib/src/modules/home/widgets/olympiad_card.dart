@@ -32,7 +32,7 @@ class OlympiadCard extends GetView<HomeController> {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: MediaQuery.of(context).size.width / 2 -
@@ -107,34 +107,34 @@ class OlympiadCard extends GetView<HomeController> {
                 SizedBox(height: 16),
                 // Action Buttons
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Center(
-                              child: ReferFriendContent(
-                                contest: myOlympiad,
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Text('INVITE FRIENDS'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.orange,
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.0408,
-                            vertical:
-                                MediaQuery.of(context).size.width * 0.0306),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     showDialog(
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return Center(
+                    //           child: ReferFriendContent(
+                    //             contest: myOlympiad,
+                    //           ),
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    //   child: Text('INVITE FRIENDS'),
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: Colors.orange,
+                    //     padding: EdgeInsets.symmetric(
+                    //         horizontal:
+                    //             MediaQuery.of(context).size.width * 0.0408,
+                    //         vertical:
+                    //             MediaQuery.of(context).size.width * 0.0306),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(16),
+                    //     ),
+                    //   ),
+                    // ),
                     ElevatedButton(
                       onPressed: () {
                         controller.getTimeSlotForQuizRegistrationDetails(
@@ -165,7 +165,7 @@ class OlympiadCard extends GetView<HomeController> {
                       },
                       child: Text('REGISTER'),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        primary: AppColors.primary,
                         padding: EdgeInsets.symmetric(
                             horizontal:
                                 MediaQuery.of(context).size.width * 0.0408,
@@ -176,20 +176,20 @@ class OlympiadCard extends GetView<HomeController> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _openWhatsAppGroup();
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.green,
-                        radius: 20,
-                        child: Icon(
-                          FontAwesomeIcons.whatsapp,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     _openWhatsAppGroup();
+                    //   },
+                    //   child: CircleAvatar(
+                    //     backgroundColor: Colors.green,
+                    //     radius: 20,
+                    //     child: Icon(
+                    //       FontAwesomeIcons.whatsapp,
+                    //       color: Colors.white,
+                    //       size: 20,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
