@@ -1,6 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:stoxhero/src/data/data.dart';
 
+import '../../data/models/response/site_settings_response.dart';
+
 class AppStorage {
   AppStorage._privateConstructor();
 
@@ -53,6 +55,14 @@ class AppStorage {
   static bool getIsProd() {
     return _box.read(AppStorageKeys.isProd);
   }
+
+  static Future? setSiteSettings(SiteSettingsData? settings) {
+    return _box.write(AppStorageKeys.siteSettings, settings);
+  }
+
+  static SettingList getSiteSettings() {
+    return _box.read(AppStorageKeys.siteSettings);
+  }
 }
 
 class AppStorageKeys {
@@ -61,4 +71,5 @@ class AppStorageKeys {
   static const String userDetails = 'userDetails';
   static const String newUser = 'newUser';
   static const String isProd = 'env';
+  static const String siteSettings = 'siteSettings';
 }

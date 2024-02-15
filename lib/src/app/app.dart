@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
+import 'package:stoxhero/src/data/models/response/site_settings_response.dart';
+import 'package:stoxhero/src/env/environment.dart';
 
 import '../../main.dart';
 import 'app.dart';
@@ -31,6 +33,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     _initializePushNotification();
+    //AppStorage.setSiteSettings(siteSettingsResponseFromJson(Environment().config?.siteSettings ?? ""));
     WidgetsBinding.instance.addObserver(this);
   }
 
