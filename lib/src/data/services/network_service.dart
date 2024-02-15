@@ -128,8 +128,8 @@ class NetworkService {
 
       final response = await _dioAuth.get(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
@@ -156,8 +156,8 @@ class NetworkService {
 
       final response = await _dioAuth.post(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
@@ -184,8 +184,8 @@ class NetworkService {
 
       final response = await _dioAuth.patch(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
@@ -212,8 +212,8 @@ class NetworkService {
 
       final response = await _dioAuth.put(
         path,
+        data: data,
         queryParameters: query,
-        data: jsonEncode(data),
         options: Options(
           headers: headers,
           contentType: "application/json",
