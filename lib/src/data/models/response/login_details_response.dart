@@ -465,6 +465,7 @@ class SchoolDetails {
   City? city;
   String? state;
   String? dob;
+  String? profilePhoto;
 
   SchoolDetails(
       {this.parentsName,
@@ -472,13 +473,15 @@ class SchoolDetails {
       this.school,
       this.city,
       this.state,
-      this.dob});
+      this.dob,
+      this.profilePhoto});
 
   SchoolDetails.fromJson(Map<String, dynamic> json) {
     parentsName = json['parents_name'];
     grade = json['grade'];
     state = json['state'];
     dob = json['dob'];
+    profilePhoto = json['profilePhoto'];
     school =
         json['school'] != null ? new School.fromJson(json['school']) : null;
     city = json['city'] != null ? new City.fromJson(json['city']) : null;
@@ -490,6 +493,7 @@ class SchoolDetails {
     data['grade'] = this.grade;
     data['state'] = this.state;
     data['dob'] = this.dob;
+    data['profilePhoto'] = this.profilePhoto;
     if (this.school != null) {
       data['school'] = this.school!.toJson();
     }
