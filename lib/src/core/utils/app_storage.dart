@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:stoxhero/src/data/data.dart';
 
-import '../../data/models/response/site_settings_response.dart';
+// import '../../data/models/response/site_settings_response.dart';
 
 class AppStorage {
   AppStorage._privateConstructor();
@@ -56,13 +56,13 @@ class AppStorage {
     return _box.read(AppStorageKeys.isProd);
   }
 
-  static Future? setSiteSettings(SiteSettingsData? settings) {
-    return _box.write(AppStorageKeys.siteSettings, settings);
-  }
+  // static Future? setSiteSettings(SiteSettingsData? settings) {
+  //   return _box.write(AppStorageKeys.siteSettings, settings);
+  // }
 
-  static SettingList getSiteSettings() {
-    return _box.read(AppStorageKeys.siteSettings);
-  }
+  // static SettingList getSiteSettings() {
+  //   return _box.read(AppStorageKeys.siteSettings);
+  // }
 }
 
 class AppStorageKeys {

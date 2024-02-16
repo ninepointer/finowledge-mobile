@@ -321,8 +321,9 @@ class _SignupViewState extends State<SignupView> {
                                     );
                                     cityName = selectedCityObject.name ?? '';
                                     controller.selectedCity =
-                                        selectedCityObject.name ??
-                                            ''; // Set the selected city's ID
+                                        selectedCityObject.sId ?? '';
+                                    controller.selectedCityForState =
+                                        selectedCityObject.name ?? '';
                                     controller.fetchschool
                                         .clear(); // Clear existing school list
                                     controller.fetchSchoolListDetails();

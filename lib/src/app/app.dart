@@ -57,7 +57,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         darkTheme: AppTheme.darkThemeData(context),
         initialBinding: AppBinding(),
         getPages: AppPages.pages,
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.splash,
       ),
     );
   }

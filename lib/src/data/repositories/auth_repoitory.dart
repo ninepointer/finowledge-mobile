@@ -88,6 +88,7 @@ class AuthRepository extends BaseRepository {
   Future<RepoResponse<LoginDetailsResponse>> loginDetails() async {
     String apiURL = AppUrls.loginDetails;
     var response = await service.getAuth(path: apiURL);
+    print("hiiii ${response}");
     return response is APIException
         ? RepoResponse(error: response)
         : RepoResponse(data: LoginDetailsResponse.fromJson(response));
