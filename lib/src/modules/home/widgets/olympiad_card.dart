@@ -12,22 +12,10 @@ class OlympiadCard extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFFF0F0F0),
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 5,
-            offset: Offset(-5, -5),
-          ),
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            blurRadius: 5,
-            offset: Offset(5, 5),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +61,6 @@ class OlympiadCard extends GetView<HomeController> {
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
 
                 /// Grade
                 Text(
@@ -83,19 +70,21 @@ class OlympiadCard extends GetView<HomeController> {
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 8),
 
                 /// Starts and Seats Left
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${string("label_starts")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
+                      '${string("label_starts")}${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
                     ),
+                  ],
+                ),
+                Row(
+                  children: [
                     Text(
                       '${string("label_seats_left")} ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
                       style: TextStyle(

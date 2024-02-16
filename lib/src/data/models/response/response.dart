@@ -15,3 +15,4 @@ export 'active_cities_response.dart';
 export 'my_active_olympiad_response.dart';
 export 'time_slot_for_quiz_respoonse.dart';
 export 'fetch_school_list_response.dart';
+export 'school_user_grade_and_section_response.dart';

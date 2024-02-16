@@ -1,22 +1,20 @@
 class FetchSchoolRequest {
   String? inputString;
-  String? stateName;
-  String? cityName;
+  String? cityId;
 
-  FetchSchoolRequest({this.inputString, this.stateName,this.cityName});
+  FetchSchoolRequest({this.inputString, this.cityId});
 
   FetchSchoolRequest.fromJson(Map<String, dynamic> json) {
     inputString = json['inputString'];
-    stateName = json['stateName'];
-    cityName = json['cityName'];
+    cityId = json['cityId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data['inputString'] = this.inputString;
-    data['stateName'] = this.stateName;
-    data['cityName'] = this.cityName;
+
+    data['cityId'] = this.cityId;
     return data;
   }
 }

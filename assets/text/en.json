@@ -21,6 +21,8 @@
   "label_search_cit_here": "Search city here",
   "label_choose_school": "Choose school",
   "hint_choose_school": "Choose school",
+  "label_choose_grade":"Choose grade",
+  "hint_choose_grade":"Choose grade",
   "label_proceed": "PROCEED",
   "label_enter_verification_code": "Please enter your\n verification code!",
   "label_we_have_sent_six_digit_code": "We have sent a six digit verification\n code to +91 ",

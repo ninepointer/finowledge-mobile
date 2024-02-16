@@ -16,7 +16,8 @@ class AppConstants {
       // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUwYWM3Mjk3YjVkNjFlODVjMjYwZjAiLCJpYXQiOjE3MDAwNDE2MDR9.rNhYuZ3Km8LPLbmRJ6QoycWOw_OZlqPuR7Ublx-vDvk"; //Ritik
       // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTY4NGEzOGE3NzAwYjg0NTllZjJkYmUiLCJpYXQiOjE3MDI4ODUxMjR9.5pqrOfzoLbXMaUs5JtpG95Iq1K6W6tHNoE_pZg_F_fg"; //Harpreet prod
       // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTg1NjEzMDNiNjJiM2Y3N2IzOWQ3ZDIiLCJpYXQiOjE3MDM0OTQ1Njl9.C_whxd94fPNJTQsOFWv8HB0PWUUS254Xopfm2-6pvuc";
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM1YzU5YTk2YzJkN2FjNzYyZDZkZmQiLCJpYXQiOjE3MDc0OTI4ODh9.qs9G6agACjizbA6YDiOvCS8Flgz4EBsVehRfHAHPh6g"; //demo account
+      //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM1YzU5YTk2YzJkN2FjNzYyZDZkZmQiLCJpYXQiOjE3MDc0OTI4ODh9.qs9G6agACjizbA6YDiOvCS8Flgz4EBsVehRfHAHPh6g"; //demo account
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU1YTVhZTY0MjM1ZGY2MzRiZDk4OGUiLCJpYXQiOjE3MDgwODk5NjF9.GSn9vKwdnG_xAd7KAc6Anaag8E1VhxYRU9TyoOpQgKY";
   static const String equityTraderType = "Equity Trader";
   static const String buy = "BUY";
   static const String sell = "SELL";

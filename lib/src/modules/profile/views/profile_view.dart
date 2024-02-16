@@ -10,6 +10,7 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    print("ggggggggg ${controller.schoolNameTextController.text}");
     controller.loadData();
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +75,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "Class: ${controller.userDetails.value.schoolDetails?.grade ?? ''}",
+                        "Class: ${controller.userDetails.value.schoolDetails?.grade?.grade ?? ''} (${controller.userDetails.value.schoolDetails?.section ?? ''})",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey,
@@ -82,7 +83,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "${controller.userDetails.value.schoolDetails?.school ?? ''}",
+                        "${controller.userDetails.value.schoolDetails?.school?.schoolName ?? ''}",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey,

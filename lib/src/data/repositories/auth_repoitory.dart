@@ -64,16 +64,24 @@ class AuthRepository extends BaseRepository {
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
-  Future<RepoResponse<List<FetchSchoolResponse>>> fetchSchoolList(
+  // Future<RepoResponse<List<FetchSchoolResponse>>> fetchSchoolList(
+  //     Map<String, dynamic> data) async {
+  //   String apiURL = AppUrls.schoollist;
+  //   var response = await service.post(path: apiURL, data: data);
+  //   return response is APIException
+  //       ? RepoResponse(error: response)
+  //       : RepoResponse(
+  //           data: (response as List<dynamic>)
+  //               .map((item) => FetchSchoolResponse.fromJson(item))
+  //               .toList());
+  // }
+  Future<RepoResponse<FetchSchoolResponse>> fetchSchoolList(
       Map<String, dynamic> data) async {
     String apiURL = AppUrls.schoollist;
     var response = await service.post(path: apiURL, data: data);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(
-            data: (response as List<dynamic>)
-                .map((item) => FetchSchoolResponse.fromJson(item))
-                .toList());
+        : RepoResponse(data: FetchSchoolResponse.fromJson(response));
   }
 
   Future<RepoResponse<GenericResponse>> resendSignupOtp(
@@ -102,6 +110,17 @@ class AuthRepository extends BaseRepository {
     return response is APIException
         ? RepoResponse(error: response)
         : RepoResponse(data: ActiveCitiesResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<SchoolUserGradeAndSectionResponse>> getUserGrade(
+      String schoolId) async {
+    String apiURL = AppUrls.userGrade(schoolId);
+    var response = await service.getAuth(path: apiURL);
+
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(
+            data: SchoolUserGradeAndSectionResponse.fromJson(response));
   }
 
   Future<RepoResponse<GenericResponse>> userSignup(

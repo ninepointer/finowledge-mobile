@@ -56,8 +56,7 @@ class _DashboardViewState extends State<DashboardView>
                             color: AppColors.whiteScreenBackgroundColors,
                             child: TabBar(
                               onTap: (index) {
-                                controller.selectedTabIndex(index);
-                                print(index);
+                                controller.selectedTabIndex.value = index;
                               },
                               padding: EdgeInsets.zero,
                               isScrollable: true,
@@ -107,7 +106,7 @@ class _DashboardViewState extends State<DashboardView>
                               ],
                             ),
                           ),
-                          Builder(builder: (context) {
+                          Obx(() {
                             if (controller.selectedTabIndex.value == 0) {
                               return UpcomingOlympiadView();
                             } else if (controller.selectedTabIndex.value == 1) {

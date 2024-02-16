@@ -37,7 +37,7 @@ class AppUrls {
   static const String verifyCouponCode = "/coupons/verify";
   static const String myWithdrawals = "/withdrawals/mywithdrawals";
 
-  static const String phoneLogin = "/schoollogin";
+  static const String phoneLogin = "/schooluserlogin";
 
   // static const String activeCities = "/cities/active";
 
@@ -48,4 +48,6 @@ class AppUrls {
 
   static String bookingQuizSlot(String id) => "/quiz/user/slots/$id";
   static const String schoollist = "/fetchschools";
+
+  static String userGrade(String schoolId) => "/school/$schoolId/usergrades";
 }

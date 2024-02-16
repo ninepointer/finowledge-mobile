@@ -20,10 +20,14 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: MediaQuery.of(context).size.width / 2,
+            // height: MediaQuery.of(context).size.width / 2.2,
+            height: MediaQuery.of(context).size.width / 2 -
+                MediaQuery.of(context).size.width * 0.051,
+            width: MediaQuery.of(context).size.width -
+                MediaQuery.of(context).size.width * 0.102,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -46,15 +50,18 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  myOlympiad?.title ?? '',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                Container(
+                  height: MediaQuery.of(context).size.width * 0.140,
+                  child: Text(
+                    myOlympiad?.title ?? '',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-                SizedBox(height: 8),
+
                 Text(
                   '${myOlympiad?.grade} Grade',
                   style: TextStyle(
@@ -62,7 +69,7 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 8),
+                // SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -75,7 +82,7 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: MediaQuery.of(context).size.width * 0.0204),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -35,13 +35,18 @@ class AuthController extends BaseController<AuthRepository> {
   final token = ''.obs;
   final inviteCode = CampaignCodeData().obs;
   final activeCities = <ActiveCitiesList>[].obs;
-  final fetchschool = <FetchSchoolResponse>[].obs;
+  final fetchschool = <FetchSchoolList>[].obs;
+  final fetchUserGrade = <SchoolUserGradeAndSectionList>[].obs;
+  final fetchUserSection = <SchoolUserGradeAndSectionList>[].obs;
   final selectedSchoolName = ''.obs;
   final campaignCode = ''.obs;
 
-  String selectedClass = '6th';
+  final selectedClass = ''.obs;
+  final selectedClassId = ''.obs;
+  final selectedSections = <String>[].obs;
+  final selectedSection = ''.obs;
 
-  List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
+  //List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
   String selectedCity = '';
   String selectedCityForState = "";
 
@@ -219,7 +224,8 @@ class AuthController extends BaseController<AuthRepository> {
       mobile: mobileTextController.text,
       dob: DateFormat('yyyy-MM-dd').format(date),
       school: selectedSchoolName.value,
-      grade: selectedClass,
+      grade: selectedClassId.value,
+      section: selectedSection.value,
       city: selectedCity,
       state: selectedState,
 
@@ -274,7 +280,8 @@ class AuthController extends BaseController<AuthRepository> {
     VerifySignupRequest data = VerifySignupRequest(
       studentName: fullNameTextController.text,
       parentsName: parentNameTextController.text,
-      grade: selectedClass,
+      grade: selectedClassId.value,
+      section: selectedSection.value,
       school: selectedSchoolName.value,
       city: selectedCity,
       mobile: mobileTextController.text,
@@ -384,19 +391,21 @@ class AuthController extends BaseController<AuthRepository> {
     FocusScope.of(Get.context!).unfocus();
 
     FetchSchoolRequest data = FetchSchoolRequest(
-        inputString: selectedSchoolName.value,
-        stateName: selectedState,
-        cityName: selectedCityForState);
+        inputString: selectedSchoolName.value, cityId: selectedCity);
 
     try {
-      final RepoResponse<List<FetchSchoolResponse>> response =
+      //  Future<RepoResponse<FetchSchoolResponse>> response =
+      //     await repository.fetchSchoolList(
+      //   data.toJson(),
+      // );
+      final RepoResponse<FetchSchoolResponse> response =
           await repository.fetchSchoolList(
         data.toJson(),
       );
 
-      if (response.data != null && response.data!.isNotEmpty) {
+      if (response.data != null) {
         // Assuming fetchschool is a function that handles a list of FetchSchoolResponse
-        fetchschool(response.data ?? []);
+        fetchschool(response.data?.data ?? []);
       } else {
         // Handle case when response.data is null or empty
         // For example, show a message indicating no schools were found
@@ -406,6 +415,30 @@ class AuthController extends BaseController<AuthRepository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isLoading(false);
+  }
+
+  Future fetchUserGradeAndSectionDetails(String schoolId) async {
+    isLoading(true);
+    try {
+      final RepoResponse<SchoolUserGradeAndSectionResponse> response =
+          await repository.getUserGrade(schoolId);
+      if (response.data != null) {
+        fetchUserGrade(response.data?.data ?? []);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  void updateSelectedGrade(String grade) {
+    selectedClass.value = grade;
+    // Find the sections for the selected grade and update selectedSections
+    final selectedGradeData = fetchUserGrade.firstWhere(
+      (gradeData) => gradeData.grade?.grade == grade,
+      orElse: () => SchoolUserGradeAndSectionList(),
+    );
+    selectedSections(selectedGradeData.sections ?? []);
   }
 
   Future getDefaultInviteCode() async {

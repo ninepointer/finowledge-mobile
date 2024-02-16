@@ -460,12 +460,13 @@ class LoginDetailsResponse {
 
 class SchoolDetails {
   String? parentsName;
-  String? grade;
+  UserGrade? grade;
   School? school;
   City? city;
   String? state;
   String? dob;
   String? profilePhoto;
+  String? section;
 
   SchoolDetails(
       {this.parentsName,
@@ -474,16 +475,20 @@ class SchoolDetails {
       this.city,
       this.state,
       this.dob,
+      this.section,
       this.profilePhoto});
 
   SchoolDetails.fromJson(Map<String, dynamic> json) {
     parentsName = json['parents_name'];
-    grade = json['grade'];
+
     state = json['state'];
     dob = json['dob'];
+    section = json['section'];
     profilePhoto = json['profilePhoto'];
     school =
         json['school'] != null ? new School.fromJson(json['school']) : null;
+    grade =
+        json['grade'] != null ? new UserGrade.fromJson(json['grade']) : null;
     city = json['city'] != null ? new City.fromJson(json['city']) : null;
   }
 
@@ -493,9 +498,13 @@ class SchoolDetails {
     data['grade'] = this.grade;
     data['state'] = this.state;
     data['dob'] = this.dob;
+    data['section'] = this.section;
     data['profilePhoto'] = this.profilePhoto;
     if (this.school != null) {
       data['school'] = this.school!.toJson();
+    }
+    if (this.grade != null) {
+      data['grade'] = this.grade!.toJson();
     }
     if (this.city != null) {
       data['city'] = this.city!.toJson();
@@ -518,6 +527,25 @@ class School {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['school_name'] = this.schoolName;
+    return data;
+  }
+}
+
+class UserGrade {
+  String? sId;
+  String? grade;
+
+  UserGrade({this.sId, this.grade});
+
+  UserGrade.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    grade = json['grade'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['grade'] = this.grade;
     return data;
   }
 }

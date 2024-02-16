@@ -70,6 +70,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.70,
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemCount:
                         controller.timeSlotForQuizRegistrationList.length,
                     // Replace myOlympiadList with your list of Olympiads
@@ -127,7 +128,7 @@ class _RegistrationViewState extends State<RegistrationView> {
       bottomNavigationBar: BottomAppBar(
         color: AppColors.lightCardBackgroundColor,
         child: Container(
-          margin: EdgeInsets.all(16.0),
+          margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {

@@ -134,65 +134,65 @@ class _SignupViewState extends State<SignupView> {
                                 },
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.only(bottom: 16),
-                              child: DropdownButtonFormField<String>(
-                                menuMaxHeight: 200,
-                                value: controller.selectedClass,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    controller.selectedClass = newValue ?? '';
-                                  });
-                                },
-                                decoration: InputDecoration(
-                                  // labelText: 'Select Class',
-                                  isDense: true,
-                                  border: OutlineInputBorder(),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                      width: 2,
-                                      color: AppColors.lightGreen,
-                                    ),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                      width: 2,
-                                      color: AppColors.primary.shade700,
-                                    ),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                      width: 2,
-                                      color: AppColors.danger.shade700,
-                                    ),
-                                  ),
-                                  filled: true,
-                                  fillColor: AppColors.grey.withOpacity(.1),
-                                ),
-                                items: controller.classes
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      maxLines: 1,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .tsRegular16,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
+                            // Container(
+                            //   padding: EdgeInsets.only(bottom: 16),
+                            //   child: DropdownButtonFormField<String>(
+                            //     menuMaxHeight: 200,
+                            //     value: controller.selectedClass,
+                            //     onChanged: (String? newValue) {
+                            //       setState(() {
+                            //         controller.selectedClass = newValue ?? '';
+                            //       });
+                            //     },
+                            //     decoration: InputDecoration(
+                            //       // labelText: 'Select Class',
+                            //       isDense: true,
+                            //       border: OutlineInputBorder(),
+                            //       enabledBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(8),
+                            //         borderSide: BorderSide.none,
+                            //       ),
+                            //       focusedBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(8),
+                            //         borderSide: BorderSide(
+                            //           width: 2,
+                            //           color: AppColors.lightGreen,
+                            //         ),
+                            //       ),
+                            //       focusedErrorBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(8),
+                            //         borderSide: BorderSide(
+                            //           width: 2,
+                            //           color: AppColors.primary.shade700,
+                            //         ),
+                            //       ),
+                            //       errorBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(8),
+                            //         borderSide: BorderSide(
+                            //           width: 2,
+                            //           color: AppColors.danger.shade700,
+                            //         ),
+                            //       ),
+                            //       filled: true,
+                            //       fillColor: AppColors.grey.withOpacity(.1),
+                            //     ),
+                            //     items: controller.classes
+                            //         .map<DropdownMenuItem<String>>(
+                            //             (String value) {
+                            //       return DropdownMenuItem<String>(
+                            //         value: value,
+                            //         child: Text(
+                            //           value,
+                            //           maxLines: 1,
+                            //           style: Theme.of(context)
+                            //               .textTheme
+                            //               .tsRegular16,
+                            //           overflow: TextOverflow.ellipsis,
+                            //         ),
+                            //       );
+                            //     }).toList(),
+                            //   ),
+                            // ),
 
                             //state dropdown
 
@@ -346,9 +346,8 @@ class _SignupViewState extends State<SignupView> {
                                     showSearchBox: true,
                                   ),
                                   items: controller.fetchschool
-                                      .map<String>(
-                                          (FetchSchoolResponse school) =>
-                                              school.schoolString ?? '')
+                                      .map<String>((FetchSchoolList school) =>
+                                          school.schoolString ?? '')
                                       .toList(),
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
@@ -396,7 +395,7 @@ class _SignupViewState extends State<SignupView> {
                                           schoolList.firstWhere(
                                         (school) =>
                                             school.schoolString == newValue,
-                                        orElse: () => FetchSchoolResponse(
+                                        orElse: () => FetchSchoolList(
                                           sId: '',
                                           schoolString: '',
                                         ),
@@ -406,6 +405,10 @@ class _SignupViewState extends State<SignupView> {
                                           selectedSchool.sId ?? '';
                                       schoolName =
                                           selectedSchool.schoolString ?? '';
+                                      controller
+                                          .fetchUserGradeAndSectionDetails(
+                                              controller
+                                                  .selectedSchoolName.value);
                                     });
                                   },
                                   selectedItem: schoolName,
@@ -490,7 +493,155 @@ class _SignupViewState extends State<SignupView> {
                             //     }).toList(),
                             //   ),
                             // ),
-
+                            Obx(
+                              () => Container(
+                                padding: EdgeInsets.only(bottom: 16),
+                                child: DropdownSearch<String>(
+                                  popupProps: PopupProps.menu(
+                                    showSelectedItems: true,
+                                    // disabledItemFn: (String s) =>
+                                    //     s.startsWith('I'),
+                                    showSearchBox: true,
+                                  ),
+                                  items: controller.fetchUserGrade
+                                      .map<String>(
+                                          (SchoolUserGradeAndSectionList
+                                                  grade) =>
+                                              grade.grade?.grade ?? '')
+                                      .toList(),
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    dropdownSearchDecoration: InputDecoration(
+                                      // labelText: string("label_choose_city"),
+                                      // hintText: string("label_search_cit_here"),
+                                      labelText: "Choose Grade",
+                                      hintText: "Choose Grade",
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      isDense: true,
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.lightGreen,
+                                        ),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.primary.shade700,
+                                        ),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.danger.shade700,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      fillColor: AppColors.grey.withOpacity(.1),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      // Find the city object corresponding to the selected ID
+                                      final selectedGradeObject =
+                                          controller.fetchUserGrade.firstWhere(
+                                        (grade) =>
+                                            grade.grade?.grade == newValue,
+                                        orElse: () =>
+                                            SchoolUserGradeAndSectionList(
+                                          sId: '',
+                                        ),
+                                      );
+                                      controller.selectedClass.value =
+                                          selectedGradeObject.grade?.grade ??
+                                              '';
+                                      controller.selectedClassId.value =
+                                          selectedGradeObject.grade?.sId ?? '';
+                                    });
+                                  },
+                                  selectedItem: controller.selectedClass.value,
+                                ),
+                              ),
+                            ),
+                            Obx(
+                              () => Container(
+                                padding: EdgeInsets.only(bottom: 16),
+                                child: DropdownSearch<String>(
+                                  popupProps: PopupProps.menu(
+                                    showSelectedItems: true,
+                                    // disabledItemFn: (String s) =>
+                                    //     s.startsWith('I'),
+                                    showSearchBox: true,
+                                  ),
+                                  items: controller.fetchUserGrade
+                                      .where((grade) =>
+                                          grade.grade?.grade ==
+                                          controller.selectedClass.value)
+                                      .map<List<String>>(
+                                        (grade) => grade.sections ?? [],
+                                      )
+                                      .expand((sections) => sections)
+                                      .toList(),
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    dropdownSearchDecoration: InputDecoration(
+                                      // labelText: string("label_choose_city"),
+                                      // hintText: string("label_search_cit_here"),
+                                      labelText: "Choose Section",
+                                      hintText: "Choose Section",
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      isDense: true,
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.lightGreen,
+                                        ),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.primary.shade700,
+                                        ),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: AppColors.danger.shade700,
+                                        ),
+                                      ),
+                                      filled: true,
+                                      fillColor: AppColors.grey.withOpacity(.1),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      controller.selectedSection.value =
+                                          newValue ?? '';
+                                    });
+                                  },
+                                  selectedItem:
+                                      controller.selectedSection.value,
+                                ),
+                              ),
+                            ),
                             // CommonDropdown(hint: hint, value: value, dropdownItems: dropdownItems, onChanged: onChanged)
                           ],
                         ),
