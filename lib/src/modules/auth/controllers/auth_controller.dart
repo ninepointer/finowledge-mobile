@@ -43,6 +43,7 @@ class AuthController extends BaseController<AuthRepository> {
 
   List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
   String selectedCity = '';
+  String selectedCityForState = "";
 
   List<String> states = [
     'Andaman & Nicobar',
@@ -384,7 +385,9 @@ class AuthController extends BaseController<AuthRepository> {
     FocusScope.of(Get.context!).unfocus();
 
     FetchSchoolRequest data = FetchSchoolRequest(
-        inputString: selectedSchoolName.value, stateName: selectedState,cityName: selectedCity);
+        inputString: selectedSchoolName.value,
+        stateName: selectedState,
+        cityName: selectedCityForState);
 
     try {
       final RepoResponse<List<FetchSchoolResponse>> response =
