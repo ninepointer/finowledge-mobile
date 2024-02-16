@@ -9,6 +9,7 @@ class HomeBinding implements Bindings {
 
 class HomeController extends BaseController<DashboardRepository> {
   final userDetails = LoginDetailsResponse().obs;
+
   LoginDetailsResponse get userDetailsData => userDetails.value;
 
   final isLoading = false.obs;
@@ -19,12 +20,15 @@ class HomeController extends BaseController<DashboardRepository> {
   final selectedIndex = 0.obs;
 
   final firstTimeshow = true.obs;
+
   bool get firstTimeshowStatus => firstTimeshow.value;
 
   final dashboardCarouselList = <DashboardCarousel>[].obs;
   final myActiveOlympiadList = <MyActiveOlympiadList>[].obs;
   final userAllOlympiadList = <MyActiveOlympiadList>[].obs;
   final timeSlotForQuizRegistrationList = <TimeSlotForQuizList>[].obs;
+
+  final selectedTabIndex = 0.obs;
 
   String selectedTradeType = 'virtual';
   String selectedTimeFrame = 'this month';

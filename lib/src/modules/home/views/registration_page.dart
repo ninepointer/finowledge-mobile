@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 
+import '../../../utils/common_utils.dart';
+
 class RegistrationView extends StatefulWidget {
   final MyActiveOlympiadList? myOlympiad;
+
   // final TimeSlotForQuizList? timeslot;
   RegistrationView({
     Key? key,
     this.myOlympiad,
     // this.timeslot,
   }) : super(key: key);
+
   @override
   State<RegistrationView> createState() => _RegistrationViewState();
 }
@@ -16,6 +20,7 @@ class RegistrationView extends StatefulWidget {
 class _RegistrationViewState extends State<RegistrationView> {
   late HomeController controller;
   int selectedIndex = -1;
+
   @override
   void initState() {
     super.initState();
@@ -26,7 +31,7 @@ class _RegistrationViewState extends State<RegistrationView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text(string("label_small_register")),
       ),
       body: Obx(
         () => Padding(
@@ -40,7 +45,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Please select your test slot",
+                      string("label_please_select_your_test_slot"),
                       style: AppStyles.tsBlackMedium20,
                       textAlign: TextAlign.center,
                     )
@@ -53,7 +58,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Test Date: ${FormatHelper.formatDate(widget.myOlympiad?.startDateTime)}",
+                      "${string("label_test_date")} ${FormatHelper.formatDate(widget.myOlympiad?.startDateTime)}",
                       style: AppStyles.tsBlackRegular16,
                       textAlign: TextAlign.center,
                     )
@@ -65,8 +70,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.70,
                   child: ListView.builder(
-                    itemCount: controller.timeSlotForQuizRegistrationList
-                        .length, // Replace myOlympiadList with your list of Olympiads
+                    itemCount:
+                        controller.timeSlotForQuizRegistrationList.length,
+                    // Replace myOlympiadList with your list of Olympiads
                     itemBuilder: (BuildContext context, int index) {
                       var timeslot =
                           controller.timeSlotForQuizRegistrationList[index];
@@ -98,7 +104,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "${FormatHelper.formatTimeOnlyToIST(timeslot.slotTime)} - ${timeslot.spotLeft} Spots Lefts",
+                                "${FormatHelper.formatTimeOnlyToIST(timeslot.slotTime)} - ${timeslot.spotLeft} ${string("label_spots_left")}",
                                 style: isDisabled
                                     ? AppStyles
                                         .tsGreyRegular16 // Style for disabled container
@@ -145,7 +151,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                 borderRadius: BorderRadius.circular(10.0), // Set border radius
               ),
             ),
-            child: Text('Next'),
+            child: Text(string("label_next")),
           ),
         ),
       ),

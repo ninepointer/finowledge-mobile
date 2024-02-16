@@ -1,4 +1,5 @@
 import '../../main.dart';
+import '../app/app.dart';
 import 'base_config.dart';
 
 class DevConfig implements BaseConfig {

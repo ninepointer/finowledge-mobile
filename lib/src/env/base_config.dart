@@ -7,5 +7,4 @@ abstract class BaseConfig {
   String get apiVersion;
 
   String get siteMessages;
-
 }

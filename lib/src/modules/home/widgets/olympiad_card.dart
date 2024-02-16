@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:stoxhero/src/app/app.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../utils/common_utils.dart';
 
 class OlympiadCard extends GetView<HomeController> {
   final MyActiveOlympiadList? myOlympiad;
@@ -56,7 +54,8 @@ class OlympiadCard extends GetView<HomeController> {
               ),
             ),
           ),
-          // Content Section
+
+          /// Content Section
           Padding(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -75,28 +74,30 @@ class OlympiadCard extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(height: 8),
-                // Grade
+
+                /// Grade
                 Text(
-                  '${myOlympiad?.grade} Grade',
+                  '${myOlympiad?.grade} ${string("label_grade")}',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
                 ),
                 SizedBox(height: 8),
-                // Starts and Seats Left
+
+                /// Starts and Seats Left
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Starts: ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
+                      '${string("label_starts")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
                     ),
                     Text(
-                      'Seats left: ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
+                      '${string("label_seats_left")} ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -109,32 +110,6 @@ class OlympiadCard extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     showDialog(
-                    //       context: context,
-                    //       builder: (BuildContext context) {
-                    //         return Center(
-                    //           child: ReferFriendContent(
-                    //             contest: myOlympiad,
-                    //           ),
-                    //         );
-                    //       },
-                    //     );
-                    //   },
-                    //   child: Text('INVITE FRIENDS'),
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Colors.orange,
-                    //     padding: EdgeInsets.symmetric(
-                    //         horizontal:
-                    //             MediaQuery.of(context).size.width * 0.0408,
-                    //         vertical:
-                    //             MediaQuery.of(context).size.width * 0.0306),
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(16),
-                    //     ),
-                    //   ),
-                    // ),
                     ElevatedButton(
                       onPressed: () {
                         controller.getTimeSlotForQuizRegistrationDetails(
@@ -144,28 +119,10 @@ class OlympiadCard extends GetView<HomeController> {
                             myOlympiad: myOlympiad,
                           ),
                         );
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (BuildContext context) {
-                        //     return AlertDialog(
-                        //       title: Text('Registration'),
-                        //       content:
-                        //           Text('Registration has not started yet.'),
-                        //       actions: <Widget>[
-                        //         TextButton(
-                        //           onPressed: () {
-                        //             Navigator.of(context).pop();
-                        //           },
-                        //           child: Text('OK'),
-                        //         ),
-                        //       ],
-                        //     );
-                        // },
-                        //  );
                       },
-                      child: Text('REGISTER'),
+                      child: Text(string("label_register")),
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.primary,
+                        backgroundColor: AppColors.primary,
                         padding: EdgeInsets.symmetric(
                             horizontal:
                                 MediaQuery.of(context).size.width * 0.0408,
@@ -176,20 +133,6 @@ class OlympiadCard extends GetView<HomeController> {
                         ),
                       ),
                     ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     _openWhatsAppGroup();
-                    //   },
-                    //   child: CircleAvatar(
-                    //     backgroundColor: Colors.green,
-                    //     radius: 20,
-                    //     child: Icon(
-                    //       FontAwesomeIcons.whatsapp,
-                    //       color: Colors.white,
-                    //       size: 20,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ],
@@ -198,17 +141,5 @@ class OlympiadCard extends GetView<HomeController> {
         ],
       ),
     );
-  }
-}
-
-_openWhatsAppGroup() async {
-  const String groupLink = 'https://chat.whatsapp.com/Bcjt7NbDTyz1odeF8RDtih';
-
-  final String whatsappUrl = "whatsapp://open?text=$groupLink";
-
-  if (await canLaunch(whatsappUrl)) {
-    await launch(whatsappUrl);
-  } else {
-    await launch(groupLink);
   }
 }

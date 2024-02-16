@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../utils/common_utils.dart';
+
 class UploadProfileImageView extends StatefulWidget {
   const UploadProfileImageView({Key? key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Profile Image'),
+        title: Text(string("label_upload_profile_image")),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -41,7 +43,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Please upload your profile image",
+                  string("label_please_upload_your_profile_image"),
                   style: AppStyles.tsBlackMedium18,
                 ),
               ],
@@ -81,7 +83,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           BorderRadius.circular(10.0), // Set border radius
                     ),
                   ),
-                  child: Text('Upload Profile Image'),
+                  child: Text(string("label_upload_profile_image")),
                 ),
               ],
             ),
@@ -92,7 +94,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
               children: [
                 Flexible(
                   child: Text(
-                    "Please upload your image for better identification on the leaderboard and social media. Your image will enhance your presence and ensure clear recognition.",
+                    string("label_why_upload_desc"),
                     style: AppStyles.tsBlackRegular14,
                   ),
                 )
@@ -121,7 +123,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           BorderRadius.circular(10.0), // Set border radius
                     ),
                   ),
-                  child: Text('Skip'),
+                  child: Text(string("label_skip")),
                 ),
               ),
               SizedBox(width: 16),
@@ -143,7 +145,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           BorderRadius.circular(10.0), // Set border radius
                     ),
                   ),
-                  child: Text('Save'),
+                  child: Text(string("label_save")),
                 ),
               ),
             ],

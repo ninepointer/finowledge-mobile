@@ -323,7 +323,6 @@ class AuthController extends BaseController<AuthRepository> {
             response.data ?? LoginDetailsResponse());
 
         String deviceToken = await firebaseMessaging.getToken() ?? '-';
-        print('DeviceToken addFcmTokenData : $deviceToken');
 
         FcmTokenDataRequest fcmTokenDataRequest = FcmTokenDataRequest(
           fcmTokenData: FcmTokenData(token: deviceToken),

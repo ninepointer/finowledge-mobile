@@ -5,6 +5,8 @@ import 'package:stoxhero/src/app/app.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../utils/common_utils.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -37,12 +39,9 @@ class _HomeViewState extends State<HomeView> {
       _initialUriIsHandled = true;
       try {
         final uri = await getInitialUri();
-        print('UniLinks Initial : $uri');
         if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
         if (!mounted) return;
-      } catch (e) {
-        print('UniLinks Error : $e');
-      }
+      } catch (e) {}
     }
   }
 
@@ -50,50 +49,19 @@ class _HomeViewState extends State<HomeView> {
     StreamSubscription? sub;
     sub = uriLinkStream.listen((Uri? uri) {
       if (!mounted) return;
-      print('UniLinks Incoming : $uri');
       if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
     }, onError: (Object e) {
       if (!mounted) return;
-      print('UniLinks Error : $e');
     });
   }
 
   void _handelInitialNotification() async {
-    print('handelInitialNotification');
     RemoteMessage? initialMessage = await firebaseMessaging.getInitialMessage();
-    print('handelInitialNotification : ${initialMessage?.toMap()}');
     if (initialMessage != null)
       NotificationServices.handelNotificationClick(
         initialMessage.data,
         isLocal: true,
       );
-  }
-
-  void _updateTab(int index) {
-    controller.selectedIndex.value = index;
-
-    switch (index) {
-      case 0:
-        Get.find<HomeController>().loadData();
-
-        Get.find<WalletController>().getWalletTransactionsList();
-
-        break;
-      case 1:
-        // Get.find<VirtualTradingController>().loadData();
-        //   break;
-        // case 2:
-        //   Get.find<TenxTradingController>().loadData();
-        break;
-      case 3:
-        // Get.find<MarginXController>().loadData();
-        break;
-      case 4:
-        // Blank
-        break;
-      default:
-    }
-    setState(() {});
   }
 
   @override
@@ -104,7 +72,8 @@ class _HomeViewState extends State<HomeView> {
         if (isOpened) controller.userDetails(AppStorage.getUserDetails());
       },
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
+        iconTheme: IconThemeData(color: Color(0xFFF9FCFF)),
+        backgroundColor: AppColors.finowledgePurpleAccentColors,
         title: Row(
           children: [
             Column(
@@ -120,25 +89,17 @@ class _HomeViewState extends State<HomeView> {
                       width: MediaQuery.of(context).size.width * 0.0102,
                     ),
                     Text(
-                      'Hello,',
+                      string("label_hello"),
                       style: AppStyles.tsGreyRegular14
                           .copyWith(color: Colors.white),
                     ),
                   ],
                 ),
-                // Text(
-                //   controller.userDetailsData.studentName?.capitalizeFirst ??
-                //       '-',
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .tsMedium16
-                //       .copyWith(color: Colors.white),
-                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.0102,
                 ),
                 Text(
-                  "Lets gear up to be future ready",
+                  string("label_gear_you_up"),
                   style:
                       AppStyles.tsBlackRegular12.copyWith(color: Colors.white),
                 ),
@@ -150,11 +111,6 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
         actions: [
-          // IconButton(
-          //   splashRadius: 24,
-          //   icon: Icon(Icons.person),
-          //   onPressed: () => Get.toNamed(AppRoutes.profile),
-          // ),
           GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.profile),
             child: Padding(
@@ -162,7 +118,6 @@ class _HomeViewState extends State<HomeView> {
               child: Obx(
                 () => Container(
                   decoration: BoxDecoration(
-                    // color: AppColors.white,
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: AppColors.grey.withOpacity(.3),
@@ -194,95 +149,6 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: Obx(() => _tabs[controller.selectedIndex.value]),
-      // floatingActionButton: FloatingActionButton(
-      //   elevation: 0,
-      //   backgroundColor:
-      //       Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-      //   onPressed: () => _updateTab(2),
-      //   child: Icon(
-      //     Icons.currency_rupee_rounded,
-      //     color: AppColors.white,
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: Obx(
-      //   () => BottomAppBar(
-      //     shape: CircularNotchedRectangle(),
-      //     notchMargin: 4,
-      //     child: Container(
-      //       height: 60,
-      //       margin: EdgeInsets.all(0),
-      //       child: Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         children: [
-      //           _buildTabButton(
-      //             context,
-      //             index: 0,
-      //             label: 'Home',
-      //             icon: Icons.bar_chart_rounded,
-      //           ),
-      //           _buildTabButton(
-      //             context,
-      //             index: 1,
-      //             label: 'Market',
-      //             icon: Icons.analytics_rounded,
-      //           ),
-      //           SizedBox(width: 40),
-      //           _buildTabButton(
-      //             context,
-      //             index: 3,
-      //             label: 'MarginX',
-      //             icon: Icons.trending_up_rounded,
-      //           ),
-      //           _buildTabButton(
-      //             context,
-      //             index: 4,
-      //             label: 'TestZone',
-      //             icon: Icons.groups_rounded,
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
-    );
-  }
-
-  Expanded _buildTabButton(
-    BuildContext context, {
-    required int index,
-    required String label,
-    required IconData icon,
-  }) {
-    return Expanded(
-      child: MaterialButton(
-        minWidth: 40,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: controller.selectedIndex.value == index
-                  ? Get.isDarkMode
-                      ? AppColors.darkGreen
-                      : AppColors.lightGreen
-                  : AppColors.grey,
-            ),
-            SizedBox(height: 4),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.tsRegular11.copyWith(
-                    color: controller.selectedIndex.value == index
-                        ? Get.isDarkMode
-                            ? AppColors.darkGreen
-                            : AppColors.lightGreen
-                        : AppColors.grey,
-                  ),
-            )
-          ],
-        ),
-        onPressed: () => _updateTab(index),
-      ),
     );
   }
 }

@@ -36,5 +36,9 @@ class AppColors {
 
   static final Color lightCardBackgroundColor = Color(0xFFFFFFFF);
   static final Color darkCardBackgroundColor = Color(0xFF1E2936);
-  static final Color finowledgeAccentColors = Color(0xFFD5F47E);
+  static final Color finowledgeGreenAccentColors = Color(0xFFD5F47E);
+  static final Color finowledgePurpleAccentColors = Color(0xFF532B9E);
+  static final Color whiteScreenBackgroundColors = Color(0xFFFBFFFA);
+  static final Color whiteScreenHeadingColors = Color(0xFF343434);
+  static final Color whiteScreenSubHeadingColors = Color(0xFF454341);
 }
