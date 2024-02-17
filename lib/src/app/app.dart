@@ -31,7 +31,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     _initializePushNotification();
-    AppStorage.setIsProd(false);
     //AppStorage.setSiteSettings(siteSettingsResponseFromJson(Environment().config?.siteSettings ?? ""));
     WidgetsBinding.instance.addObserver(this);
   }

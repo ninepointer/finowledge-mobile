@@ -48,12 +48,12 @@ class AppStorage {
     _box.erase();
   }
 
-  static Future? setIsProd(bool? isProd) {
-    return _box.write(AppStorageKeys.isProd, isProd ?? false);
+  static Future? setIsProd(bool isProd) {
+    return _box.write(AppStorageKeys.isProd, isProd);
   }
 
   static bool getIsProd() {
-    return _box.read(AppStorageKeys.isProd);
+    return _box.read(AppStorageKeys.isProd) ?? false;
   }
 
   // static Future? setSiteSettings(SiteSettingsData? settings) {
