@@ -33,7 +33,7 @@ class _ActiveOlympiadViewState extends State<ActiveOlympiadView> {
                   label: string("label_my_olympiad"),
                   showSeeAllButton: false,
                   value: "",
-                  margin: EdgeInsets.zero,
+                  margin: EdgeInsets.only(left: 8),
                   padding: EdgeInsets.zero,
                 )
               : SizedBox(),

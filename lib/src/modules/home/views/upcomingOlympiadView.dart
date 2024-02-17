@@ -33,7 +33,7 @@ class _UpcomingOlympiadViewState extends State<UpcomingOlympiadView> {
                   label: string("label_upcoming_olympiad"),
                   showSeeAllButton: false,
                   value: "",
-                  margin: EdgeInsets.zero,
+                  margin: EdgeInsets.only(left: 8),
                   padding: EdgeInsets.zero,
                 )
               : SizedBox(),
