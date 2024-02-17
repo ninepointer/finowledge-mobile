@@ -69,6 +69,9 @@ class SplashController extends GetxController {
   }
 
   void _startOnBoarding() async {
+    if (useTestToken) {
+      AppStorage.setNewUserStatus(false);
+    }
     bool isNewUser = AppStorage.getNewUserStatus();
     await Future.delayed(Duration(seconds: 3));
     try {
