@@ -13,6 +13,7 @@ class UploadProfileImageView extends StatefulWidget {
 }
 
 class _UploadProfileImageViewState extends State<UploadProfileImageView> {
+  late HomeController controller;
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
 
@@ -22,6 +23,12 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
     setState(() {
       _imageFile = pickedImage;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<HomeController>();
   }
 
   @override
@@ -79,8 +86,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                     primary: Colors.green,
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Set border radius
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   child: Text(string("label_upload_profile_image")),
@@ -119,8 +125,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                     primary: Colors.green,
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Set border radius
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   child: Text(string("label_skip")),
@@ -132,17 +137,18 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                   onPressed: _imageFile == null
                       ? null
                       : () {
-                          // Handle save action
                           if (_imageFile != null) {
-                            // Save the profile image
+                            String imagePath = _imageFile!.path;
+                            controller.userDetails.value.profilePhoto =
+                                imagePath as UserImageDetails?;
+                            Get.to(() => DashboardView());
                           }
                         },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Set border radius
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   child: Text(string("label_save")),

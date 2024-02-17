@@ -52,12 +52,18 @@ class OlympiadCard extends GetView<HomeController> {
                 // Title
                 Container(
                   height: MediaQuery.of(context).size.width * 0.14,
-                  child: Text(
-                    myOlympiad?.title ?? '',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                  child: Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          myOlympiad?.title ?? '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -111,7 +117,7 @@ class OlympiadCard extends GetView<HomeController> {
                       },
                       child: Text(string("label_register")),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.finowledgePurpleAccentColors,
                         padding: EdgeInsets.symmetric(
                             horizontal:
                                 MediaQuery.of(context).size.width * 0.0408,
