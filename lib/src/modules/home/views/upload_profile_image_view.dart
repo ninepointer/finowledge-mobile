@@ -137,8 +137,33 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (widget.myOlympiad?.entryFee == 0) {}
+                  onPressed: () async {
+                    if (widget.myOlympiad?.entryFee == 0) {
+                      await controller.getFinalRegistrationPageDetails(
+                          widget.slotForQuizList?.slotId ?? '',
+                          widget.myOlympiad?.sId ?? '');
+                      print(
+                          "idddd ${widget.slotForQuizList?.slotId} ${widget.myOlympiad?.sId} ${controller.registrationFinalPageData.value.message}");
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: Text(
+                                "${controller.registrationFinalPageData.value.message}"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  controller.getUserAllOlympiadDetails();
+                                  Get.to(
+                                      () => HomeView()); // To close the dialog
+                                },
+                                child: Text("Close"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
@@ -157,9 +182,13 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       ? null
                       : () async {
                           if (_imageFile != null) {
-                            // Uint8List data = getUint8List(_imageFile!.path);
-                            // String image = getBase64FromUint8List(data);
-                            controller.saveUserProfilePhotoDetails(_imageFile);
+                            File imageFile = File(_imageFile!.path ?? '');
+                            PlatformFile platformFile = PlatformFile(
+                                name: imageFile.path.split('/').last,
+                                path: imageFile.path,
+                                size: await imageFile.length());
+                            controller
+                                .saveUserProfilePhotoDetails(platformFile);
                             Get.to(() => HomeView());
                           }
                         },
@@ -180,33 +209,3 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
     );
   }
 }
-
-
-
-// class MyPopupScreen extends StatelessWidget {
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//       onPressed: () {
-//         showDialog(
-//           context: context,
-//           builder: (BuildContext context) {
-//             return AlertDialog(
-//               content: Text("${}"),
-//               actions: [
-//                 TextButton(
-//                   onPressed: () {
-//                     Navigator.of(context).pop(); // To close the dialog
-//                   },
-//                   child: Text("Close"),
-//                 ),
-//               ],
-//             );
-//           },
-//         );
-//       },
-//       child: Text("Show Popup"),
-//     );
-//   }
-// }

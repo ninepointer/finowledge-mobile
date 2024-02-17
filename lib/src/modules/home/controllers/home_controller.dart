@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:stoxhero/src/utils/common_utils.dart';
-
 import '../../../app/app.dart';
 
 class HomeBinding implements Bindings {
@@ -31,6 +27,7 @@ class HomeController extends BaseController<DashboardRepository> {
   final myActiveOlympiadList = <MyActiveOlympiadList>[].obs;
   final userAllOlympiadList = <MyActiveOlympiadList>[].obs;
   final timeSlotForQuizRegistrationList = <TimeSlotForQuizList>[].obs;
+  final registrationFinalPageData = RegistrationFinalResponse().obs;
 
   final selectedTabIndex = 0.obs;
 
@@ -78,6 +75,25 @@ class HomeController extends BaseController<DashboardRepository> {
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getFinalRegistrationPageDetails(String slotId, String quizId) async {
+    isLoading(true);
+
+    Map<String, dynamic> data = {
+      'slotId': slotId,
+    };
+
+    try {
+      final RepoResponse<RegistrationFinalResponse> response =
+          await repository.freeRegistration(data, quizId);
+      if (response.data != null) {
+        registrationFinalPageData(response.data);
       }
     } catch (e) {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);

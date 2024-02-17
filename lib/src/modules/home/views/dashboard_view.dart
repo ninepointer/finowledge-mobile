@@ -54,6 +54,7 @@ class _DashboardViewState extends State<DashboardView>
                             color: AppColors.whiteScreenBackgroundColors,
                             child: TabBar(
                               onTap: (index) {
+                                controller.loadData();
                                 controller.selectedTabIndex.value = index;
                               },
                               padding: EdgeInsets.zero,

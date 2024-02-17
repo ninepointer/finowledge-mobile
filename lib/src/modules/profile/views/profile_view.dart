@@ -10,7 +10,8 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    print("ggggggggg ${controller.schoolNameTextController.text}");
+    print(
+        "hhhhhhh ${controller.userDetails.value.schoolDetails?.profilePhoto}");
     controller.loadData();
     return Scaffold(
       appBar: AppBar(
@@ -46,8 +47,8 @@ class ProfileView extends GetView<ProfileController> {
                             radius: 70, // Adjust the radius as needed
                             backgroundColor: AppColors.white.withOpacity(1),
                             child: ClipOval(
-                              child: controller.userDetails.value.profilePhoto
-                                          ?.url ==
+                              child: controller.userDetails.value.schoolDetails
+                                          ?.profilePhoto ==
                                       null
                                   ? Image.asset(
                                       Get.isDarkMode
@@ -56,8 +57,8 @@ class ProfileView extends GetView<ProfileController> {
                                       fit: BoxFit.cover,
                                     )
                                   : Image.network(
-                                      controller.userDetails.value.profilePhoto
-                                              ?.url ??
+                                      controller.userDetails.value.schoolDetails
+                                              ?.profilePhoto ??
                                           '',
                                       fit: BoxFit.cover,
                                     ),

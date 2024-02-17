@@ -127,7 +127,8 @@ class _HomeViewState extends State<HomeView> {
                     radius: 20, // Adjust the radius as needed
                     backgroundColor: AppColors.white.withOpacity(1),
                     child: ClipOval(
-                      child: controller.userDetails.value.profilePhoto?.url ==
+                      child: controller.userDetails.value.schoolDetails
+                                  ?.profilePhoto ==
                               null
                           ? Image.asset(
                               Get.isDarkMode
@@ -136,7 +137,8 @@ class _HomeViewState extends State<HomeView> {
                               fit: BoxFit.cover,
                             )
                           : Image.network(
-                              controller.userDetails.value.profilePhoto?.url ??
+                              controller.userDetails.value.schoolDetails
+                                      ?.profilePhoto ??
                                   '',
                               fit: BoxFit.cover,
                             ),

@@ -52,17 +52,13 @@ class OlympiadCard extends GetView<HomeController> {
                 // Title
                 Container(
                   height: MediaQuery.of(context).size.width * 0.14,
-                  child: Row(
-                    children: [
-                      Text(
-                        myOlympiad?.title ?? '',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    myOlympiad?.title ?? '',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
 
@@ -105,6 +101,7 @@ class OlympiadCard extends GetView<HomeController> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        print("quiz id ${myOlympiad?.sId}");
                         controller.getTimeSlotForQuizRegistrationDetails(
                             myOlympiad?.sId ?? '');
                         Get.to(

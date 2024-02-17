@@ -131,7 +131,7 @@ class _RegistrationViewState extends State<RegistrationView> {
           margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (selectedIndex == -1 ||
                   controller.timeSlotForQuizRegistrationList[selectedIndex]
                           .spotLeft ==
@@ -139,11 +139,44 @@ class _RegistrationViewState extends State<RegistrationView> {
                 SnackbarHelper.showSnackbar(
                     "Please select a valid time slot for registration");
               } else {
-                Get.to(() => UploadProfileImageView(
+                if (controller.userDetails.value.schoolDetails?.profilePhoto !=
+                    null) {
+                  if (widget.myOlympiad?.entryFee == 0) {
+                    await controller.getFinalRegistrationPageDetails(
+                        controller
+                                .timeSlotForQuizRegistrationList[selectedIndex]
+                                .slotId ??
+                            '',
+                        widget.myOlympiad?.sId ?? '');
+
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Text(
+                              "${controller.registrationFinalPageData.value.message}"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                controller.getUserAllOlympiadDetails();
+                                Get.to(() => HomeView()); // To close the dialog
+                              },
+                              child: Text("Close"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                } else {
+                  Get.to(
+                    () => UploadProfileImageView(
                       slotForQuizList: controller
                           .timeSlotForQuizRegistrationList[selectedIndex],
                       myOlympiad: widget.myOlympiad,
-                    ));
+                    ),
+                  );
+                }
               }
             },
             style: ElevatedButton.styleFrom(
