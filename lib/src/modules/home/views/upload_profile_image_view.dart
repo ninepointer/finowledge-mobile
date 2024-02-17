@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../utils/common_utils.dart';
 
 class UploadProfileImageView extends StatefulWidget {
-  const UploadProfileImageView({Key? key}) : super(key: key);
+  TimeSlotForQuizList? slotForQuizList;
+  UploadProfileImageView({Key? key, this.slotForQuizList}) : super(key: key);
 
   @override
   State<UploadProfileImageView> createState() => _UploadProfileImageViewState();
@@ -15,13 +17,12 @@ class UploadProfileImageView extends StatefulWidget {
 class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   late HomeController controller;
   final ImagePicker _picker = ImagePicker();
-  XFile? _imageFile;
+  File? _imageFile;
 
   Future<void> _pickImage() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
+    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _imageFile = pickedImage;
+      _imageFile = File(pickedImage!.path);
     });
   }
 
@@ -138,12 +139,11 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       ? null
                       : () {
                           if (_imageFile != null) {
-                            // String imagePath = _imageFile!.path;
-                            // controller.userDetails.value.schoolDetails
-                            //         ?.profilePhoto =
-                            //     UserImageDetails(url: imagePath) as String?;
+                            Uint8List data = getUint8List(_imageFile!.path);
+                            String image = getBase64FromUint8List(data);
+                            controller.saveUserProfilePhotoDetails(image);
 
-                            // Get.to(() => DashboardView());
+                            Get.to(() => HomeView());
                           }
                         },
                   style: ElevatedButton.styleFrom(

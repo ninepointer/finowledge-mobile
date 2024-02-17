@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +36,8 @@ Widget emptyOlympiadText(String? txt) {
     style: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      color: AppColors.whiteScreenSubHeadingColors, // Change the text color as needed
+      color: AppColors
+          .whiteScreenSubHeadingColors, // Change the text color as needed
     ),
     textAlign: TextAlign.center,
   );
@@ -56,4 +58,13 @@ Widget comingSoonViewWithLottie(String? txt) {
       ),
     ],
   );
+}
+
+String getBase64FromUint8List(Uint8List bytes) {
+  return base64Encode(bytes);
+}
+
+Uint8List getUint8List(String path) {
+  File file = File(path);
+  return file.readAsBytesSync();
 }

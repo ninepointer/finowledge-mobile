@@ -36,4 +36,13 @@ class DashboardRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: MyActiveOlympiadResponse.fromJson(response));
   }
+
+  Future<RepoResponse<LoginDetailsResponse>> uploadProfileImageinOlympiad(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.profilephotoUpdate;
+    var response = await service.patchAuthFormData(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: LoginDetailsResponse.fromJson(response));
+  }
 }
