@@ -1,8 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:stoxhero/src/data/data.dart';
 
-// import '../../data/models/response/site_settings_response.dart';
-
 class AppStorage {
   AppStorage._privateConstructor();
 

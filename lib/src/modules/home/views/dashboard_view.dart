@@ -1,6 +1,4 @@
-import 'package:autoscale_tabbarview/autoscale_tabbarview.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../../app/app.dart';
 import '../../../utils/common_utils.dart';
 

@@ -42,6 +42,7 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
   String apiEndpoint = "/pg/v1/pay";
   String environment = "PRODUCTION";
   String appId = "dcc929b3b7904f93997b89d23de36df3";
+
   // String appId = "63dff75c930b42a9af0f216bb6af6e16";
   String saltKey = "92333ad2-4277-4e69-86f1-b86a83161b74";
   String merchantId = "STOXONLINE";
@@ -82,12 +83,13 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
       merchantId,
       true,
     )
-        .then((isInitialized) => {
-              setState(() {
-                result = 'PhonePe SDK Initialized - $isInitialized';
-                print(result);
-              })
-            })
+        .then((isInitialized) =>
+    {
+      setState(() {
+        result = 'PhonePe SDK Initialized - $isInitialized';
+        print(result);
+      })
+    })
         .catchError((error) {
       handleError(error);
       return <dynamic>{};
@@ -103,7 +105,10 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
     const String allowedCharacters = "0123456789";
 
     String timestampPart =
-        "mtid" + DateTime.now().millisecondsSinceEpoch.toString();
+        "mtid" + DateTime
+            .now()
+            .millisecondsSinceEpoch
+            .toString();
     int remainingLength = maxLength - timestampPart.length;
     String randomChars = List.generate(remainingLength, (index) {
       return allowedCharacters[math.Random().nextInt(allowedCharacters.length)];
@@ -115,20 +120,20 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
   num get calculateHeroCash {
     return controller.isCouponCodeAdded.value
         ? math.min(
-            (controller.amountAfterCouponAdded.value) *
-                ((controller.readSetting.value.maxBonusRedemptionPercentage ??
-                        0) /
-                    100),
-            (controller.calculateBonus(controller.walletTransactionsList) /
-                (controller.readSetting.value.bonusToUnitCashRatio ?? 1)),
-          )
+      (controller.amountAfterCouponAdded.value) *
+          ((controller.readSetting.value.maxBonusRedemptionPercentage ??
+              0) /
+              100),
+      (controller.calculateBonus(controller.walletTransactionsList) /
+          (controller.readSetting.value.bonusToUnitCashRatio ?? 1)),
+    )
         : math.min(
-            (controller.actualSubscriptionAmount.value) *
-                ((controller.readSetting.value.maxBonusRedemptionPercentage ??
-                        0) /
-                    100),
-            (controller.calculateBonus(controller.walletTransactionsList) /
-                (controller.readSetting.value.bonusToUnitCashRatio ?? 1)));
+        (controller.actualSubscriptionAmount.value) *
+            ((controller.readSetting.value.maxBonusRedemptionPercentage ??
+                0) /
+                100),
+        (controller.calculateBonus(controller.walletTransactionsList) /
+            (controller.readSetting.value.bonusToUnitCashRatio ?? 1)));
   }
 
   void startPaymentTransaction(BuildContext context) async {
@@ -146,7 +151,7 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
           num.parse(controller.addMoneyAmountTextController.text) * 100;
       paymentData = PaymentRequest(
         bonusRedemption:
-            controller.isHeroCashAdded.value ? calculateHeroCash : 0,
+        controller.isHeroCashAdded.value ? calculateHeroCash : 0,
         coupon: controller.isCouponCodeAdded == true
             ? controller.couponCodeTextController.text
             : '',
@@ -161,7 +166,7 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
       amount = amount * 100;
       paymentData = PaymentRequest(
         bonusRedemption:
-            controller.isHeroCashAdded.value ? calculateHeroCash : 0,
+        controller.isHeroCashAdded.value ? calculateHeroCash : 0,
         coupon: controller.isCouponCodeAdded == true
             ? controller.couponCodeTextController.text
             : '',
@@ -231,34 +236,33 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
 
   Future startPhonePePayment() async {
     try {
-      await PhonePePaymentSdk.startPGTransaction(
+      await PhonePePaymentSdk.startTransaction(
         body,
         callBackUrl,
         checksum,
-        {"Content-Type": "application/json"},
-        apiEndpoint,
         "",
       )
-          .then((response) => {
-                setState(() {
-                  paymentStatus = false;
-                  if (response != null) {
-                    print(response);
-                    String status = response['status'].toString();
-                    String error = response['error'].toString();
-                    if (status == 'SUCCESS') {
-                      paymentStatus = true;
-                      result = "Flow Completed - Status: Success!";
-                    } else {
-                      result =
-                          "Flow Completed - Status: $status and Error: $error";
-                    }
-                  } else {
-                    result = "Flow Incomplete";
-                  }
-                  print(result);
-                })
-              })
+          .then((response) =>
+      {
+        setState(() {
+          paymentStatus = false;
+          if (response != null) {
+            print(response);
+            String status = response['status'].toString();
+            String error = response['error'].toString();
+            if (status == 'SUCCESS') {
+              paymentStatus = true;
+              result = "Flow Completed - Status: Success!";
+            } else {
+              result =
+              "Flow Completed - Status: $status and Error: $error";
+            }
+          } else {
+            result = "Flow Incomplete";
+          }
+          print(result);
+        })
+      })
           .catchError((error) {
         handleError(error);
         return <dynamic>{};
@@ -298,320 +302,358 @@ class _PaymentBottomSheetState extends State<PaymentBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Wrap(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              ),
-            ),
-            child: Visibility(
-              visible: !isLoading,
-              replacement: Container(
-                height: MediaQuery.of(context).size.height / 2,
-                child: CommonLoader(),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    width: 56,
-                    height: 56,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.secondary.withOpacity(0.25),
-                    ),
-                    child: Icon(
-                      Icons.lock,
-                      color: AppColors.secondary,
-                    ),
+          () =>
+          Wrap(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Theme
+                      .of(context)
+                      .cardColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
                   ),
-                  SizedBox(height: 24),
-                  Text(
-                    isWalletPayment
-                        ? 'Add money to\nwallet from bank account'
-                        : 'Choose how to pay',
-                    style: AppStyles.tsSecondarySemiBold20,
-                    textAlign: TextAlign.center,
+                ),
+                child: Visibility(
+                  visible: !isLoading,
+                  replacement: Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height / 2,
+                    child: CommonLoader(),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Your payment is encrypted and you can change your payment method at anytime.',
-                    style: AppStyles.tsGreyRegular14,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 24),
-                  if (!isWalletPayment)
-                    CommonCard(
-                      margin: EdgeInsets.only(top: 8),
-                      padding: EdgeInsets.all(12),
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Transaction Amount',
-                              style: Theme.of(context).textTheme.tsRegular16,
-                            ),
-                            Spacer(),
-                            Text(
-                              FormatHelper.formatNumbers((controller
-                                          .couponCodeSuccessText.isNotEmpty ||
-                                      controller.isHeroCashAdded.value)
-                                  ? controller.subscriptionAmount.value
-                                  : widget.buyItemPrice),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tsMedium18
-                                  .copyWith(
-                                    color: AppColors.success,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  else
-                    CommonTextField(
-                      controller: controller.addMoneyAmountTextController,
-                      padding: EdgeInsets.only(top: 16),
-                      hintText: 'Enter amount',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                    ),
-                  if (controller.couponCodeSuccessText.isNotEmpty)
-                    GestureDetector(
-                      onTap: () =>
-                          controller.removeCouponCode(calculateHeroCash),
-                      child: Container(
-                        margin: EdgeInsets.only(top: 16),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 56,
+                        height: 56,
                         decoration: BoxDecoration(
-                          color: AppColors.success.withOpacity(.25),
-                          borderRadius: BorderRadius.circular(50),
+                          shape: BoxShape.circle,
+                          color: AppColors.secondary.withOpacity(0.25),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                controller.couponCodeSuccessText.value,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .tsMedium12
-                                    .copyWith(
-                                      color: AppColors.success,
-                                    ),
-                              ),
-                            ),
-                            Icon(
-                              Icons.close,
-                              size: 20,
-                              color: AppColors.success,
-                            )
-                          ],
+                        child: Icon(
+                          Icons.lock,
+                          color: AppColors.secondary,
                         ),
                       ),
-                    ),
-                  // if (!isWalletPayment)
-                  // if (walletBalance != null)
-                  if (!controller.isCouponCodeAdded.value)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonTextField(
-                            controller: controller.couponCodeTextController,
-                            padding: EdgeInsets.only(top: 16),
-                            hintText: 'Enter your Coupon code',
-                            inputFormatters: [
-                              UpperCaseTextFormatter(),
-                            ],
+                      SizedBox(height: 24),
+                      Text(
+                        isWalletPayment
+                            ? 'Add money to\nwallet from bank account'
+                            : 'Choose how to pay',
+                        style: AppStyles.tsSecondarySemiBold20,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Your payment is encrypted and you can change your payment method at anytime.',
+                        style: AppStyles.tsGreyRegular14,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 24),
+                      if (!isWalletPayment)
+                        CommonCard(
+                          margin: EdgeInsets.only(top: 8),
+                          padding: EdgeInsets.all(12),
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Transaction Amount',
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .tsRegular16,
+                                ),
+                                Spacer(),
+                                Text(
+                                  FormatHelper.formatNumbers((controller
+                                      .couponCodeSuccessText.isNotEmpty ||
+                                      controller.isHeroCashAdded.value)
+                                      ? controller.subscriptionAmount.value
+                                      : widget.buyItemPrice),
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .tsMedium18
+                                      .copyWith(
+                                    color: AppColors.success,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      else
+                        CommonTextField(
+                          controller: controller.addMoneyAmountTextController,
+                          padding: EdgeInsets.only(top: 16),
+                          hintText: 'Enter amount',
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(10),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      if (controller.couponCodeSuccessText.isNotEmpty)
+                        GestureDetector(
+                          onTap: () =>
+                              controller.removeCouponCode(calculateHeroCash),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 16),
+                            padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: AppColors.success.withOpacity(.25),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    controller.couponCodeSuccessText.value,
+                                    style: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .tsMedium12
+                                        .copyWith(
+                                      color: AppColors.success,
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.close,
+                                  size: 20,
+                                  color: AppColors.success,
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 100,
-                          padding: EdgeInsets.only(top: 16, left: 8),
-                          child: CommonOutlinedButton(
+                      // if (!isWalletPayment)
+                      // if (walletBalance != null)
+                      if (!controller.isCouponCodeAdded.value)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CommonTextField(
+                                controller: controller.couponCodeTextController,
+                                padding: EdgeInsets.only(top: 16),
+                                hintText: 'Enter your Coupon code',
+                                inputFormatters: [
+                                  UpperCaseTextFormatter(),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 100,
+                              padding: EdgeInsets.only(top: 16, left: 8),
+                              child: CommonOutlinedButton(
+                                backgroundColor: Get.isDarkMode
+                                    ? AppColors.darkGreen
+                                    : AppColors.lightGreen,
+                                labelColor: Get.isDarkMode
+                                    ? AppColors.darkGreen
+                                    : AppColors.lightGreen,
+                                isLoading: controller.isCouponCodeLoadingStatus,
+                                label: 'APPLY',
+                                onPressed: () =>
+                                    controller.verifyCouponCode(
+                                        context,
+                                        widget.productType,
+                                        widget.buyItemPrice),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      if (!isWalletPayment)
+                        CommonCard(
+                          onTap: () =>
+                              controller.selectedPaymentValue('wallet'),
+                          margin: EdgeInsets.only(top: 16),
+                          children: [
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 'wallet',
+                                  groupValue: controller.selectedPaymentValue
+                                      .value,
+                                  onChanged: (value) {
+                                    controller.selectedPaymentValue.value =
+                                    value as String;
+                                  },
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Pay from StoxHero wallet',
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .tsRegular14,
+                                ),
+                                Spacer(),
+                                Text(
+                                  FormatHelper.formatNumbers(
+                                    walletBalance,
+                                  ),
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .tsMedium16
+                                      .copyWith(
+                                    color: AppColors.success,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                      if (!isWalletPayment)
+                        CommonCard(
+                          onTap: () =>
+                              controller.selectedPaymentValue('gateway'),
+                          margin: EdgeInsets.only(top: 8),
+                          children: [
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 'gateway',
+                                  groupValue: controller.selectedPaymentValue
+                                      .value,
+                                  onChanged: (value) {
+                                    controller.selectedPaymentValue.value =
+                                    value as String;
+                                  },
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Pay from Bank Account/UPI',
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .tsRegular14,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      //dbfbhf
+                      if (!isWalletPayment)
+                        CommonCard(
+                          margin:
+                          EdgeInsets.only(top: 8, bottom: 8, left: 0, right: 0),
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: controller.isHeroCashAdded.value,
+                                  onChanged: (value) {
+                                    controller.isHeroCashAdded(value);
+                                    controller.heroCashAmount(
+                                        calculateHeroCash.toDouble());
+                                    if (value ?? false) {
+                                      controller.addHeroCash(calculateHeroCash);
+                                    } else {
+                                      controller.removeHeroCash(
+                                          calculateHeroCash);
+                                    }
+                                  },
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Use ${calculateHeroCash.toStringAsFixed(
+                                          2)} HeroCash (1 HeroCash = ${FormatHelper
+                                          .formatNumbers(1 /
+                                          (controller.readSetting.value
+                                              .bonusToUnitCashRatio ?? 0),
+                                          decimal: 0)})',
+                                      style:
+                                      Theme
+                                          .of(context)
+                                          .textTheme
+                                          .tsRegular14,
+                                    ),
+                                    Text(
+                                        "Available HeroCash  : ${controller
+                                            .calculateBonus(
+                                            controller.walletTransactionsList)
+                                            .toStringAsFixed(2)}"),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      //fdhfhbd
+                      if (walletBalance != null &&
+                          ((controller.couponCodeSuccessText.isNotEmpty ||
+                              controller.isHeroCashAdded.value)
+                              ? controller.subscriptionAmount.value
+                              : widget.buyItemPrice) >
+                              walletBalance!)
+                        Column(
+                          children: [
+                            SizedBox(height: 16),
+                            Text(
+                              'Your wallet balance is low kindly recharge your wallet to buy this subscription.',
+                              textAlign: TextAlign.center,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .tsRegular14,
+                            ),
+                            SizedBox(height: 16),
+                            // ReferralCodeCard(),
+                          ],
+                        ),
+                      Column(
+                        children: [
+                          SizedBox(height: 16),
+                          CommonFilledButton(
                             backgroundColor: Get.isDarkMode
                                 ? AppColors.darkGreen
                                 : AppColors.lightGreen,
-                            labelColor: Get.isDarkMode
-                                ? AppColors.darkGreen
-                                : AppColors.lightGreen,
-                            isLoading: controller.isCouponCodeLoadingStatus,
-                            label: 'APPLY',
-                            onPressed: () => controller.verifyCouponCode(
-                                context,
-                                widget.productType,
-                                widget.buyItemPrice),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                  if (!isWalletPayment)
-                    CommonCard(
-                      onTap: () => controller.selectedPaymentValue('wallet'),
-                      margin: EdgeInsets.only(top: 16),
-                      children: [
-                        Row(
-                          children: [
-                            Radio(
-                              value: 'wallet',
-                              groupValue: controller.selectedPaymentValue.value,
-                              onChanged: (value) {
-                                controller.selectedPaymentValue.value =
-                                    value as String;
-                              },
-                              visualDensity: VisualDensity.compact,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Pay from StoxHero wallet',
-                              style: Theme.of(context).textTheme.tsRegular14,
-                            ),
-                            Spacer(),
-                            Text(
-                              FormatHelper.formatNumbers(
-                                walletBalance,
-                              ),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tsMedium16
-                                  .copyWith(
-                                    color: AppColors.success,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                  if (!isWalletPayment)
-                    CommonCard(
-                      onTap: () => controller.selectedPaymentValue('gateway'),
-                      margin: EdgeInsets.only(top: 8),
-                      children: [
-                        Row(
-                          children: [
-                            Radio(
-                              value: 'gateway',
-                              groupValue: controller.selectedPaymentValue.value,
-                              onChanged: (value) {
-                                controller.selectedPaymentValue.value =
-                                    value as String;
-                              },
-                              visualDensity: VisualDensity.compact,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Pay from Bank Account/UPI',
-                              style: Theme.of(context).textTheme.tsRegular14,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  //dbfbhf
-                  if (!isWalletPayment)
-                    CommonCard(
-                      margin:
-                          EdgeInsets.only(top: 8, bottom: 8, left: 0, right: 0),
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: controller.isHeroCashAdded.value,
-                              onChanged: (value) {
-                                controller.isHeroCashAdded(value);
-                                controller.heroCashAmount(
-                                    calculateHeroCash.toDouble());
-                                if (value ?? false) {
-                                  controller.addHeroCash(calculateHeroCash);
-                                } else {
-                                  controller.removeHeroCash(calculateHeroCash);
-                                }
-                              },
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Use ${calculateHeroCash.toStringAsFixed(2)} HeroCash (1 HeroCash = ${FormatHelper.formatNumbers(1 / (controller.readSetting.value.bonusToUnitCashRatio ?? 0), decimal: 0)})',
-                                  style:
-                                      Theme.of(context).textTheme.tsRegular14,
-                                ),
-                                Text(
-                                    "Available HeroCash  : ${controller.calculateBonus(controller.walletTransactionsList).toStringAsFixed(2)}"),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  //fdhfhbd
-                  if (walletBalance != null &&
-                      ((controller.couponCodeSuccessText.isNotEmpty ||
-                                  controller.isHeroCashAdded.value)
-                              ? controller.subscriptionAmount.value
-                              : widget.buyItemPrice) >
-                          walletBalance!)
-                    Column(
-                      children: [
-                        SizedBox(height: 16),
-                        Text(
-                          'Your wallet balance is low kindly recharge your wallet to buy this subscription.',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.tsRegular14,
-                        ),
-                        SizedBox(height: 16),
-                        // ReferralCodeCard(),
-                      ],
-                    ),
-                  Column(
-                    children: [
-                      SizedBox(height: 16),
-                      CommonFilledButton(
-                        backgroundColor: Get.isDarkMode
-                            ? AppColors.darkGreen
-                            : AppColors.lightGreen,
-                        isLoading: controller.isLoadingStatus,
-                        height: 42,
-                        label: 'Proceed',
-                        onPressed: isWalletPayment ||
+                            isLoading: controller.isLoadingStatus,
+                            height: 42,
+                            label: 'Proceed',
+                            onPressed: isWalletPayment ||
                                 controller.selectedPaymentValue.value ==
                                     'gateway'
-                            ? () => startPaymentTransaction(context)
-                            : walletBalance != null &&
-                                    ((controller.couponCodeSuccessText
-                                                    .isNotEmpty ||
-                                                controller
-                                                    .isHeroCashAdded.value)
-                                            ? controller
-                                                .subscriptionAmount.value
-                                            : widget.buyItemPrice) >
-                                        walletBalance!
+                                ? () => startPaymentTransaction(context)
+                                : walletBalance != null &&
+                                ((controller.couponCodeSuccessText
+                                    .isNotEmpty ||
+                                    controller
+                                        .isHeroCashAdded.value)
+                                    ? controller
+                                    .subscriptionAmount.value
+                                    : widget.buyItemPrice) >
+                                    walletBalance!
                                 ? () {
-                                    SnackbarHelper.showSnackbar(
-                                        'Low wallet balance!');
-                                  }
+                              SnackbarHelper.showSnackbar(
+                                  'Low wallet balance!');
+                            }
                                 : widget.onSubmit,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }
