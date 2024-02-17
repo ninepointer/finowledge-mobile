@@ -10,6 +10,11 @@ import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
 import '../core/utils/app_lottie.dart';
 import '../env/environment.dart';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
+import 'package:get/get.dart' hide MultipartFile;
+
 String string(String key, [dynamic args]) {
   //return globalContext.getString(key, args);
   String response = Environment().config?.siteMessages ?? "";
@@ -67,4 +72,24 @@ String getBase64FromUint8List(Uint8List bytes) {
 Uint8List getUint8List(String path) {
   File file = File(path);
   return file.readAsBytesSync();
+}
+
+String getMediaTypeFromFile(File file) {
+  final fileExtension = file.path.split('.').last;
+  final mediaType = lookupMimeType(fileExtension);
+  print(mediaType);
+  return mediaType ?? 'image/$fileExtension';
+}
+
+Future<MultipartFile?> convertPlatformFileToMultipartFile(
+    PlatformFile? platformFile) async {
+  if (platformFile?.path == null) {
+    return null;
+  } else {
+    final file = File(platformFile?.path ?? '');
+    return await MultipartFile(
+      filename: file.path,
+      MediaType.parse(getMediaTypeFromFile(file)),
+    );
+  }
 }

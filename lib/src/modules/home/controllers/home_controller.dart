@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:stoxhero/src/utils/common_utils.dart';
 
 import '../../../app/app.dart';
 
@@ -56,11 +58,11 @@ class HomeController extends BaseController<DashboardRepository> {
     await getDashboardCarousel();
   }
 
-  Future saveUserProfilePhotoDetails(String imagePath) async {
+  Future saveUserProfilePhotoDetails(PlatformFile? imagePath) async {
     isLoading(true);
 
     Map<String, dynamic> data = {
-      'profilePhoto': imagePath,
+      'profilePhoto': await convertPlatformFileToMultipartFile(imagePath),
     };
 
     try {

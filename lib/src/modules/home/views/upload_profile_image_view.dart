@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,14 +18,29 @@ class UploadProfileImageView extends StatefulWidget {
 class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   late HomeController controller;
   final ImagePicker _picker = ImagePicker();
-  File? _imageFile;
+  PlatformFile? _imageFile;
 
-  Future<void> _pickImage() async {
-    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+  void filePicker() async {
+    PlatformFile? file = PlatformFile(name: '', size: 0);
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+    file = result?.files.first;
     setState(() {
-      _imageFile = File(pickedImage!.path);
+      _imageFile = PlatformFile(name: file!.name, path: file.path, size: 0);
     });
   }
+
+  // Future<void> _pickImage() async {
+  //   final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+  //   setState(() async {
+  //     _imageFile = PlatformFile(
+  //         name: pickedImage!.name,
+  //         path: pickedImage.path,
+  //         size: await File(pickedImage.path).length());
+  //   });
+  // }
 
   @override
   void initState() {
@@ -76,13 +92,13 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           radius: 60,
                         )
                       : CircleAvatar(
-                          backgroundImage: FileImage(File(_imageFile!.path)),
+                          backgroundImage: AssetImage(AppImages.lightAppLogo),
                           radius: 60,
                         ),
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: _pickImage,
+                  onPressed: filePicker,
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
                     padding: EdgeInsets.all(16.0),
@@ -137,12 +153,11 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                 child: ElevatedButton(
                   onPressed: _imageFile == null
                       ? null
-                      : () {
+                      : () async {
                           if (_imageFile != null) {
-                            Uint8List data = getUint8List(_imageFile!.path);
-                            String image = getBase64FromUint8List(data);
-                            controller.saveUserProfilePhotoDetails(image);
-
+                            // Uint8List data = getUint8List(_imageFile!.path);
+                            // String image = getBase64FromUint8List(data);
+                            controller.saveUserProfilePhotoDetails(_imageFile);
                             Get.to(() => HomeView());
                           }
                         },
