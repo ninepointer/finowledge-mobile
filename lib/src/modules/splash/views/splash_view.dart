@@ -40,7 +40,7 @@ class SplashView extends GetView<SplashController> {
               child: Obx(
                 () => Column(
                   children: [
-                    // if (AppStorage.getIsProd() == true)
+                    if (AppStorage.getIsProd() == true)
                     Text(
                       string("label_dev"),
                       style: Get.isDarkMode
