@@ -45,4 +45,13 @@ class DashboardRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: LoginDetailsResponse.fromJson(response));
   }
+
+  Future<RepoResponse<LoginDetailsResponse>> freeRegistration(
+      Map<String, dynamic> data, String quizId) async {
+    String apiURL = AppUrls.registrationComplate(quizId);
+    var response = await service.patch(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: LoginDetailsResponse.fromJson(response));
+  }
 }

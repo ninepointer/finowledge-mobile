@@ -142,6 +142,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                 Get.to(() => UploadProfileImageView(
                       slotForQuizList: controller
                           .timeSlotForQuizRegistrationList[selectedIndex],
+                      myOlympiad: widget.myOlympiad,
                     ));
               }
             },

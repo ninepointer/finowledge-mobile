@@ -52,6 +52,6 @@ class AppUrls {
   static String userGrade(String schoolId) => "/school/$schoolId/usergrades";
   static const String profilephotoUpdate = "/student/image";
 
-  static String registrationComplate(String slotId) =>
-      "/school/$slotId/usergrades";
+  static String registrationComplate(String quizId) =>
+      "/quiz/user/registration/$quizId";
 }

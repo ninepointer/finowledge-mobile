@@ -9,7 +9,9 @@ import '../../../utils/common_utils.dart';
 
 class UploadProfileImageView extends StatefulWidget {
   TimeSlotForQuizList? slotForQuizList;
-  UploadProfileImageView({Key? key, this.slotForQuizList}) : super(key: key);
+  final MyActiveOlympiadList? myOlympiad;
+  UploadProfileImageView({Key? key, this.slotForQuizList, this.myOlympiad})
+      : super(key: key);
 
   @override
   State<UploadProfileImageView> createState() => _UploadProfileImageViewState();
@@ -136,7 +138,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle skip action
+                    if (widget.myOlympiad?.entryFee == 0) {}
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
@@ -178,3 +180,33 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
     );
   }
 }
+
+
+
+// class MyPopupScreen extends StatelessWidget {
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     return ElevatedButton(
+//       onPressed: () {
+//         showDialog(
+//           context: context,
+//           builder: (BuildContext context) {
+//             return AlertDialog(
+//               content: Text("${}"),
+//               actions: [
+//                 TextButton(
+//                   onPressed: () {
+//                     Navigator.of(context).pop(); // To close the dialog
+//                   },
+//                   child: Text("Close"),
+//                 ),
+//               ],
+//             );
+//           },
+//         );
+//       },
+//       child: Text("Show Popup"),
+//     );
+//   }
+// }
