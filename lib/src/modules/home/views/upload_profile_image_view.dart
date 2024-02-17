@@ -138,10 +138,12 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       ? null
                       : () {
                           if (_imageFile != null) {
-                            String imagePath = _imageFile!.path;
-                            controller.userDetails.value.profilePhoto =
-                                imagePath as UserImageDetails?;
-                            Get.to(() => DashboardView());
+                            // String imagePath = _imageFile!.path;
+                            // controller.userDetails.value.schoolDetails
+                            //         ?.profilePhoto =
+                            //     UserImageDetails(url: imagePath) as String?;
+
+                            // Get.to(() => DashboardView());
                           }
                         },
                   style: ElevatedButton.styleFrom(
