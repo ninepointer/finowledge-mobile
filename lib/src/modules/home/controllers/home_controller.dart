@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../app/app.dart';
@@ -54,75 +56,31 @@ class HomeController extends BaseController<DashboardRepository> {
     await getDashboardCarousel();
   }
 
-  // void navigateToCarousel(String link) {
-  //   if (link == 'marginxs') {
-  //     selectedIndex(3);
+  Future saveUserProfilePhotoDetails(String imagePath) async {
+    isLoading(true);
 
-  //     Get.find<MarginXController>().loadData();
-  //     // Get.toNamed(AppRoutes.marginx);
-  //     // Get.to(() => MarginXView());
-  //   } else if (link == 'testzone') {
-  //     selectedIndex(4);
-  //     Get.find<ContestController>().loadData();
-  //   } else if (link == 'tenxtrading') {
-  //     selectedIndex(2);
-  //     Get.find<TenxTradingController>().loadData();
-  //   } else if (link == 'referrals') {
-  //     Get.find<ReferralsController>().loadData();
-  //     Get.toNamed(AppRoutes.referrals);
-  //   } else if (link == 'wallet') {
-  //     Get.find<WalletController>().loadData();
-  //     Get.toNamed(AppRoutes.wallet);
-  //   } else if (link == 'market') {
-  //     selectedIndex(1);
-  //     Get.find<VirtualTradingController>().loadData();
-  //   } else if (link == 'toptestzoneportfolios') {
-  //     // selectedIndex(3);
-  //     Get.find<ContestProfileController>().loadData();
+    Map<String, dynamic> data = {
+      'profilePhoto': imagePath,
+    };
 
-  //     Get.to(() => ContestTopPerformerCard());
-  //   }
-  // }
-
-  String getPaidCapAmount(num fees, num cap) {
-    num percentage = (fees * cap) / 100;
-    return FormatHelper.formatNumbers(percentage, showDecimal: false);
-  }
-
-  // String getStockIndexName(int instId) {
-  //   int index = stockIndexInstrumentList
-  //       .indexWhere((element) => element.instrumentToken == instId);
-  //   return stockIndexInstrumentList[index].displayName ?? '-';
-  // }
-
-  String getProductName(String? label) {
-    String name = '';
-    if (label == 'virtual') name = 'F&O';
-    if (label == 'tenx') name = 'TenX Trading';
-    if (label == 'contest') name = 'TestZones Trading';
-    return name;
-  }
-
-  Color getValueColor(dynamic value) {
-    if (value != null) {
-      if (value is String) {
-        if (value.contains('-')) {
-          return AppColors.danger;
-        } else if (value == '0') {
-          return AppColors.success;
+    try {
+      final RepoResponse<LoginDetailsResponse> response =
+          await repository.uploadProfileImageinOlympiad(data);
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          final loginDetailsResponse =
+              await Get.find<AuthRepository>().loginDetails();
+          if (loginDetailsResponse.data != null) {
+            await AppStorage.setUserDetails(loginDetailsResponse.data!);
+          }
         }
       } else {
-        num number = value is int || value is double ? value : num.parse(value);
-        if (number > 0) {
-          return AppColors.success;
-        } else if (number < 0) {
-          return AppColors.danger;
-        } else if (number == 0) {
-          return AppColors.success;
-        }
+        SnackbarHelper.showSnackbar(response.error?.message);
       }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
-    return AppColors.grey;
+    isLoading(false);
   }
 
   Future getDashboardCarousel() async {

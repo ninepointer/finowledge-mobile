@@ -132,18 +132,18 @@ class _RegistrationViewState extends State<RegistrationView> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              // if (selectedIndex == -1 ||
-              //     controller.timeSlotForQuizRegistrationList[selectedIndex]
-              //             .spotLeft ==
-              //         0) {
-              //   SnackbarHelper.showSnackbar(
-              //       "Please select a valid time slot for registration");
-              // } else {
-              //   controller.timeSlotForQuizRegistrationList[selectedIndex];
-              //   Get.to(() => UploadProfileImageView());
-              // }
-              // controller.timeSlotForQuizRegistrationList[selectedIndex];
-              Get.to(() => UploadProfileImageView());
+              if (selectedIndex == -1 ||
+                  controller.timeSlotForQuizRegistrationList[selectedIndex]
+                          .spotLeft ==
+                      0) {
+                SnackbarHelper.showSnackbar(
+                    "Please select a valid time slot for registration");
+              } else {
+                Get.to(() => UploadProfileImageView(
+                      slotForQuizList: controller
+                          .timeSlotForQuizRegistrationList[selectedIndex],
+                    ));
+              }
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.green,

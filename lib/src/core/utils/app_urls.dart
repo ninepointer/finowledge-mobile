@@ -50,4 +50,8 @@ class AppUrls {
   static const String schoollist = "/fetchschools";
 
   static String userGrade(String schoolId) => "/school/$schoolId/usergrades";
+  static const String profilephotoUpdate = "/student/image";
+
+  static String registrationComplate(String slotId) =>
+      "/school/$slotId/usergrades";
 }

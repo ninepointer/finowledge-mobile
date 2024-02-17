@@ -52,19 +52,17 @@ class OlympiadCard extends GetView<HomeController> {
                 // Title
                 Container(
                   height: MediaQuery.of(context).size.width * 0.14,
-                  child: Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          myOlympiad?.title ?? '',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                  child: Row(
+                    children: [
+                      Text(
+                        myOlympiad?.title ?? '',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
 
