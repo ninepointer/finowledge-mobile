@@ -78,7 +78,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           radius: 60,
                         )
                       : CircleAvatar(
-                          backgroundImage: AssetImage(AppImages.lightAppLogo),
+                          backgroundImage: FileImage(File(_imageFile!.path)),
                           radius: 60,
                         ),
                 ),
