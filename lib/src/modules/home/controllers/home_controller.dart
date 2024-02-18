@@ -1,6 +1,6 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:stoxhero/src/utils/common_utils.dart';
+import 'dart:io';
 import '../../../app/app.dart';
+import 'package:file_support/file_support.dart';
 
 class HomeBinding implements Bindings {
   @override
@@ -9,6 +9,7 @@ class HomeBinding implements Bindings {
 
 class HomeController extends BaseController<DashboardRepository> {
   final userDetails = LoginDetailsResponse().obs;
+  final _fileSupportPlugin = FileSupport();
 
   LoginDetailsResponse get userDetailsData => userDetails.value;
 
@@ -55,11 +56,12 @@ class HomeController extends BaseController<DashboardRepository> {
     await getDashboardCarousel();
   }
 
-  Future saveUserProfilePhotoDetails(PlatformFile? imagePath) async {
+  Future saveUserProfilePhotoDetails(File? file) async {
     isLoading(true);
 
     Map<String, dynamic> data = {
-      'profilePhoto': await convertPlatformFileToMultipartFile(imagePath),
+      'profilePhoto':
+          await _fileSupportPlugin.getMultiPartFromFile(file ?? File(""))
     };
 
     try {

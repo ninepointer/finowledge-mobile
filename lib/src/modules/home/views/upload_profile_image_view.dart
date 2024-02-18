@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +8,7 @@ import '../../../utils/common_utils.dart';
 class UploadProfileImageView extends StatefulWidget {
   TimeSlotForQuizList? slotForQuizList;
   final MyActiveOlympiadList? myOlympiad;
+
   UploadProfileImageView({Key? key, this.slotForQuizList, this.myOlympiad})
       : super(key: key);
 
@@ -20,29 +19,14 @@ class UploadProfileImageView extends StatefulWidget {
 class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   late HomeController controller;
   final ImagePicker _picker = ImagePicker();
-  PlatformFile? _imageFile;
+  File? _imageFile;
 
-  void filePicker() async {
-    PlatformFile? file = PlatformFile(name: '', size: 0);
-
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-    );
-    file = result?.files.first;
+  Future<void> pickImage() async {
+    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _imageFile = PlatformFile(name: file!.name, path: file.path, size: 0);
+      _imageFile = File(pickedImage?.path ?? "");
     });
   }
-
-  // Future<void> _pickImage() async {
-  //   final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-  //   setState(() async {
-  //     _imageFile = PlatformFile(
-  //         name: pickedImage!.name,
-  //         path: pickedImage.path,
-  //         size: await File(pickedImage.path).length());
-  //   });
-  // }
 
   @override
   void initState() {
@@ -100,7 +84,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: filePicker,
+                  onPressed: pickImage,
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
                     padding: EdgeInsets.all(16.0),
@@ -142,8 +126,6 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       await controller.getFinalRegistrationPageDetails(
                           widget.slotForQuizList?.slotId ?? '',
                           widget.myOlympiad?.sId ?? '');
-                      print(
-                          "idddd ${widget.slotForQuizList?.slotId} ${widget.myOlympiad?.sId} ${controller.registrationFinalPageData.value.message}");
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -182,13 +164,8 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       ? null
                       : () async {
                           if (_imageFile != null) {
-                            File imageFile = File(_imageFile!.path ?? '');
-                            PlatformFile platformFile = PlatformFile(
-                                name: imageFile.path.split('/').last,
-                                path: imageFile.path,
-                                size: await imageFile.length());
-                            controller
-                                .saveUserProfilePhotoDetails(platformFile);
+                            await controller
+                                .saveUserProfilePhotoDetails(_imageFile);
                             Get.to(() => HomeView());
                           }
                         },

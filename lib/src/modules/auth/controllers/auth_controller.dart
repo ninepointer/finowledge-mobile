@@ -340,7 +340,7 @@ class AuthController extends BaseController<AuthRepository> {
 
         Get.find<HomeController>().loadUserDetails();
         if (navigate) {
-          await SocketService().initSocket();
+          //await SocketService().initSocket();
           Get.offAllNamed(AppRoutes.home);
         }
         log('App ${AppStorage.getToken()}');

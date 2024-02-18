@@ -1,13 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.finowledge.app">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher2"
-        android:label="Finowledge">
+        android:label="Finowledge"
+        android:requestLegacyExternalStorage="true">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/notification_icon" />
