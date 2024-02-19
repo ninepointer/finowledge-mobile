@@ -173,6 +173,10 @@ class _RegistrationViewState extends State<RegistrationView> {
                       context: context,
                       child: PaymentDetailView(
                         myOlympiad: widget.myOlympiad,
+                        slotId: controller
+                                .timeSlotForQuizRegistrationList[selectedIndex]
+                                .slotId ??
+                            '',
                       ),
                     );
                   }

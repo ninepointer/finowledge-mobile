@@ -9,7 +9,7 @@ class AppUrls {
   static const String referralWebUrl = 'https://www.stoxhero.com/?referral=';
 
   static const String paymentCallBackUrl =
-      "https://stoxhero.com/api/v1/payment/callback";
+      "http://43.204.7.180/api/v1/payment/callback";
 
   static const String tenxYoutubeVideoLink =
       'https://www.youtube.com/watch?v=a3_bmjv5tXQ';

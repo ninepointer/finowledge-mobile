@@ -9,8 +9,9 @@ import '../../../app/app.dart';
 
 class PaymentDetailView extends StatefulWidget {
   final MyActiveOlympiadList? myOlympiad;
+  final String? slotId;
 
-  const PaymentDetailView({super.key, this.myOlympiad});
+  const PaymentDetailView({super.key, this.myOlympiad, this.slotId});
 
   @override
   _PaymentDetailViewState createState() => _PaymentDetailViewState();
@@ -56,7 +57,8 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
       appId,
       merchantId,
       true,
-    ).then((isInitialized) => {
+    )
+        .then((isInitialized) => {
               setState(() {
                 result = 'PhonePe SDK Initialized - $isInitialized';
                 print(result);
@@ -145,8 +147,9 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
         callBackUrl,
         checksum,
         packageName,
-      ).then((response) => {
-                setState(() {
+      )
+          .then((response) => {
+                setState(() async {
                   paymentStatus = false;
                   if (response != null) {
                     print(response);
@@ -155,8 +158,10 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
                     if (status == 'SUCCESS') {
                       paymentStatus = true;
                       result = "Flow Completed - Status: Success!";
-                      Get.to(
-                              () => HomeView());
+                      await controller.getFinalRegistrationPageDetails(
+                          widget.slotId ?? '', widget.myOlympiad?.sId ?? '');
+                      await controller.getUserAllOlympiadDetails();
+                      Get.to(() => HomeView());
                     } else {
                       result =
                           "Flow Completed - Status: $status and Error: $error";

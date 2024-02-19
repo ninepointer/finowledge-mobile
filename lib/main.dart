@@ -13,7 +13,7 @@ FirebaseConfig firebaseConfig = FirebaseConfig.instance;
 AppPackageInfo? appPackageInfo;
 
 const bool isProd = false;
-const bool useTestToken = false;
+const bool useTestToken = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
