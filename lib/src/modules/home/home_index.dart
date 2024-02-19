@@ -10,3 +10,5 @@ export 'views/upload_profile_image_view.dart';
 
 export 'views/upcomingOlympiadView.dart';
 export 'views/activeOlympiadView.dart';
+export 'views/practice_test_for_quiz.dart';
+export 'widgets/options_for_quiz_practice.dart';
