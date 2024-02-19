@@ -149,7 +149,7 @@ class MyActiveOlympiadList {
     maxParticipant = json['maxParticipant'];
     grade = json['grade'];
     status = json['status'];
-    entryFee = json['entryFee'];
+    entryFee = json['entryFee'] != null ? json['entryFee'] : 0;
     noOfSlots = json['noOfSlots'];
     registrationCloseDateTime = json['registrationCloseDateTime'];
     registrationsCount = json['registrationsCount'];

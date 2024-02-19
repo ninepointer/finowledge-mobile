@@ -19,7 +19,6 @@ class _ActiveOlympiadViewState extends State<ActiveOlympiadView> {
   void initState() {
     super.initState();
     controller = Get.find<HomeController>();
-    controller.loadData();
   }
 
   @override
@@ -55,33 +54,28 @@ class _ActiveOlympiadViewState extends State<ActiveOlympiadView> {
                                   string("label_no_my_olympiad"))),
                         ],
                       )
-                    : Obx(
-                        () => Row(
-                          children:
-                              controller.myActiveOlympiadList.map((contest) {
-                            String userId =
-                                controller.userDetailsData.sId ?? '';
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  right:
-                                      controller.myActiveOlympiadList.length ==
-                                              1
-                                          ? 0
-                                          : MediaQuery.of(context).size.width *
-                                              0.0408),
-                              width: controller.myActiveOlympiadList.length == 1
-                                  ? MediaQuery.of(context).size.width -
-                                      MediaQuery.of(context).size.width * 0.102
-                                  : MediaQuery.of(context).size.width -
-                                      MediaQuery.of(context).size.width *
-                                          0.1603,
-                              child: ActiveOlympiadCard(
-                                //userId: userId,
-                                myOlympiad: contest,
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                    : Row(
+                        children:
+                            controller.myActiveOlympiadList.map((contest) {
+                          String userId = controller.userDetailsData.sId ?? '';
+                          return Container(
+                            margin: EdgeInsets.only(
+                                right:
+                                    controller.myActiveOlympiadList.length == 1
+                                        ? 0
+                                        : MediaQuery.of(context).size.width *
+                                            0.0408),
+                            width: controller.myActiveOlympiadList.length == 1
+                                ? MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width * 0.102
+                                : MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width * 0.1603,
+                            child: ActiveOlympiadCard(
+                              //userId: userId,
+                              myOlympiad: contest,
+                            ),
+                          );
+                        }).toList(),
                       ),
               ],
             ),

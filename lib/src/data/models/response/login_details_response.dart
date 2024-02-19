@@ -53,7 +53,7 @@ class LoginDetailsResponse {
   String? upiId;
   String? mobileOtp;
   bool? isAlgoTrader;
-  List<String>? watchlistInstruments;
+  // List<String>? watchlistInstruments;
   List<String>? contests;
   List<ProfilePortfolio>? portfolio;
   List<Referrals>? referrals;
@@ -116,7 +116,7 @@ class LoginDetailsResponse {
     this.upiId,
     this.mobileOtp,
     this.isAlgoTrader,
-    this.watchlistInstruments,
+    // this.watchlistInstruments,
     this.contests,
     this.portfolio,
     this.referrals,
@@ -207,8 +207,8 @@ class LoginDetailsResponse {
     mobileOtp = json['mobile_otp'];
     isAffiliate = json['isAffiliate'];
     isAlgoTrader = json['isAlgoTrader'];
-    watchlistInstruments = json['watchlistInstruments'].cast<String>();
-    contests = json['contests'].cast<String>();
+    // watchlistInstruments = json['watchlistInstruments'].cast<String>();
+    // contests = json['contests'].cast<String>();
     if (json['portfolio'] != null) {
       portfolio = <ProfilePortfolio>[];
       json['portfolio'].forEach((v) {
@@ -306,9 +306,9 @@ class LoginDetailsResponse {
     data['upiId'] = this.upiId;
     data['mobile_otp'] = this.mobileOtp;
     data['isAlgoTrader'] = this.isAlgoTrader;
-    data['watchlistInstruments'] = this.watchlistInstruments;
+    // data['watchlistInstruments'] = this.watchlistInstruments;
 
-    data['contests'] = this.contests;
+    // data['contests'] = this.contests;
 
     if (this.portfolio != null) {
       data['portfolio'] = this.portfolio!.map((v) => v.toJson()).toList();
@@ -383,8 +383,8 @@ class LoginDetailsResponse {
     String? upiId,
     String? mobileOtp,
     bool? isAlgoTrader,
-    List<String>? watchlistInstruments,
-    List<String>? contests,
+    // List<String>? watchlistInstruments,
+    // List<String>? contests,
     List<ProfilePortfolio>? portfolio,
     List<Referrals>? referrals,
     List<InternshipBatchList>? internshipBatch,
@@ -447,8 +447,8 @@ class LoginDetailsResponse {
       upiId: upiId ?? this.upiId,
       mobileOtp: mobileOtp ?? this.mobileOtp,
       isAlgoTrader: isAlgoTrader ?? this.isAlgoTrader,
-      watchlistInstruments: watchlistInstruments ?? this.watchlistInstruments,
-      contests: contests ?? this.contests,
+      // watchlistInstruments: watchlistInstruments ?? this.watchlistInstruments,
+      // contests: contests ?? this.contests,
       portfolio: portfolio ?? this.portfolio,
       referrals: referrals ?? this.referrals,
       internshipBatch: internshipBatch ?? this.internshipBatch,

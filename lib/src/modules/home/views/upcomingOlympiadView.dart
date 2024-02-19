@@ -19,7 +19,6 @@ class _UpcomingOlympiadViewState extends State<UpcomingOlympiadView> {
   void initState() {
     super.initState();
     controller = Get.find<HomeController>();
-    controller.loadData();
   }
 
   @override
@@ -55,32 +54,27 @@ class _UpcomingOlympiadViewState extends State<UpcomingOlympiadView> {
                                   string("label_no_upcoming_olympiad"))),
                         ],
                       )
-                    : Obx(
-                        () => Row(
-                          children:
-                              controller.userAllOlympiadList.map((contest) {
-                            String userId =
-                                controller.userDetailsData.sId ?? '';
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  right:
-                                      controller.userAllOlympiadList.length == 1
-                                          ? 0
-                                          : MediaQuery.of(context).size.width *
-                                              0.0408),
-                              width: controller.userAllOlympiadList.length == 1
-                                  ? MediaQuery.of(context).size.width -
-                                      MediaQuery.of(context).size.width * 0.102
-                                  : MediaQuery.of(context).size.width -
-                                      MediaQuery.of(context).size.width *
-                                          0.1603,
-                              child: OlympiadCard(
-                                //userId: userId,
-                                myOlympiad: contest,
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                    : Row(
+                        children: controller.userAllOlympiadList.map((contest) {
+                          String userId = controller.userDetailsData.sId ?? '';
+                          return Container(
+                            margin: EdgeInsets.only(
+                                right:
+                                    controller.userAllOlympiadList.length == 1
+                                        ? 0
+                                        : MediaQuery.of(context).size.width *
+                                            0.0408),
+                            width: controller.userAllOlympiadList.length == 1
+                                ? MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width * 0.102
+                                : MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width * 0.1603,
+                            child: OlympiadCard(
+                              //userId: userId,
+                              myOlympiad: contest,
+                            ),
+                          );
+                        }).toList(),
                       ),
               ],
             ),

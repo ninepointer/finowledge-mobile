@@ -141,33 +141,32 @@ class _RegistrationViewState extends State<RegistrationView> {
               } else {
                 if (controller.userDetails.value.schoolDetails?.profilePhoto !=
                     null) {
-                  if (widget.myOlympiad?.entryFee == 0) {
-                    await controller.getFinalRegistrationPageDetails(
-                        controller
-                                .timeSlotForQuizRegistrationList[selectedIndex]
-                                .slotId ??
-                            '',
-                        widget.myOlympiad?.sId ?? '');
+                  // if (widget.myOlympiad?.entryFee == 0) {
+                  await controller.getFinalRegistrationPageDetails(
+                      controller.timeSlotForQuizRegistrationList[selectedIndex]
+                              .slotId ??
+                          '',
+                      widget.myOlympiad?.sId ?? '');
 
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          content: Text(
-                              "${controller.registrationFinalPageData.value.message}"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                controller.getUserAllOlympiadDetails();
-                                Get.to(() => HomeView()); // To close the dialog
-                              },
-                              child: Text("Close"),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Text(
+                            "${controller.registrationFinalPageData.value.message}"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              controller.getUserAllOlympiadDetails();
+                              Get.to(() => HomeView()); // To close the dialog
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  //}
                 } else {
                   Get.to(
                     () => UploadProfileImageView(
