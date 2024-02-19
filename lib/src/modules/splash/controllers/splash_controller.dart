@@ -38,7 +38,7 @@ class SplashController extends GetxController {
     int mainVersion = playStoreVersion[0].compareTo(currentVersion[0]);
 
     if (mainVersion < 0) {
-      await Get.dialog(UpdateAlertDialog());
+      //  await Get.dialog(UpdateAlertDialog());
     } else {
       int playStoreBuild = int.parse(playStoreVersion[1]);
       int currentBuild = int.parse(currentVersion[1]);
