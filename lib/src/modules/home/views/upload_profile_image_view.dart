@@ -18,6 +18,7 @@ class UploadProfileImageView extends StatefulWidget {
 
 class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   late HomeController controller;
+  late AuthController authController;
   final ImagePicker _picker = ImagePicker();
   File? _imageFile;
 
@@ -32,6 +33,7 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
   void initState() {
     super.initState();
     controller = Get.find<HomeController>();
+    authController = Get.find<AuthController>();
   }
 
   @override
@@ -122,30 +124,29 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (widget.myOlympiad?.entryFee == 0) {
-                      await controller.getFinalRegistrationPageDetails(
-                          widget.slotForQuizList?.slotId ?? '',
-                          widget.myOlympiad?.sId ?? '');
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            content: Text(
-                                "${controller.registrationFinalPageData.value.message}"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  controller.getUserAllOlympiadDetails();
-                                  Get.to(
-                                      () => HomeView()); // To close the dialog
-                                },
-                                child: Text("Close"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
+                    // if (widget.myOlympiad?.entryFee == 0) {
+                    await controller.getFinalRegistrationPageDetails(
+                        widget.slotForQuizList?.slotId ?? '',
+                        widget.myOlympiad?.sId ?? '');
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Text(
+                              "${controller.registrationFinalPageData.value.message}"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                controller.getUserAllOlympiadDetails();
+                                Get.to(() => HomeView()); // To close the dialog
+                              },
+                              child: Text("Close"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    //   }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
@@ -166,7 +167,30 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                           if (_imageFile != null) {
                             await controller
                                 .saveUserProfilePhotoDetails(_imageFile);
-                            Get.to(() => HomeView());
+                            await controller.getFinalRegistrationPageDetails(
+                                widget.slotForQuizList?.slotId ?? '',
+                                widget.myOlympiad?.sId ?? '');
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: Text(
+                                      "${controller.registrationFinalPageData.value.message}"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        controller.getUserAllOlympiadDetails();
+                                        authController
+                                            .getUserDetails(); // To close the dialog
+                                      },
+                                      child: Text("Close"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            // authController.getUserDetails();
+                            //  Get.to(() => HomeView());
                           }
                         },
                   style: ElevatedButton.styleFrom(

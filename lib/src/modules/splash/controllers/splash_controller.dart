@@ -38,7 +38,7 @@ class SplashController extends GetxController {
     int mainVersion = playStoreVersion[0].compareTo(currentVersion[0]);
 
     if (mainVersion < 0) {
-      await Get.dialog(UpdateAlertDialog());
+      //  await Get.dialog(UpdateAlertDialog());
     } else {
       int playStoreBuild = int.parse(playStoreVersion[1]);
       int currentBuild = int.parse(currentVersion[1]);
@@ -56,7 +56,7 @@ class SplashController extends GetxController {
       String build = packageInfo.buildNumber;
 
       _appVersion('$version+$build');
-      if (isProd) {
+      if (AppStorage.getIsProd() == true) {
         final response =
             await Get.find<AuthController>().repository.getAppVersion();
         if (response.data != null) {

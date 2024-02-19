@@ -50,10 +50,10 @@ class HomeController extends BaseController<DashboardRepository> {
   }
 
   Future loadData() async {
-    userDetails.value = AppStorage.getUserDetails();
+    ///   userDetails.value = AppStorage.getUserDetails();
     await getMyActiveOlympiadDetails();
     await getUserAllOlympiadDetails();
-    await getDashboardCarousel();
+    // await getDashboardCarousel();
   }
 
   Future saveUserProfilePhotoDetails(File? file) async {
