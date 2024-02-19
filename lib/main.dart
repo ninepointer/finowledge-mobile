@@ -13,14 +13,14 @@ FirebaseConfig firebaseConfig = FirebaseConfig.instance;
 AppPackageInfo? appPackageInfo;
 
 const bool isProd = false;
-const bool useTestToken = false;
+const bool useTestToken = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Set Environment
   const String environment = String.fromEnvironment(
     'ENVIRONMENT',
-    defaultValue: Environment.PROD,
+    defaultValue: Environment.DEV,
   );
   Environment().initConfig(environment);
 
