@@ -53,5 +53,6 @@
   "label_please_upload_your_profile_image": "Please upload your profile image",
   "label_why_upload_desc": "Please upload your image for better identification on the leaderboard and social media. Your image will enhance your presence and ensure clear recognition.",
   "label_skip": "Skip",
-  "label_save": "Save"
+  "label_save": "Save",
+  "label_olympaid_date": "Olympiad Date:"
 }

@@ -52,51 +52,35 @@ class OlympiadCard extends GetView<HomeController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title
-                    Container(
-                      height: MediaQuery.of(context).size.width * 0.14,
-                      child: Text(
-                        myOlympiad?.title ?? '',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-
-                    // /// Grade
-                    // Text(
-                    //   '${myOlympiad?.grade} ${string("label_grade")}',
-                    //   style: TextStyle(
-                    //     fontSize: 16,
-                    //     color: Colors.grey,
-                    //   ),
-                    // ),
-
-                    /// Starts and Seats Left
                     Row(
                       children: [
-                        Text(
-                          'Olympiad Date: ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
+                        Expanded(
+                          child: Text(
+                            myOlympiad?.title ?? '',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       '${string("label_seats_left")} ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
-                    //       style: TextStyle(
-                    //         fontSize: 16,
-                    //         color: Colors.grey,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+
+                    /// Starts and Seats Left
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${string("label_olympaid_date")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: 16),
                     // Action Buttons
                     Row(
@@ -104,7 +88,6 @@ class OlympiadCard extends GetView<HomeController> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            print("quiz id ${myOlympiad?.sId}");
                             controller.getTimeSlotForQuizRegistrationDetails(
                                 myOlympiad?.sId ?? '');
                             Get.to(

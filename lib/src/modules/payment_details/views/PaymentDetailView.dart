@@ -3,11 +3,15 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
+import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
 import 'dart:math' as math;
 import '../../../app/app.dart';
-import '../../../utils/common_utils.dart';
 
 class PaymentDetailView extends StatefulWidget {
+  final MyActiveOlympiadList? myOlympiad;
+
+  const PaymentDetailView({super.key, this.myOlympiad});
+
   @override
   _PaymentDetailViewState createState() => _PaymentDetailViewState();
 }
@@ -25,7 +29,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
   Object? result;
   String appId = "";
   String saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
-  String merchantId = "MERCHANTUAT";
+  String merchantId = "PGTESTPAYUAT";
   String packageName = "com.phonepe.simulator";
   String apiEndpoint = "/pg/v1/pay";
   String saltIndex = "1";
@@ -52,8 +56,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
       appId,
       merchantId,
       true,
-    )
-        .then((isInitialized) => {
+    ).then((isInitialized) => {
               setState(() {
                 result = 'PhonePe SDK Initialized - $isInitialized';
                 print(result);
@@ -93,10 +96,10 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
     String muId = 'muid${userDetails.sId}';
     String mobile = userDetails.mobile ?? '';
 
+    await generatePaymentData(mtId, muId, mobile);
+    controller.isLoading(false);
     await startPhonePePayment();
 
-
-    await generatePaymentData(mtId, muId, mobile);
     if (paymentStatus) {
       SnackbarHelper.showSnackbar('Transaction successful');
     } else {
@@ -105,8 +108,8 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
   }
 
   Future generatePaymentData(String mtId, String muId, String mobile) async {
-    num amount = 1000;
-
+    int amount = widget.myOlympiad?.entryFee ?? 0;
+    amount = amount * 100;
     final data = {
       "merchantId": merchantId,
       "merchantTransactionId": mtId,
@@ -141,9 +144,8 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
         body,
         callBackUrl,
         checksum,
-        "",
-      )
-          .then((response) => {
+        packageName,
+      ).then((response) => {
                 setState(() {
                   paymentStatus = false;
                   if (response != null) {
@@ -153,6 +155,8 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
                     if (status == 'SUCCESS') {
                       paymentStatus = true;
                       result = "Flow Completed - Status: Success!";
+                      Get.to(
+                              () => HomeView());
                     } else {
                       result =
                           "Flow Completed - Status: $status and Error: $error";
@@ -183,25 +187,77 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
 
   @override
   Widget build(BuildContext context) {
-    throw Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
-              child: CommonFilledButton(
-                backgroundColor:
-                    Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-                isLoading: controller.isLoadingStatus,
-                label: "Pay ",
-                onPressed: () {
-                  startPaymentTransaction(context);
-                },
-              ),
+    return Wrap(
+      children: [
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
             ),
-          ],
-        ),
-      ),
+          ),
+          child: Column(
+            children: [
+              Text(
+                "Your payment is encrypted and secured",
+                style: AppStyles.tsBlackRegular16,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Transaction Amount",
+                      style: Theme.of(context).textTheme.tsGreyRegular16,
+                    ),
+                    Text(
+                      widget.myOlympiad?.entryFee.toString() ?? "",
+                      style: Theme.of(context).textTheme.tsGreyRegular16,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "GST",
+                      style: Theme.of(context).textTheme.tsGreyRegular16,
+                    ),
+                    Text(
+                      "0",
+                      style: Theme.of(context).textTheme.tsGreyRegular16,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 24),
+                child: CommonFilledButton(
+                  backgroundColor: Get.isDarkMode
+                      ? AppColors.darkGreen
+                      : AppColors.lightGreen,
+                  isLoading: controller.isLoadingStatus,
+                  label: "Pay ",
+                  onPressed: () {
+                    startPaymentTransaction(context);
+                  },
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

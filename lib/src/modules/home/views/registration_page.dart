@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 
 import '../../../utils/common_utils.dart';
+import '../../payment_details/views/PaymentDetailView.dart';
 
 class RegistrationView extends StatefulWidget {
   final MyActiveOlympiadList? myOlympiad;
@@ -166,6 +167,13 @@ class _RegistrationViewState extends State<RegistrationView> {
                           ],
                         );
                       },
+                    );
+                  } else {
+                    BottomSheetHelper.openBottomSheet(
+                      context: context,
+                      child: PaymentDetailView(
+                        myOlympiad: widget.myOlympiad,
+                      ),
                     );
                   }
                 } else {
