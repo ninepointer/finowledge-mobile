@@ -56,7 +56,9 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
               children: [
                 Text(
                   string("label_please_upload_your_profile_image"),
-                  style: AppStyles.tsBlackMedium18,
+                  style: Get.isDarkMode
+                      ? AppStyles.tsWhiteMedium18
+                      : AppStyles.tsBlackMedium18,
                 ),
               ],
             ),
@@ -94,7 +96,12 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(string("label_upload_profile_image")),
+                  child: Text(
+                    string("label_upload_profile_image"),
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
+                  ),
                 ),
               ],
             ),
@@ -106,7 +113,9 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
                 Flexible(
                   child: Text(
                     string("label_why_upload_desc"),
-                    style: AppStyles.tsBlackRegular14,
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteRegular14
+                        : AppStyles.tsBlackRegular14,
                   ),
                 )
               ],
@@ -115,7 +124,9 @@ class _UploadProfileImageViewState extends State<UploadProfileImageView> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.lightCardBackgroundColor,
+        color: Get.isDarkMode
+            ? AppColors.darkCardBackgroundColor
+            : AppColors.lightCardBackgroundColor,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Row(
