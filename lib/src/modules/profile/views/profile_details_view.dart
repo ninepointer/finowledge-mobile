@@ -1,8 +1,44 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:stoxhero/src/utils/common_utils.dart';
 import '../../../app/app.dart';
 
-class ProfileDetailsView extends GetView<ProfileController> {
+class ProfileDetailsView extends StatefulWidget {
+  @override
+  _ProfileDetailsViewState createState() => _ProfileDetailsViewState();
+}
+
+class _ProfileDetailsViewState extends State<ProfileDetailsView> {
+  late ProfileController controller;
+  late AuthController authController;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<ProfileController>();
+    authController = Get.find<AuthController>();
+    controller.studentNameTextController.text =
+        controller.userDetails.value.studentName ?? '';
+    controller.parentsNameTextController.text =
+        controller.userDetails.value.schoolDetails?.parentsName ?? '';
+    authController.dobTextController.text = DateFormat("dd-MM-yyyy").format(
+        DateTime.parse(controller.userDetails.value.schoolDetails?.dob ?? ''));
+    controller.stateTextController.text =
+        controller.userDetails.value.schoolDetails?.state ?? '';
+    controller.cityTextController.text =
+        controller.userDetails.value.schoolDetails?.city?.name ?? '';
+    controller.schoolNameTextController.text =
+        controller.userDetails.value.schoolDetails?.school?.schoolName ?? '';
+    controller.grade.value =
+        controller.userDetails.value.schoolDetails?.grade?.grade ?? '';
+    controller.section.value =
+        controller.userDetails.value.schoolDetails?.section ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -16,10 +52,12 @@ class ProfileDetailsView extends GetView<ProfileController> {
                   ? Icon(Icons.save)
                   : Icon(Icons.edit),
               onPressed: () {
-                if (controller.isEditEnabled.value)
-                  controller.saveUserProfileDetails();
                 controller.isEditEnabled.toggle();
-                FocusScope.of(context).unfocus();
+                if (controller.isEditEnabled.value == true) {
+                  controller.saveUserProfileDetails();
+
+                  FocusScope.of(context).unfocus();
+                }
               },
             ),
           ],
@@ -50,161 +88,409 @@ class ProfileDetailsView extends GetView<ProfileController> {
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0306,
                     ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Full Name',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.0102),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.person),
-                                controller:
-                                    controller.studentNameTextController,
-                                hintText: 'Full Name',
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Parent\'s Name',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.0102),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.person),
-                                controller:
-                                    controller.parentsNameTextController,
-                                hintText: 'Parent\'s Name',
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.width *
-                                        0.0204),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Mobile',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0102,
+                    CommonTextField(
+                      controller: controller.studentNameTextController,
+                      hintText: string("label_enter_full_name"),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: AppColors.grey,
+                      ),
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length == 0) {
+                          return string("label_full_name_is_required");
+                        }
+                        return null;
+                      },
                     ),
                     CommonTextField(
-                      controller: controller.mobileTextController,
-                      hintText: 'Mobile',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.width * 0.0204,
+                      controller: controller.parentsNameTextController,
+                      hintText: string("label_enter_parents_name"),
+                      // focusNode: FocusNode(),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: AppColors.grey,
+                      ),
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length == 0) {
+                          return string("label_parents_name_is_required");
+                        }
+                        return null;
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () => authController.showDateRangePicker(context),
+                      child: CommonTextField(
+                        isDisabled: true,
+                        controller: authController.dobTextController,
+                        hintText: string("label_enter_birth_date"),
+                        prefixIcon: Icon(
+                          Icons.calendar_month,
+                          color: AppColors.grey,
+                        ),
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              value.length == 0) {
+                            return string("label_birth_date_is_required");
+                          }
+                          return null;
+                        },
                       ),
                     ),
-                    Text(
-                      'School',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.0102),
-                    CommonTextField(
-                      controller: controller.schoolNameTextController,
-                      hintText: 'School',
-                      keyboardType: TextInputType.name,
-                      // inputFormatters: [
-                      //   LengthLimitingTextInputFormatter(10),
-                      //   FilteringTextInputFormatter.digitsOnly,
-                      // ],
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.width * 0.0204),
-                    ),
-                    Row(
-                      children: [
-                        // Flexible(
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       Text(
-                        //         'Gender',
-                        //         style:
-                        //             Theme.of(context).textTheme.tsGreyMedium12,
-                        //       ),
-                        //       SizedBox(
-                        //         height:
-                        //             MediaQuery.of(context).size.width * 0.0102,
-                        //       ),
-                        //       CommonDropdown(
-                        //         color: AppColors.grey.withOpacity(0.1),
-                        //         hint: 'Gender',
-                        //         value: controller.genderValue,
-                        //         dropdownItems: controller.dropdownItems,
-                        //         onChanged: (value) =>
-                        //             controller.genderValue = value,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   width: MediaQuery.of(context).size.width * 0.0306,
-                        // ),
-                        Flexible(
-                          child: AbsorbPointer(
-                            absorbing: controller.isKYCApproved,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'DOB',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .tsGreyMedium12,
-                                ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.0102),
-                                GestureDetector(
-                                  onTap: () =>
-                                      controller.showDateRangePicker(context),
-                                  child: CommonTextField(
-                                    padding: EdgeInsets.zero,
-                                    isDisabled: true,
-                                    controller: controller.dobTextController,
-                                    hintText: 'Date of Birth',
-                                    suffixIcon: Icon(
-                                      Icons.calendar_month,
-                                      color: AppColors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                    Container(
+                      padding: EdgeInsets.only(bottom: 16),
+                      child: DropdownSearch<String>(
+                        popupProps: PopupProps.menu(
+                          showSelectedItems: true,
+                          // disabledItemFn: (String s) =>
+                          //     s.startsWith('I'),
+                          showSearchBox: true,
+                        ),
+                        items: authController.states
+                            .map<String>((states) => states)
+                            .toList(),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                            labelText: string("label_choose_state"),
+                            hintText: string("label_search_state_here"),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            isDense: true,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide.none,
                             ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: AppColors.lightGreen,
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: AppColors.primary.shade700,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: AppColors.danger.shade700,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: AppColors.grey.withOpacity(.1),
                           ),
                         ),
-                      ],
+                        onChanged: (String? newValue) async {
+                          authController.selectedState(newValue ?? '');
+                          context.loaderOverlay.show();
+                          await authController.getActiveCities(
+                              authController.selectedState.value);
+                          context.loaderOverlay.hide();
+                        },
+                        selectedItem: controller.stateTextController.text,
+                      ),
+                    ),
+
+                    Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: DropdownSearch<String>(
+                          popupProps: PopupProps.menu(
+                            showSelectedItems: true,
+                            // disabledItemFn: (String s) =>
+                            //     s.startsWith('I'),
+                            showSearchBox: true,
+                          ),
+                          items: authController.activeCities
+                              .map<String>(
+                                  (ActiveCitiesList city) => city.name ?? '')
+                              .toList(),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              labelText: string("label_choose_city"),
+                              hintText: string("label_search_cit_here"),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              isDense: true,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.lightGreen,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.primary.shade700,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.danger.shade700,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.grey.withOpacity(.1),
+                            ),
+                          ),
+                          onChanged: (String? newValue) async {
+                            final selectedCityObject =
+                                authController.activeCities.firstWhere(
+                              (city) => city.name == newValue,
+                              orElse: () => ActiveCitiesList(
+                                sId: '',
+                                name:
+                                    '', // Provide a default value if not found
+                              ),
+                            );
+                            authController
+                                .selectedCity(selectedCityObject.sId ?? '');
+                            authController.selectedCityForState(
+                                selectedCityObject.name ?? '');
+                            authController.fetchSchool
+                                .clear(); // Clear existing school list
+                            context.loaderOverlay.show();
+                            await authController.fetchSchoolListDetails();
+                            context.loaderOverlay.hide();
+                          },
+                          selectedItem: controller.cityTextController.text,
+                        ),
+                      ),
+                    ),
+
+                    ///school
+                    Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: DropdownSearch<String>(
+                          popupProps: PopupProps.menu(
+                            showSelectedItems: true,
+                            // disabledItemFn: (String s) =>
+                            //     s.startsWith('I'),
+                            showSearchBox: true,
+                          ),
+                          items: authController.fetchSchool
+                              .map<String>((fetchSchoolList school) =>
+                                  school.schoolString ?? '')
+                              .toList(),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              labelText: string("label_choose_school"),
+                              hintText: string("hint_choose_school"),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              isDense: true,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.lightGreen,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.primary.shade700,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.danger.shade700,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.grey.withOpacity(.1),
+                            ),
+                          ),
+                          onChanged: (String? newValue) async {
+                            context.loaderOverlay.show();
+                            // await controller.fetchSchoolListDetails();
+                            final schoolList = authController.fetchSchool;
+                            final selectedSchool = schoolList.firstWhere(
+                              (school) => school.schoolString == newValue,
+                              orElse: () => fetchSchoolList(
+                                sId: '',
+                                schoolString: '',
+                              ),
+                            );
+                            authController
+                                .selectedSchoolSid(selectedSchool.sId ?? '');
+                            authController.selectedSchoolName(
+                                selectedSchool.schoolString ?? '');
+                            await authController
+                                .fetchUserGradeAndSectionDetails(
+                                    authController.selectedSchoolSid.value);
+                            context.loaderOverlay.hide();
+                          },
+                          selectedItem:
+                              controller.schoolNameTextController.text,
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: DropdownSearch<String>(
+                          popupProps: PopupProps.menu(
+                            showSelectedItems: true,
+                            // disabledItemFn: (String s) =>
+                            //     s.startsWith('I'),
+                            showSearchBox: true,
+                          ),
+                          items: authController.fetchUserGrade
+                              .map<String>(
+                                  (SchoolUserGradeAndSectionList grade) =>
+                                      grade.grade?.grade ?? '')
+                              .toList(),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              // labelText: string("label_choose_city"),
+                              // hintText: string("label_search_cit_here"),
+                              labelText: "Choose Grade",
+                              hintText: "Choose Grade",
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              isDense: true,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.lightGreen,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.primary.shade700,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.danger.shade700,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.grey.withOpacity(.1),
+                            ),
+                          ),
+                          onChanged: (String? newValue) {
+                            final selectedGradeObject =
+                                authController.fetchUserGrade.firstWhere(
+                              (grade) => grade.grade?.grade == newValue,
+                              orElse: () => SchoolUserGradeAndSectionList(
+                                sId: '',
+                              ),
+                            );
+                            authController.selectedClass(
+                                selectedGradeObject.grade?.grade ?? "");
+                            authController.selectedClassId(
+                                selectedGradeObject.grade?.sId ?? '');
+                          },
+                          selectedItem: controller.grade.value,
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: DropdownSearch<String>(
+                          popupProps: PopupProps.menu(
+                            showSelectedItems: true,
+                            // disabledItemFn: (String s) =>
+                            //     s.startsWith('I'),
+                            showSearchBox: true,
+                          ),
+                          items: authController.fetchUserGrade
+                              .where((grade) =>
+                                  grade.grade?.grade ==
+                                  authController.selectedClass.value)
+                              .map<List<String>>(
+                                (grade) => grade.sections ?? [],
+                              )
+                              .expand((sections) => sections)
+                              .toList(),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              // labelText: string("label_choose_city"),
+                              // hintText: string("label_search_cit_here"),
+                              labelText: "Choose Section",
+                              hintText: "Choose Section",
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              isDense: true,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.lightGreen,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.primary.shade700,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: AppColors.danger.shade700,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.grey.withOpacity(.1),
+                            ),
+                          ),
+                          onChanged: (String? newValue) {
+                            authController.selectedSection(newValue ?? '');
+                          },
+                          selectedItem: controller.section.value,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0306,
@@ -229,139 +515,6 @@ class ProfileDetailsView extends GetView<ProfileController> {
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0306,
                     ),
-                    // Text(
-                    //   'Location',
-                    //   textAlign: TextAlign.start,
-                    //   style: Theme.of(context).textTheme.tsMedium16,
-                    // ),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.width * 0.0306,
-                    // ),
-                    // Text(
-                    //   'Address',
-                    //   style: Theme.of(context).textTheme.tsGreyMedium12,
-                    // ),
-                    // SizedBox(
-                    //     height: MediaQuery.of(context).size.width * 0.0102),
-                    // CommonTextField(
-                    //   prefixIcon: Icon(Icons.home),
-                    //   controller: controller.addressTextController,
-                    //   hintText: 'Address',
-                    //   padding: EdgeInsets.only(
-                    //       bottom: MediaQuery.of(context).size.width * 0.0204),
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Flexible(
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             'City',
-                    //             style:
-                    //                 Theme.of(context).textTheme.tsGreyMedium12,
-                    //           ),
-                    //           SizedBox(
-                    //             height:
-                    //                 MediaQuery.of(context).size.width * 0.0204,
-                    //           ),
-                    //           CommonTextField(
-                    //             prefixIcon: Icon(Icons.location_city),
-                    //             controller: controller.cityTextController,
-                    //             hintText: 'City',
-                    //             padding: EdgeInsets.only(
-                    //                 bottom: MediaQuery.of(context).size.width *
-                    //                     0.0204),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: MediaQuery.of(context).size.width * 0.0306,
-                    //     ),
-                    //     Flexible(
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             'Pin Code',
-                    //             style:
-                    //                 Theme.of(context).textTheme.tsGreyMedium12,
-                    //           ),
-                    //           SizedBox(
-                    //               height: MediaQuery.of(context).size.width *
-                    //                   0.0102),
-                    //           CommonTextField(
-                    //             controller: controller.pincodeTextController,
-                    //             hintText: 'Pincode',
-                    //             prefixIcon: Icon(Icons.pin),
-                    //             keyboardType: TextInputType.number,
-                    //             inputFormatters: [
-                    //               LengthLimitingTextInputFormatter(6),
-                    //               FilteringTextInputFormatter.digitsOnly,
-                    //             ],
-                    //             padding: EdgeInsets.only(
-                    //                 bottom: MediaQuery.of(context).size.width *
-                    //                     0.0204),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Flexible(
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             'State',
-                    //             style:
-                    //                 Theme.of(context).textTheme.tsGreyMedium12,
-                    //           ),
-                    //           SizedBox(
-                    //               height: MediaQuery.of(context).size.width *
-                    //                   0.0102),
-                    //           CommonTextField(
-                    //             prefixIcon: Icon(Icons.location_on),
-                    //             controller: controller.stateTextController,
-                    //             hintText: 'State',
-                    //             padding: EdgeInsets.only(
-                    //                 bottom: MediaQuery.of(context).size.width *
-                    //                     0.0204),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: MediaQuery.of(context).size.width * 0.0306,
-                    //     ),
-                    //     Flexible(
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             'Country',
-                    //             style:
-                    //                 Theme.of(context).textTheme.tsGreyMedium12,
-                    //           ),
-                    //           SizedBox(
-                    //               height: MediaQuery.of(context).size.width *
-                    //                   0.0102),
-                    //           CommonTextField(
-                    //             prefixIcon: Icon(Icons.public),
-                    //             controller: controller.countryTextController,
-                    //             hintText: 'Country',
-                    //             padding: EdgeInsets.only(
-                    //                 bottom: MediaQuery.of(context).size.width *
-                    //                     0.0204),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),

@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide MultipartFile;
+import 'package:get_storage/get_storage.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -103,6 +104,8 @@ class ProfileController extends BaseController<ProfileRepository> {
   final studentNameTextController = TextEditingController();
   final parentsNameTextController = TextEditingController();
   final schoolNameTextController = TextEditingController();
+  final grade = ''.obs;
+  final section = ''.obs;
 
   final Rx<PlatformFile?> aadhaarCardFrontFile =
       PlatformFile(name: '', size: 0).obs;
@@ -380,6 +383,60 @@ class ProfileController extends BaseController<ProfileRepository> {
     }
   }
 
+  // Future saveUserProfileDetails() async {
+  //   if (profilePhotoFile.value?.path == null ||
+  //       profilePhotoFile.value!.name.isEmpty) {
+  //     isEditEnabled(false);
+  //     SnackbarHelper.showSnackbar('Select profile picture to continue!');
+  //     return;
+  //   }
+
+  //   isProfileLoading(true);
+  //   DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
+  //   Map<String, dynamic> data = {
+  //     "student_name": studentNameTextController.text,
+  //     "parents_name": parentsNameTextController.text,
+  //     "school": schoolNameTextController.text,
+  //     "first_name": firstNameTextController.text,
+  //     "last_name": lastNameTextController.text,
+  //     "email": emailTextController.text,
+  //     "mobile": mobileTextController.text,
+  //     "gender": genderValue,
+  //     "dob": DateFormat('yyyy-MM-dd').format(date),
+  //     "address": addressTextController.text,
+  //     "city": cityTextController.text,
+  //     "pincode": pincodeTextController.text,
+  //     "state": stateTextController.text,
+  //     "country": countryTextController.text,
+  //     'profilePhoto':
+  //         await convertPlatformFileToMultipartFile(profilePhotoFile.value),
+  //     'employeeid': userNameTextController.text,
+  //     'whatsApp_number': whatsAppTextController.text,
+  //   };
+
+  //   try {
+  //     final RepoResponse<GenericResponse> response =
+  //         await repository.updateUserDetails(data);
+  //     if (response.data != null) {
+  //       if (response.data?.status?.toLowerCase() == "success") {
+  //         final loginDetailsResponse =
+  //             await Get.find<AuthRepository>().loginDetails();
+  //         if (loginDetailsResponse.data != null) {
+  //           await AppStorage.setUserDetails(loginDetailsResponse.data!);
+  //         }
+  //       }
+  //       log('AppStorage.getUserDetails : ${AppStorage.getUserDetails().toJson()}');
+  //       SnackbarHelper.showSnackbar(response.data?.message);
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     log('Save KYC: ${e.toString()}');
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  //   isProfileLoading(false);
+  // }
+
   Future saveUserProfileDetails() async {
     if (profilePhotoFile.value?.path == null ||
         profilePhotoFile.value!.name.isEmpty) {
@@ -399,6 +456,8 @@ class ProfileController extends BaseController<ProfileRepository> {
       "email": emailTextController.text,
       "mobile": mobileTextController.text,
       "gender": genderValue,
+      "grade": grade.value,
+      'section': section.value,
       "dob": DateFormat('yyyy-MM-dd').format(date),
       "address": addressTextController.text,
       "city": cityTextController.text,
@@ -412,8 +471,8 @@ class ProfileController extends BaseController<ProfileRepository> {
     };
 
     try {
-      final RepoResponse<GenericResponse> response =
-          await repository.updateUserDetails(data);
+      final RepoResponse<LoginDetailsResponse> response =
+          await repository.updateStudensDetails(data);
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
           final loginDetailsResponse =
@@ -422,8 +481,6 @@ class ProfileController extends BaseController<ProfileRepository> {
             await AppStorage.setUserDetails(loginDetailsResponse.data!);
           }
         }
-        log('AppStorage.getUserDetails : ${AppStorage.getUserDetails().toJson()}');
-        SnackbarHelper.showSnackbar(response.data?.message);
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }
