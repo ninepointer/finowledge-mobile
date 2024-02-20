@@ -59,7 +59,9 @@ class OlympiadCard extends GetView<HomeController> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Get.isDarkMode
+                              ? AppColors.white
+                              : AppColors.black,
                         ),
                       ),
                     ),
@@ -91,7 +93,10 @@ class OlympiadCard extends GetView<HomeController> {
                               ),
                             );
                           },
-                          child: Text(string("label_register")),
+                          child: Text(
+                            string("label_register"),
+                            style: AppStyles.tsWhiteRegular14,
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 AppColors.finowledgePurpleAccentColors,

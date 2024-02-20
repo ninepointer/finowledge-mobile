@@ -47,7 +47,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                   children: [
                     Text(
                       string("label_please_select_your_test_slot"),
-                      style: AppStyles.tsBlackMedium20,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteMedium20
+                          : AppStyles.tsBlackMedium20,
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -60,7 +62,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                   children: [
                     Text(
                       "${string("label_test_date")} ${FormatHelper.formatDate(widget.myOlympiad?.startDateTime)}",
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -127,7 +131,9 @@ class _RegistrationViewState extends State<RegistrationView> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.lightCardBackgroundColor,
+        color: Get.isDarkMode
+            ? AppColors.darkCardBackgroundColor
+            : AppColors.lightCardBackgroundColor,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           width: double.infinity,
@@ -198,7 +204,10 @@ class _RegistrationViewState extends State<RegistrationView> {
                 borderRadius: BorderRadius.circular(10.0), // Set border radius
               ),
             ),
-            child: Text(string("label_next")),
+            child: Text(
+              string("label_next"),
+              style: AppStyles.tsWhiteMedium14,
+            ),
           ),
         ),
       ),

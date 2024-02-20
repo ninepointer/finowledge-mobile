@@ -51,7 +51,9 @@ class _DashboardViewState extends State<DashboardView>
                       child: Column(
                         children: [
                           Container(
-                            color: AppColors.whiteScreenBackgroundColors,
+                            color: Get.isDarkMode
+                                ? AppColors.darkScaffoldBackgroundColor
+                                : AppColors.whiteScreenBackgroundColors,
                             child: TabBar(
                               onTap: (index) {
                                 controller.loadData();
@@ -60,10 +62,13 @@ class _DashboardViewState extends State<DashboardView>
                               padding: EdgeInsets.zero,
                               isScrollable: true,
                               controller: tabController,
-                              indicatorColor: AppColors.white,
+                              indicatorColor: Get.isDarkMode
+                                  ? AppColors.black
+                                  : AppColors.white,
                               labelColor: AppColors.white,
-                              unselectedLabelColor:
-                                  AppColors.whiteScreenSubHeadingColors,
+                              unselectedLabelColor: Get.isDarkMode
+                                  ? AppColors.white
+                                  : AppColors.black,
                               indicator: BoxDecoration(
                                 color: AppColors.finowledgePurpleAccentColors,
                                 borderRadius:
@@ -112,7 +117,10 @@ class _DashboardViewState extends State<DashboardView>
                               return ActiveOlympiadView();
                             } else if (controller.selectedTabIndex.value == 2) {
                               return comingSoonViewWithLottie(
-                                  string("label_coming_soon_text"));
+                                string(
+                                  "label_coming_soon_text",
+                                ),
+                              );
                             } else {
                               return comingSoonViewWithLottie(
                                   string("label_coming_soon_text"));

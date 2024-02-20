@@ -57,7 +57,9 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Get.isDarkMode
+                              ? AppColors.white
+                              : AppColors.black,
                         ),
                       ),
                     ),
@@ -98,7 +100,10 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                               },
                             );
                           },
-                          child: Text('INVITE FRIENDS'),
+                          child: Text(
+                            'INVITE FRIENDS',
+                            style: AppStyles.tsWhiteMedium14,
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.orange,
                             padding: EdgeInsets.symmetric(
@@ -116,7 +121,9 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text('Start'),
+                                  title: Text(
+                                    'Start',
+                                  ),
                                   content:
                                       Text('Olympiad has not started yet.'),
                                   actions: <Widget>[
@@ -131,7 +138,10 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                               },
                             );
                           },
-                          child: Text('START'),
+                          child: Text(
+                            'START',
+                            style: AppStyles.tsWhiteMedium14,
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
                             padding: EdgeInsets.symmetric(
