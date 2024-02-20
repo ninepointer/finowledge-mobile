@@ -106,7 +106,9 @@ class ProfileController extends BaseController<ProfileRepository> {
   final schoolNameTextController = TextEditingController();
   final grade = ''.obs;
   final section = ''.obs;
-
+  final selectedCityForState = ''.obs;
+  final selectedSchoolName = ''.obs;
+  final selectedClass = ''.obs;
   final Rx<PlatformFile?> aadhaarCardFrontFile =
       PlatformFile(name: '', size: 0).obs;
   final Rx<PlatformFile?> aadhaarCardBackFile =
