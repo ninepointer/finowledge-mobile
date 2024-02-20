@@ -10,9 +10,6 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "hhhhhhh ${controller.userDetails.value.schoolDetails?.profilePhoto}");
-    controller.loadData();
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
