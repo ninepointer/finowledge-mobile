@@ -10,6 +10,16 @@ class OlympiadCard extends GetView<HomeController> {
     this.myOlympiad,
   }) : super(key: key);
 
+  int? totalSpotLefts() {
+    int? maxParticipants = myOlympiad?.maxParticipant ?? 0;
+    int? noOfSlots = myOlympiad?.noOfSlots ?? 0;
+    int? registrationsCount = myOlympiad?.registrationsCount ?? 0;
+
+    int? seatsLeft = maxParticipants * noOfSlots - registrationsCount;
+
+    return seatsLeft;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -127,7 +137,7 @@ class OlympiadCard extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Seats Left: ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
+                'Seats Left: ${totalSpotLefts()}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,

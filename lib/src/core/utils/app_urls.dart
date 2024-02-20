@@ -25,6 +25,7 @@ class AppUrls {
   static const String resendSignupOtp = "/resendotp";
   static const String loginDetails = "/loginDetail";
   static const String updateUserDetails = "/userdetail/me";
+  //  static const String updateStudentDetails = "/student/me";
   static const String readSetting = "/readsetting";
   static const String referralsActive = "/referrals/active";
   static const String referralsLeaderboard = "/referrals/leaderboard";

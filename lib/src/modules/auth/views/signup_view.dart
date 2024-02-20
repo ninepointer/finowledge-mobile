@@ -30,6 +30,7 @@ class _SignupViewState extends State<SignupView> {
       controller.selectedCity(controller.activeCities.first.sId ?? '');
     }
     formKey = GlobalKey<FormState>();
+    controller.clearForm();
   }
 
   @override
@@ -101,6 +102,7 @@ class _SignupViewState extends State<SignupView> {
                               CommonTextField(
                                 controller: controller.parentNameTextController,
                                 hintText: string("label_enter_parents_name"),
+                                // focusNode: FocusNode(),
                                 prefixIcon: Icon(
                                   Icons.person,
                                   color: AppColors.grey,

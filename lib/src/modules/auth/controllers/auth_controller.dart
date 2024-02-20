@@ -102,6 +102,7 @@ class AuthController extends BaseController<AuthRepository> {
     if (pickedDate != null) {
       String date = DateFormat("dd-MM-yyyy").format(pickedDate);
       dobTextController.text = date;
+      FocusScope.of(context).requestFocus(FocusNode());
     }
   }
 
@@ -166,6 +167,8 @@ class AuthController extends BaseController<AuthRepository> {
           getDefaultInviteCode();
           Get.toNamed(AppRoutes.signup);
         }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
       }
     } catch (e) {
       log(e.toString());
@@ -404,14 +407,12 @@ class AuthController extends BaseController<AuthRepository> {
           await repository.fetchSchoolList(
         data.toJson(),
       );
-
-      if (response.data != null) {
-        // Assuming fetchSchool is a function that handles a list of fetchSchoolResponse
-        fetchSchool(response.data?.data ?? []);
-      } else {
-        // Handle case when response.data is null or empty
-        // For example, show a message indicating no schools were found
+      if (response.data?.status == "success" && response.data?.data == null) {
+        fetchSchoolListDetails();
       }
+      if (response.data != null) {
+        fetchSchool(response.data?.data ?? []);
+      } else {}
     } catch (e) {
       log(e.toString());
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
@@ -460,8 +461,11 @@ class AuthController extends BaseController<AuthRepository> {
   void clearForm() {
     fullNameTextController.clear();
     parentNameTextController.clear();
-    schoolNameTextController.clear();
-    mobileTextController.clear();
-    otpTextController.clear();
+    selectedClass.value = '';
+    selectedSection.value = '';
+    selectedSchoolName.value = '';
+    selectedCityForState.value = '';
+    selectedState.value = '';
+    dobTextController.clear();
   }
 }
