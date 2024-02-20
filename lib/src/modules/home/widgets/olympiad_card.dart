@@ -52,31 +52,26 @@ class OlympiadCard extends GetView<HomeController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            myOlympiad?.title ?? '',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
+                    Container(
+                      height: MediaQuery.of(context).size.width * 0.14,
+                      child: Text(
+                        myOlympiad?.title ?? '',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                      ],
+                      ),
                     ),
 
                     /// Starts and Seats Left
                     Row(
                       children: [
-                        Expanded(
-                          child: Text(
-                            '${string("label_olympaid_date")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
+                        Text(
+                          '${string("label_olympaid_date")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
                           ),
                         ),
                       ],

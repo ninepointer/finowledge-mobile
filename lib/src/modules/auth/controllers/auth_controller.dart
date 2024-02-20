@@ -260,6 +260,7 @@ class AuthController extends BaseController<AuthRepository> {
 
   Future getActiveCities(String state) async {
     isLoading(true);
+
     try {
       final RepoResponse<ActiveCitiesResponse> response =
           await repository.getActiveCities(state);
