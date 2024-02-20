@@ -13,14 +13,14 @@ FirebaseConfig firebaseConfig = FirebaseConfig.instance;
 AppPackageInfo? appPackageInfo;
 
 const bool isProd = false;
-const bool useTestToken = true;
+const bool useTestToken = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Set Environment
   const String environment = String.fromEnvironment(
     'ENVIRONMENT',
-    defaultValue: Environment.DEV,
+    defaultValue: Environment.PROD,
   );
   Environment().initConfig(environment);
 
@@ -33,7 +33,7 @@ void main() async {
   /// Make sure minimumFetchInterval make it in hours due to throttle
   await remoteConfig.setConfigSettings(RemoteConfigSettings(
     fetchTimeout: const Duration(minutes: 1),
-    minimumFetchInterval: const Duration(seconds: 10),
+    minimumFetchInterval: const Duration(hours: 3),
   ));
 
   /// To Activate and Fetch Remote config data
