@@ -397,6 +397,7 @@ class AuthController extends BaseController<AuthRepository> {
 
     fetchSchoolRequest data = fetchSchoolRequest(
         inputString: selectedSchoolSid.value, cityId: selectedCity.value);
+    //
 
     try {
       //  Future<RepoResponse<fetchSchoolResponse>> response =

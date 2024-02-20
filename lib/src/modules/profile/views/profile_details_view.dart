@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stoxhero/src/utils/common_utils.dart';
@@ -37,6 +38,14 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
         controller.userDetails.value.schoolDetails?.grade?.grade ?? '';
     controller.section.value =
         controller.userDetails.value.schoolDetails?.section ?? '';
+    controller.cityTextController.text =
+        controller.userDetails.value.schoolDetails?.city?.sId ?? "";
+    controller.schoolNameTextController.text =
+        controller.userDetails.value.schoolDetails?.school?.sId ?? "";
+    controller
+        .grade(controller.userDetails.value.schoolDetails?.grade?.sId ?? "");
+    authController.selectedCity.value =
+        controller.userDetails.value.schoolDetails?.city?.sId ?? "";
   }
 
   @override
@@ -271,10 +280,13 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                               //     .selectedCity(selectedCityObject.sId ?? '');
                               controller.cityTextController.text =
                                   selectedCityObject.sId ?? '';
+                              authController.selectedCity.value =
+                                  selectedCityObject.sId ?? '';
+                              //  authController.selectedSchoolSid.value =
                               controller.selectedCityForState(
                                   selectedCityObject.name ?? '');
-                              authController.fetchSchool
-                                  .clear(); // Clear existing school list
+                              // authController.fetchSchool
+                              //     .clear(); // Clear existing school list
                               context.loaderOverlay.show();
                               await authController.fetchSchoolListDetails();
                               context.loaderOverlay.hide();
