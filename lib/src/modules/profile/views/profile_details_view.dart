@@ -267,8 +267,10 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                                       '', // Provide a default value if not found
                                 ),
                               );
-                              authController
-                                  .selectedCity(selectedCityObject.sId ?? '');
+                              // authController
+                              //     .selectedCity(selectedCityObject.sId ?? '');
+                              controller.cityTextController.text =
+                                  selectedCityObject.sId ?? '';
                               controller.selectedCityForState(
                                   selectedCityObject.name ?? '');
                               authController.fetchSchool
