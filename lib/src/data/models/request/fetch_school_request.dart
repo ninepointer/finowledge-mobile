@@ -1,10 +1,10 @@
-class FetchSchoolRequest {
+class fetchSchoolRequest {
   String? inputString;
   String? cityId;
 
-  FetchSchoolRequest({this.inputString, this.cityId});
+  fetchSchoolRequest({this.inputString, this.cityId});
 
-  FetchSchoolRequest.fromJson(Map<String, dynamic> json) {
+  fetchSchoolRequest.fromJson(Map<String, dynamic> json) {
     inputString = json['inputString'];
     cityId = json['cityId'];
   }

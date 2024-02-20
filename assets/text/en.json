@@ -54,5 +54,9 @@
   "label_why_upload_desc": "Please upload your image for better identification on the leaderboard and social media. Your image will enhance your presence and ensure clear recognition.",
   "label_skip": "Skip",
   "label_save": "Save",
-  "label_olympaid_date": "Olympiad Date:"
+  "label_olympaid_date": "Olympiad Date:",
+  "label_payment_secured": "Your payment is encrypted and secured",
+  "label_transaction_amount": "Transaction Amount",
+  "label_gst": "GST",
+  "label_pay": "Pay"
 }

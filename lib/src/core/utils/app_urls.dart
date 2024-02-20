@@ -47,7 +47,7 @@ class AppUrls {
   static const String userAllQuizOlympiad = "/quiz/user";
 
   static String bookingQuizSlot(String id) => "/quiz/user/slots/$id";
-  static const String schoollist = "/fetchschools";
+  static const String schoollist = "/fetchSchools";
 
   static String userGrade(String schoolId) => "/school/$schoolId/usergrades";
   static const String profilephotoUpdate = "/student/image";

@@ -6,6 +6,7 @@ import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 import 'package:stoxhero/src/base/screen_utils/flutter_screenutil.dart';
 import 'dart:math' as math;
 import '../../../app/app.dart';
+import '../../../utils/common_utils.dart';
 
 class PaymentDetailView extends StatefulWidget {
   final MyActiveOlympiadList? myOlympiad;
@@ -207,7 +208,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
           child: Column(
             children: [
               Text(
-                "Your payment is encrypted and secured",
+                string("label_payment_secured"),
                 style: AppStyles.tsBlackRegular16,
                 textAlign: TextAlign.center,
               ),
@@ -220,7 +221,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Transaction Amount",
+                      string("label_transaction_amount"),
                       style: Theme.of(context).textTheme.tsGreyRegular16,
                     ),
                     Text(
@@ -236,7 +237,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "GST",
+                      string("label_gst"),
                       style: Theme.of(context).textTheme.tsGreyRegular16,
                     ),
                     Text(
@@ -253,7 +254,7 @@ class _PaymentDetailViewState extends State<PaymentDetailView>
                       ? AppColors.darkGreen
                       : AppColors.lightGreen,
                   isLoading: controller.isLoadingStatus,
-                  label: "Pay ",
+                  label: string("label_pay"),
                   onPressed: () {
                     startPaymentTransaction(context);
                   },
