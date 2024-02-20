@@ -29,11 +29,11 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
         DateTime.parse(controller.userDetails.value.schoolDetails?.dob ?? ''));
     controller.stateTextController.text =
         controller.userDetails.value.schoolDetails?.state ?? '';
-    controller.cityTextController.text =
+    controller.selectedCityForState.value =
         controller.userDetails.value.schoolDetails?.city?.name ?? '';
-    controller.schoolNameTextController.text =
+    controller.selectedSchoolName.value =
         controller.userDetails.value.schoolDetails?.school?.schoolName ?? '';
-    controller.grade.value =
+    controller.selectedClass.value =
         controller.userDetails.value.schoolDetails?.grade?.grade ?? '';
     controller.section.value =
         controller.userDetails.value.schoolDetails?.section ?? '';
@@ -193,10 +193,10 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                           ),
                         ),
                         onChanged: (String? newValue) async {
-                          authController.selectedState(newValue ?? '');
+                          controller.stateTextController.text = newValue ?? '';
                           context.loaderOverlay.show();
                           await authController.getActiveCities(
-                              authController.selectedState.value);
+                              controller.stateTextController.text);
                           context.loaderOverlay.hide();
                         },
                         selectedItem: controller.stateTextController.text,
@@ -264,8 +264,8 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                                     '', // Provide a default value if not found
                               ),
                             );
-                            authController
-                                .selectedCity(selectedCityObject.sId ?? '');
+                            controller.cityTextController.text =
+                                selectedCityObject.sId ?? '';
                             authController.selectedCityForState(
                                 selectedCityObject.name ?? '');
                             authController.fetchSchool
@@ -274,7 +274,7 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                             await authController.fetchSchoolListDetails();
                             context.loaderOverlay.hide();
                           },
-                          selectedItem: controller.cityTextController.text,
+                          selectedItem: controller.selectedCityForState.value,
                         ),
                       ),
                     ),
@@ -342,17 +342,16 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                                 schoolString: '',
                               ),
                             );
-                            authController
-                                .selectedSchoolSid(selectedSchool.sId ?? '');
-                            authController.selectedSchoolName(
+                            controller.schoolNameTextController.text =
+                                selectedSchool.sId ?? '';
+                            controller.selectedSchoolName(
                                 selectedSchool.schoolString ?? '');
                             await authController
                                 .fetchUserGradeAndSectionDetails(
-                                    authController.selectedSchoolSid.value);
+                                    controller.schoolNameTextController.text);
                             context.loaderOverlay.hide();
                           },
-                          selectedItem:
-                              controller.schoolNameTextController.text,
+                          selectedItem: controller.selectedSchoolName.value,
                         ),
                       ),
                     ),
@@ -419,12 +418,12 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                                 sId: '',
                               ),
                             );
-                            authController.selectedClass(
+                            controller.selectedClass(
                                 selectedGradeObject.grade?.grade ?? "");
-                            authController.selectedClassId(
-                                selectedGradeObject.grade?.sId ?? '');
+                            controller.grade.value =
+                                selectedGradeObject.grade?.sId ?? '';
                           },
-                          selectedItem: controller.grade.value,
+                          selectedItem: controller.selectedClass.value,
                         ),
                       ),
                     ),
@@ -489,7 +488,7 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                             ),
                           ),
                           onChanged: (String? newValue) {
-                            authController.selectedSection(newValue ?? '');
+                            controller.section.value = newValue ?? '';
                           },
                           selectedItem: controller.section.value,
                         ),
