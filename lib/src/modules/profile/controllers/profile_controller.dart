@@ -33,22 +33,28 @@ class ProfileBinding implements Bindings {
 
 class ProfileController extends BaseController<ProfileRepository> {
   final userDetails = LoginDetailsResponse().obs;
+
   LoginDetailsResponse get userDetailsData => userDetails.value;
   final isLoading = false.obs;
+
   bool get isLoadingStatus => isLoading.value;
 
   final isProfileLoading = false.obs;
+
   bool get isProfileLoadingStatus => isProfileLoading.value;
 
   final isBankLoading = false.obs;
+
   bool get isBankLoadingStatus => isBankLoading.value;
 
   final isverifyKycLoading = false.obs;
+
   bool get isverifyKycLoadingStatus => isverifyKycLoading.value;
 
   bool get isKYCApproved => userDetails.value.kYCStatus == 'Approved';
 
   final isOTPGenerated = false.obs;
+
   bool get isOTPGeneratedStatus => isOTPGenerated.value;
 
   final isEditEnabled = false.obs;
@@ -441,36 +447,26 @@ class ProfileController extends BaseController<ProfileRepository> {
   // }
 
   Future saveUserProfileDetails() async {
-    if (profilePhotoFile.value?.path == null ||
-        profilePhotoFile.value!.name.isEmpty) {
-      isEditEnabled(true);
-      SnackbarHelper.showSnackbar('Select profile picture to continue!');
-      return;
-    }
+    // if (profilePhotoFile.value?.path == null ||
+    //     profilePhotoFile.value!.name.isEmpty) {
+    //   isEditEnabled(true);
+    //   SnackbarHelper.showSnackbar('Select profile picture to continue!');
+    //   return;
+    // }
 
     isProfileLoading(true);
     DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
     Map<String, dynamic> data = {
       "student_name": studentNameTextController.text,
       "parents_name": parentsNameTextController.text,
+      "dob": DateFormat('yyyy-MM-dd').format(date),
+      "state": stateTextController.text,
+      "city": cityTextController.text,
       "school": schoolNameTextController.text,
-      "first_name": firstNameTextController.text,
-      "last_name": lastNameTextController.text,
-      "email": emailTextController.text,
-      "mobile": mobileTextController.text,
-      "gender": genderValue,
       "grade": grade.value,
       'section': section.value,
-      "dob": DateFormat('yyyy-MM-dd').format(date),
-      "address": addressTextController.text,
-      "city": cityTextController.text,
-      "pincode": pincodeTextController.text,
-      "state": stateTextController.text,
-      "country": countryTextController.text,
       'profilePhoto':
           await convertPlatformFileToMultipartFile(profilePhotoFile.value),
-      'employeeid': userNameTextController.text,
-      'whatsApp_number': whatsAppTextController.text,
     };
 
     try {
@@ -489,7 +485,6 @@ class ProfileController extends BaseController<ProfileRepository> {
         SnackbarHelper.showSnackbar(response.error?.message);
       }
     } catch (e) {
-      log('Save KYC: ${e.toString()}');
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isProfileLoading(false);
@@ -605,28 +600,28 @@ class ProfileController extends BaseController<ProfileRepository> {
     isBankLoading(false);
   }
 
-  // Future verifyKYCGenrateOtpDetails() async {
-  //   Map<String, dynamic> data = {
-  //     "aadhaarNumber": kycAadhaarNumberTextController.text,
-  //   };
-  //   try {
-  //     final RepoResponse<VerifyKYCGenrateOTPResponse> response =
-  //         await repository.verifyKYCOtpGenrate(data);
-  //     if (response.data != null) {
-  //       // await Get.find<AuthController>().getUserDetails(navigate: false);
-  //       verifyKYCGenrateOtpDataList(response.data?.data);
+// Future verifyKYCGenrateOtpDetails() async {
+//   Map<String, dynamic> data = {
+//     "aadhaarNumber": kycAadhaarNumberTextController.text,
+//   };
+//   try {
+//     final RepoResponse<VerifyKYCGenrateOTPResponse> response =
+//         await repository.verifyKYCOtpGenrate(data);
+//     if (response.data != null) {
+//       // await Get.find<AuthController>().getUserDetails(navigate: false);
+//       verifyKYCGenrateOtpDataList(response.data?.data);
 
-  //       if (response.data?.status == "success") {
-  //         SnackbarHelper.showSnackbar("Aadhaar Otp Sent");
-  //       }
-  //     } else {
-  //       SnackbarHelper.showSnackbar(response.error?.message);
-  //     }
-  //   } catch (e) {
-  //     log('Save: ${e.toString()}');
-  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-  //   }
-  // }
+//       if (response.data?.status == "success") {
+//         SnackbarHelper.showSnackbar("Aadhaar Otp Sent");
+//       }
+//     } else {
+//       SnackbarHelper.showSnackbar(response.error?.message);
+//     }
+//   } catch (e) {
+//     log('Save: ${e.toString()}');
+//     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+//   }
+// }
 
 //   Future verifyKYCVerifyOtpDetails() async {
 //     isverifyKycLoading(true);
