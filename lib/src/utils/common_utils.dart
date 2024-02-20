@@ -41,8 +41,8 @@ Widget emptyOlympiadText(String? txt) {
     style: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      color: AppColors
-          .whiteScreenSubHeadingColors, // Change the text color as needed
+      color: Get.isDarkMode ? AppColors.white : AppColors.black,
+      // Change the text color as needed
     ),
     textAlign: TextAlign.center,
   );
