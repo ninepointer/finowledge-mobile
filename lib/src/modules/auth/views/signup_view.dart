@@ -394,8 +394,10 @@ class _SignupViewState extends State<SignupView> {
                                       dropdownSearchDecoration: InputDecoration(
                                         // labelText: string("label_choose_city"),
                                         // hintText: string("label_search_cit_here"),
-                                        labelText: "Choose Grade",
-                                        hintText: "Choose Grade",
+                                        labelText: string(
+                                            "label_choose_grade_sign_up"),
+                                        hintText:
+                                            string("hint_choose_grade_sign_up"),
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 16, vertical: 8),
                                         isDense: true,
@@ -479,8 +481,10 @@ class _SignupViewState extends State<SignupView> {
                                       dropdownSearchDecoration: InputDecoration(
                                         // labelText: string("label_choose_city"),
                                         // hintText: string("label_search_cit_here"),
-                                        labelText: "Choose Section",
-                                        hintText: "Choose Section",
+                                        labelText: string(
+                                            "label_choose_section_sign_up"),
+                                        hintText: string(
+                                            "hint_choose_section_sign_up"),
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 16, vertical: 8),
                                         isDense: true,

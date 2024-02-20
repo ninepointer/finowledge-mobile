@@ -85,7 +85,7 @@ class _DashboardViewState extends State<DashboardView>
                                 ),
                                 Tab(
                                   child: Text(
-                                    string("label_my_olympaid"),
+                                    string("label_my_olympiad"),
                                     style:
                                         Theme.of(context).textTheme.tsRegular14,
                                     textAlign: TextAlign.center,

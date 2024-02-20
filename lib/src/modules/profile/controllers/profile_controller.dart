@@ -440,7 +440,7 @@ class ProfileController extends BaseController<ProfileRepository> {
   Future saveUserProfileDetails() async {
     if (profilePhotoFile.value?.path == null ||
         profilePhotoFile.value!.name.isEmpty) {
-      isEditEnabled(false);
+      isEditEnabled(true);
       SnackbarHelper.showSnackbar('Select profile picture to continue!');
       return;
     }
@@ -475,6 +475,7 @@ class ProfileController extends BaseController<ProfileRepository> {
           await repository.updateStudensDetails(data);
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
+          isEditEnabled(false);
           final loginDetailsResponse =
               await Get.find<AuthRepository>().loginDetails();
           if (loginDetailsResponse.data != null) {

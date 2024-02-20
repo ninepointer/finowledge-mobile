@@ -44,19 +44,19 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
     return Obx(
       () => Scaffold(
         appBar: AppBar(
-          title: Text('My Profile'),
+          title: Text(string("label_my_profile")),
           actions: [
             IconButton(
               splashRadius: 24,
-              icon: controller.isEditEnabled.value
+              icon: controller.isEditEnabled.value == true
                   ? Icon(Icons.save)
                   : Icon(Icons.edit),
               onPressed: () {
-                controller.isEditEnabled.toggle();
                 if (controller.isEditEnabled.value == true) {
                   controller.saveUserProfileDetails();
-
                   FocusScope.of(context).unfocus();
+                } else {
+                  controller.isEditEnabled.toggle();
                 }
               },
             ),
@@ -81,7 +81,7 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Personal Information',
+                      string("label_personal_information"),
                       textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.tsMedium16,
                     ),
@@ -375,8 +375,9 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                             dropdownSearchDecoration: InputDecoration(
                               // labelText: string("label_choose_city"),
                               // hintText: string("label_search_cit_here"),
-                              labelText: "Choose Grade",
-                              hintText: "Choose Grade",
+                              labelText:
+                                  string("label_choose_grade_my_profile"),
+                              hintText: string("hint_choose_grade_my_profile"),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 8),
                               isDense: true,
@@ -450,8 +451,10 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                             dropdownSearchDecoration: InputDecoration(
                               // labelText: string("label_choose_city"),
                               // hintText: string("label_search_cit_here"),
-                              labelText: "Choose Section",
-                              hintText: "Choose Section",
+                              labelText:
+                                  string("label_choose_section_my_profile"),
+                              hintText:
+                                  string("hint_choose_section_my_profile"),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 8),
                               isDense: true,
@@ -496,13 +499,13 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                       height: MediaQuery.of(context).size.width * 0.0306,
                     ),
                     Text(
-                      'Profile Photo',
+                      string("label_profile_photo"),
                       style: Theme.of(context).textTheme.tsGreyMedium12,
                     ),
                     SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0102),
                     CommonImageUpload(
-                      label: 'Profile Photo',
+                      label: string("label_profile_photo"),
                       file: controller.profilePhotoFile.value,
                       selectFile: () => controller.filePicker(
                         KycDocumentType.profilePhoto,
