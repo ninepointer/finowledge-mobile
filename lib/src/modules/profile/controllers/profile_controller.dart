@@ -109,6 +109,7 @@ class ProfileController extends BaseController<ProfileRepository> {
   final selectedCityForState = ''.obs;
   final selectedSchoolName = ''.obs;
   final selectedClass = ''.obs;
+  final selectedState = ''.obs;
   final Rx<PlatformFile?> aadhaarCardFrontFile =
       PlatformFile(name: '', size: 0).obs;
   final Rx<PlatformFile?> aadhaarCardBackFile =
@@ -166,7 +167,7 @@ class ProfileController extends BaseController<ProfileRepository> {
 
   void loadData() {
     loadProfileDetails();
-    loadBankDetails();
+    // loadBankDetails();
     isEditEnabled(false);
   }
 
