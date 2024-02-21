@@ -5,7 +5,9 @@ import 'package:stoxhero/src/app/app.dart';
 
 class OptionsForQuizPracticsWidget extends StatelessWidget {
   String options;
-  OptionsForQuizPracticsWidget({Key? key, required this.options})
+  String optionsTask;
+  OptionsForQuizPracticsWidget(
+      {Key? key, required this.options, required this.optionsTask})
       : super(key: key);
 
   @override
@@ -27,7 +29,13 @@ class OptionsForQuizPracticsWidget extends StatelessWidget {
                     options,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Radio(value: options, groupValue: 2, onChanged: (value) {})
+                  Radio(value: options, groupValue: 2, onChanged: (value) {}),
+                  Flexible(
+                    child: Text(
+                      optionsTask,
+                      style: AppStyles.tsBlackRegular14,
+                    ),
+                  )
                 ],
               ),
             ),

@@ -56,16 +56,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               SizedBox(height: 20.0),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'The quiz consists of a total of 20 questions.',
+                      '- The quiz consists of a total of 20 questions.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -76,16 +76,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               Row(
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'Each question has 4 options out of which only one is correct.',
+                      '- Each question has 4 options out of which only one is correct.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -95,16 +95,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'You have to finish the test in 12 minutes.',
+                      '- You have to finish the test in 12 minutes.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -114,16 +114,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'You will be awarded 2 marks for each correct answer and 0.5 will be deducted for each wrong answer.',
+                      '- You will be awarded 2 marks for each correct answer and 0.5 will be deducted for each wrong answer.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -133,16 +133,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'There is no negative marking for the questions that you have not attempted.',
+                      '- There is no negative marking for the questions that you have not attempted.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -152,16 +152,16 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 6,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   size: 6,
+                  // ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
                   Flexible(
                     child: Text(
-                      'You can write this quiz only once. Make sure that you complete the test before you submit the test and/or close the app.',
+                      '- You can write this quiz only once. Make sure that you complete the test before you submit the test and/or close the app.',
                       style: Get.isDarkMode
                           ? AppStyles.tsWhiteRegular16
                           : AppStyles.tsBlackRegular16,
@@ -171,7 +171,7 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               ),
               SizedBox(height: 20.0),
               Text(
-                'I have read all the instructions carefully and have understood them. I agree not to cheat or use unfair means in this examinations. I understand that using unfair means of any sort for my or someone else\'s advantage will lead to my immediate disqualification. The decision of Finowledge.com will be final in these matters and cannot be appealed.',
+                '- I have read all the instructions carefully and have understood them. I agree not to cheat or use unfair means in this examinations. I understand that using unfair means of any sort for my or someone else\'s advantage will lead to my immediate disqualification. The decision of Finowledge.com will be final in these matters and cannot be appealed.',
                 style: Get.isDarkMode
                     ? AppStyles.tsWhiteRegular16
                     : AppStyles.tsBlackRegular16,
@@ -205,7 +205,7 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                     "Agree and Continue",
                     style: Get.isDarkMode
                         ? AppStyles.tsWhiteMedium14
-                        : AppStyles.tsBlackMedium14,
+                        : AppStyles.tsWhiteMedium14,
                   ),
                 ),
               ),

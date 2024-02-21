@@ -39,7 +39,7 @@ class CompletedQuizPage extends StatelessWidget {
                                   "Your score",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color(0xffA42fC1),
+                                    color: AppColors.lightGreen,
                                   ),
                                 ),
                                 RichText(
@@ -277,7 +277,7 @@ class CompletedQuizPage extends StatelessWidget {
                     "Leaderboard",
                     style: Get.isDarkMode
                         ? AppStyles.tsWhiteMedium14
-                        : AppStyles.tsBlackMedium14,
+                        : AppStyles.tsWhiteMedium14,
                   ),
                 ),
               ),
@@ -299,7 +299,7 @@ class CompletedQuizPage extends StatelessWidget {
                     "Home",
                     style: Get.isDarkMode
                         ? AppStyles.tsWhiteMedium14
-                        : AppStyles.tsBlackMedium14,
+                        : AppStyles.tsWhiteMedium14,
                   ),
                 ),
               ),
