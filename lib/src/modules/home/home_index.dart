@@ -13,3 +13,5 @@ export 'views/activeOlympiadView.dart';
 export 'views/practice_test_for_quiz.dart';
 export 'widgets/options_for_quiz_practice.dart';
 export 'views/completed_quiz_page.dart';
+export 'views/disclaimer_page.dart';
+export 'views/practice_quiz_homepage.dart';

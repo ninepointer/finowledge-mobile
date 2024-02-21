@@ -122,8 +122,9 @@ class _DashboardViewState extends State<DashboardView>
                                 ),
                               );
                             } else {
-                              return comingSoonViewWithLottie(
-                                  string("label_coming_soon_text"));
+                              // return comingSoonViewWithLottie(
+                              //     string("label_coming_soon_text"));
+                              return PracticeQuizHomeView();
                             }
                           }),
                         ],

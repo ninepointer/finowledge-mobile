@@ -8,22 +8,6 @@ class PracticeTestForQuizView extends StatefulWidget {
 }
 
 class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
-  // Dummy list of quiz questions
-  List<String> questions = [
-    "What is the capital of France?",
-    "What is the largest mammal?",
-    "What is 2 + 2?",
-  ];
-
-  // Dummy list of answer choices
-  List<List<String>> choices = [
-    ["Paris", "London", "Berlin", "Rome"],
-    ["Elephant", "Blue Whale", "Giraffe", "Horse"],
-    ["3", "4", "5", "6"],
-  ];
-
-  int currentQuestionIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

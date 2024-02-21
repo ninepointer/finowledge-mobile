@@ -169,31 +169,31 @@ class ActiveOlympiadCard extends GetView<FinowledgeController> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0204,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.to(() => PracticeTestForQuizView());
-                            },
-                            child: Text('Practice Your Test'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.width * 0.0204,
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       child: ElevatedButton(
+                    //         onPressed: () {
+                    //           Get.to(() => PracticeTestForQuizView());
+                    //         },
+                    //         child: Text('Practice Your Test'),
+                    //         style: ElevatedButton.styleFrom(
+                    //           primary: Colors.green,
+                    //           padding: EdgeInsets.symmetric(
+                    //             horizontal: 16,
+                    //             vertical: 12,
+                    //           ),
+                    //           shape: RoundedRectangleBorder(
+                    //             borderRadius: BorderRadius.circular(16),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // )
                   ],
                 ),
               ),
