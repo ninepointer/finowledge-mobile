@@ -12,3 +12,4 @@ export 'views/upcomingOlympiadView.dart';
 export 'views/activeOlympiadView.dart';
 export 'views/practice_test_for_quiz.dart';
 export 'widgets/options_for_quiz_practice.dart';
+export 'views/completed_quiz_page.dart';

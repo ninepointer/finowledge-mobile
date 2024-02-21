@@ -30,35 +30,8 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
       appBar: AppBar(
         title: Text('Practice Your Test'),
       ),
-      //  body:
-      // Padding(
-      //   padding: EdgeInsets.all(20.0),
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.stretch,
-      //     children: [
-      //       Text(
-      //         questions[currentQuestionIndex],
-      //         style: TextStyle(fontSize: 24.0),
-      //       ),
-      //       SizedBox(height: 20.0),
-      //       // Build answer choices
-      //       ...choices[currentQuestionIndex].map((choice) {
-      //         return ElevatedButton(
-      //           onPressed: () {
-      //             // Handle answer selection here
-      //             // For simplicity, just move to the next question
-      //             setState(() {
-      //               currentQuestionIndex++;
-      //             });
-      //           },
-      //           child: Text(choice),
-      //         );
-      //       }).toList(),
-      //     ],
-      //   ),
-      // ),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.0408),
         child: Column(children: [
           SizedBox(
             height: 321,
@@ -74,7 +47,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                 ),
                 Positioned(
                   bottom: 20,
-                  left: 15,
+                  left: 6,
                   child: Container(
                     height: 170,
                     width: 350,
@@ -93,35 +66,38 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                       padding: EdgeInsets.symmetric(horizontal: 18),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "05",
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                "07",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
+                          SizedBox(
+                            height: 20,
                           ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       "05",
+                          //       style: TextStyle(
+                          //         color: Colors.green,
+                          //         fontSize: 20,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       "07",
+                          //       style: TextStyle(
+                          //         color: Colors.red,
+                          //         fontSize: 20,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           Center(
                             child: Text(
-                              "Question 3/10",
+                              "Question 1/10",
                               style: TextStyle(color: Color(0xffA42FC1)),
                             ),
                           ),
                           SizedBox(
                             height: 25,
                           ),
-                          Text("What is computer"),
+                          Text("What is UPI?"),
                         ],
                       ),
                     ),
@@ -129,7 +105,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                 ),
                 Positioned(
                   bottom: 170,
-                  left: 150,
+                  left: 144,
                   child: CircleAvatar(
                     radius: 42,
                     backgroundColor: Colors.white,
@@ -150,34 +126,66 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
           SizedBox(
             height: 10,
           ),
-          OptionsForQuizPracticsWidget(options: "Option A"),
-          OptionsForQuizPracticsWidget(options: "Option B"),
-          OptionsForQuizPracticsWidget(options: "Option C"),
-          OptionsForQuizPracticsWidget(options: "Option D"),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0xffA42FC1),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                onPressed: () {},
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Next",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )),
-          ),
+          OptionsForQuizPracticsWidget(options: "A"),
+          OptionsForQuizPracticsWidget(options: "B"),
+          OptionsForQuizPracticsWidget(options: "C"),
+          OptionsForQuizPracticsWidget(options: "D"),
+
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 18),
+          //   child: ElevatedButton(
+          //       style: ElevatedButton.styleFrom(
+          //         primary: Color(0xffA42FC1),
+          //         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         elevation: 5,
+          //       ),
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //             context,
+          //             MaterialPageRoute(
+          //                 builder: (context) => CompletedQuizPage()));
+          //       },
+          //       child: Container(
+          //         alignment: Alignment.center,
+          //         child: Text(
+          //           "Next",
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 18,
+          //               fontWeight: FontWeight.bold),
+          //         ),
+          //       )),
+          // ),
         ]),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Get.isDarkMode
+            ? AppColors.darkCardBackgroundColor
+            : AppColors.lightCardBackgroundColor,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CompletedQuizPage()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xffA42fC1),
+                padding: EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Text("Next"),
+            ),
+          ),
+        ),
       ),
     );
   }

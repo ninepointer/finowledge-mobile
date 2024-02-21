@@ -12,8 +12,8 @@ class OptionsForQuizPracticsWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 50,
-          width: 240,
+          // height: 50,
+          width: MediaQuery.of(context).size.width - 32,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               border: Border.all(width: 3, color: Color(0xffA42FC1))),
