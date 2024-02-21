@@ -35,9 +35,10 @@ class AuthController extends BaseController<AuthRepository> {
   final token = ''.obs;
   final inviteCode = CampaignCodeData().obs;
   final activeCities = <ActiveCitiesList>[].obs;
-  final fetchschool = <FetchSchoolList>[].obs;
+  final fetchSchool = <fetchSchoolList>[].obs;
   final fetchUserGrade = <SchoolUserGradeAndSectionList>[].obs;
   final fetchUserSection = <SchoolUserGradeAndSectionList>[].obs;
+  final selectedSchoolSid = ''.obs;
   final selectedSchoolName = ''.obs;
   final campaignCode = ''.obs;
 
@@ -47,8 +48,8 @@ class AuthController extends BaseController<AuthRepository> {
   final selectedSection = ''.obs;
 
   //List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
-  String selectedCity = '';
-  String selectedCityForState = "";
+  final selectedCity = ''.obs;
+  final selectedCityForState = "".obs;
 
   List<String> states = [
     'Andaman & Nicobar',
@@ -87,7 +88,7 @@ class AuthController extends BaseController<AuthRepository> {
     "Uttarakhand",
     "West Bengal"
   ];
-  String selectedState = "";
+  final selectedState = "".obs;
   void verifyOtp() => isSignup.value ? verifySignupOtp() : verifySigninOtp();
 
   void showDateRangePicker(BuildContext context) async {
@@ -101,6 +102,7 @@ class AuthController extends BaseController<AuthRepository> {
     if (pickedDate != null) {
       String date = DateFormat("dd-MM-yyyy").format(pickedDate);
       dobTextController.text = date;
+      FocusScope.of(context).requestFocus(FocusNode());
     }
   }
 
@@ -165,6 +167,8 @@ class AuthController extends BaseController<AuthRepository> {
           getDefaultInviteCode();
           Get.toNamed(AppRoutes.signup);
         }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
       }
     } catch (e) {
       log(e.toString());
@@ -223,11 +227,11 @@ class AuthController extends BaseController<AuthRepository> {
       parentName: parentNameTextController.text,
       mobile: mobileTextController.text,
       dob: DateFormat('yyyy-MM-dd').format(date),
-      school: selectedSchoolName.value,
+      school: selectedSchoolSid.value,
       grade: selectedClassId.value,
       section: selectedSection.value,
-      city: selectedCity,
-      state: selectedState,
+      city: selectedCity.value,
+      state: selectedState.value,
 
       // referrerCode: hasCampaignCode.value
       //     ? campaignCode.value
@@ -259,6 +263,7 @@ class AuthController extends BaseController<AuthRepository> {
 
   Future getActiveCities(String state) async {
     isLoading(true);
+
     try {
       final RepoResponse<ActiveCitiesResponse> response =
           await repository.getActiveCities(state);
@@ -282,8 +287,8 @@ class AuthController extends BaseController<AuthRepository> {
       parentsName: parentNameTextController.text,
       grade: selectedClassId.value,
       section: selectedSection.value,
-      school: selectedSchoolName.value,
-      city: selectedCity,
+      school: selectedSchoolSid.value,
+      city: selectedCity.value,
       mobile: mobileTextController.text,
       mobileOtp: otpTextController.text,
       dob: DateFormat('yyyy-MM-dd').format(date),
@@ -390,26 +395,25 @@ class AuthController extends BaseController<AuthRepository> {
 
     FocusScope.of(Get.context!).unfocus();
 
-    FetchSchoolRequest data = FetchSchoolRequest(
-        inputString: selectedSchoolName.value, cityId: selectedCity);
+    fetchSchoolRequest data = fetchSchoolRequest(
+        inputString: selectedSchoolSid.value, cityId: selectedCity.value);
+    //
 
     try {
-      //  Future<RepoResponse<FetchSchoolResponse>> response =
+      //  Future<RepoResponse<fetchSchoolResponse>> response =
       //     await repository.fetchSchoolList(
       //   data.toJson(),
       // );
-      final RepoResponse<FetchSchoolResponse> response =
+      final RepoResponse<fetchSchoolResponse> response =
           await repository.fetchSchoolList(
         data.toJson(),
       );
-
-      if (response.data != null) {
-        // Assuming fetchschool is a function that handles a list of FetchSchoolResponse
-        fetchschool(response.data?.data ?? []);
-      } else {
-        // Handle case when response.data is null or empty
-        // For example, show a message indicating no schools were found
+      if (response.data?.status == "success" && response.data?.data == null) {
+        fetchSchoolListDetails();
       }
+      if (response.data != null) {
+        fetchSchool(response.data?.data ?? []);
+      } else {}
     } catch (e) {
       log(e.toString());
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
@@ -458,8 +462,11 @@ class AuthController extends BaseController<AuthRepository> {
   void clearForm() {
     fullNameTextController.clear();
     parentNameTextController.clear();
-    schoolNameTextController.clear();
-    mobileTextController.clear();
-    otpTextController.clear();
+    selectedClass.value = '';
+    selectedSection.value = '';
+    selectedSchoolName.value = '';
+    selectedCityForState.value = '';
+    selectedState.value = '';
+    dobTextController.clear();
   }
 }

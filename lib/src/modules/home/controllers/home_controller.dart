@@ -157,6 +157,14 @@ class HomeController extends BaseController<DashboardRepository> {
     isLoading(false);
   }
 
+  int? totalSpotLefts() {
+    int? spots = 0;
+    for (TimeSlotForQuizList spot in timeSlotForQuizRegistrationList) {
+      spots = (spots ?? 0) + (spot.spotLeft ?? 0);
+    }
+    return spots;
+  }
+
   Future getTimeSlotForQuizRegistrationDetails(String id) async {
     isLoading(true);
     try {

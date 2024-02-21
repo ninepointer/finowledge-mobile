@@ -9,7 +9,7 @@ class AppUrls {
   static const String referralWebUrl = 'https://www.stoxhero.com/?referral=';
 
   static const String paymentCallBackUrl =
-      "https://stoxhero.com/api/v1/payment/callback";
+      "http://43.204.7.180/api/v1/payment/callback";
 
   static const String tenxYoutubeVideoLink =
       'https://www.youtube.com/watch?v=a3_bmjv5tXQ';
@@ -25,6 +25,7 @@ class AppUrls {
   static const String resendSignupOtp = "/resendotp";
   static const String loginDetails = "/loginDetail";
   static const String updateUserDetails = "/userdetail/me";
+  static const String updateStudentDetails = "/student/me";
   static const String readSetting = "/readsetting";
   static const String referralsActive = "/referrals/active";
   static const String referralsLeaderboard = "/referrals/leaderboard";
@@ -47,7 +48,7 @@ class AppUrls {
   static const String userAllQuizOlympiad = "/quiz/user";
 
   static String bookingQuizSlot(String id) => "/quiz/user/slots/$id";
-  static const String schoollist = "/fetchschools";
+  static const String schoollist = "/fetchSchools";
 
   static String userGrade(String schoolId) => "/school/$schoolId/usergrades";
   static const String profilephotoUpdate = "/student/image";

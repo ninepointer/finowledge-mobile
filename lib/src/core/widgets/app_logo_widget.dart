@@ -27,7 +27,7 @@ class AppLogoWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 1.0),
                 child: Image.asset(
                   Get.isDarkMode
-                      ? AppImages.lightAppName
+                      ? AppImages.finowedgeLogo
                       : AppImages.finowedgeLogo,
                   //height: logoSize ?? 0.4.sh,
                   width: logoSize ?? 0.4.sw,

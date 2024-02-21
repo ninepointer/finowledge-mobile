@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stoxhero/src/app/app.dart';
 
 import '../../../utils/common_utils.dart';
+import '../../payment_details/views/PaymentDetailView.dart';
 
 class RegistrationView extends StatefulWidget {
   final MyActiveOlympiadList? myOlympiad;
@@ -46,7 +47,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                   children: [
                     Text(
                       string("label_please_select_your_test_slot"),
-                      style: AppStyles.tsBlackMedium20,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteMedium20
+                          : AppStyles.tsBlackMedium20,
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -59,7 +62,9 @@ class _RegistrationViewState extends State<RegistrationView> {
                   children: [
                     Text(
                       "${string("label_test_date")} ${FormatHelper.formatDate(widget.myOlympiad?.startDateTime)}",
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -126,7 +131,9 @@ class _RegistrationViewState extends State<RegistrationView> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.lightCardBackgroundColor,
+        color: Get.isDarkMode
+            ? AppColors.darkCardBackgroundColor
+            : AppColors.lightCardBackgroundColor,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           width: double.infinity,
@@ -141,32 +148,44 @@ class _RegistrationViewState extends State<RegistrationView> {
               } else {
                 if (controller.userDetails.value.schoolDetails?.profilePhoto !=
                     null) {
-                  // if (widget.myOlympiad?.entryFee == 0) {
-                  await controller.getFinalRegistrationPageDetails(
-                      controller.timeSlotForQuizRegistrationList[selectedIndex]
-                              .slotId ??
-                          '',
-                      widget.myOlympiad?.sId ?? '');
+                  if (widget.myOlympiad?.entryFee == 0) {
+                    await controller.getFinalRegistrationPageDetails(
+                        controller
+                                .timeSlotForQuizRegistrationList[selectedIndex]
+                                .slotId ??
+                            '',
+                        widget.myOlympiad?.sId ?? '');
 
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Text(
-                            "${controller.registrationFinalPageData.value.message}"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              controller.getUserAllOlympiadDetails();
-                              Get.to(() => HomeView()); // To close the dialog
-                            },
-                            child: Text("Close"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                  //}
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Text(
+                              "${controller.registrationFinalPageData.value.message}"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                controller.getUserAllOlympiadDetails();
+                                Get.to(() => HomeView()); // To close the dialog
+                              },
+                              child: Text("Close"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    BottomSheetHelper.openBottomSheet(
+                      context: context,
+                      child: PaymentDetailView(
+                        myOlympiad: widget.myOlympiad,
+                        slotId: controller
+                                .timeSlotForQuizRegistrationList[selectedIndex]
+                                .slotId ??
+                            '',
+                      ),
+                    );
+                  }
                 } else {
                   Get.to(
                     () => UploadProfileImageView(
@@ -185,7 +204,10 @@ class _RegistrationViewState extends State<RegistrationView> {
                 borderRadius: BorderRadius.circular(10.0), // Set border radius
               ),
             ),
-            child: Text(string("label_next")),
+            child: Text(
+              string("label_next"),
+              style: AppStyles.tsWhiteMedium14,
+            ),
           ),
         ),
       ),

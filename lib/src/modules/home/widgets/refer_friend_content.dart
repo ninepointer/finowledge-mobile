@@ -169,7 +169,7 @@ class ReferFriendContent extends GetView<HomeController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text("Seat Left",
+                                        Text("Seats Left",
                                             style: AppStyles
                                                 .tsSecondaryRegular14
                                                 .copyWith(

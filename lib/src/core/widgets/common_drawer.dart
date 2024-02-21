@@ -86,11 +86,11 @@ class _CommonDrawerState extends State<CommonDrawer> {
                 ),
                 accountEmail: Row(
                   children: [
-                    Expanded(
-                      child: Text(
-                        'Referral Code: ${controller.userDetailsData.myReferralCode ?? '-'}',
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Text(
+                    //     'Referral Code: ${controller.userDetailsData.myReferralCode ?? '-'}',
+                    //   ),
+                    // ),
                   ],
                 ),
                 currentAccountPicture: Container(
@@ -101,7 +101,9 @@ class _CommonDrawerState extends State<CommonDrawer> {
                     ),
                   ),
                   child: ClipOval(
-                    child: controller.userDetails.value.profilePhoto == null
+                    child: controller.userDetails.value.schoolDetails
+                                ?.profilePhoto ==
+                            null
                         ? Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Image.asset(
@@ -114,7 +116,8 @@ class _CommonDrawerState extends State<CommonDrawer> {
                             ),
                           )
                         : Image.network(
-                            controller.userDetails.value.profilePhoto?.url ??
+                            controller.userDetails.value.schoolDetails
+                                    ?.profilePhoto ??
                                 '',
                           ),
                   ),

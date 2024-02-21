@@ -10,6 +10,16 @@ class OlympiadCard extends GetView<HomeController> {
     this.myOlympiad,
   }) : super(key: key);
 
+  int? totalSpotLefts() {
+    int? maxParticipants = myOlympiad?.maxParticipant ?? 0;
+    int? noOfSlots = myOlympiad?.noOfSlots ?? 0;
+    int? registrationsCount = myOlympiad?.registrationsCount ?? 0;
+
+    int? seatsLeft = maxParticipants * noOfSlots - registrationsCount;
+
+    return seatsLeft;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -59,26 +69,18 @@ class OlympiadCard extends GetView<HomeController> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Get.isDarkMode
+                              ? AppColors.white
+                              : AppColors.black,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-
-                    // /// Grade
-                    // Text(
-                    //   '${myOlympiad?.grade} ${string("label_grade")}',
-                    //   style: TextStyle(
-                    //     fontSize: 16,
-                    //     color: Colors.grey,
-                    //   ),
-                    // ),
 
                     /// Starts and Seats Left
                     Row(
                       children: [
                         Text(
-                          'Olympiad Date: ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
+                          '${string("label_olympaid_date")} ${FormatHelper.formatDateTimeToIST(myOlympiad?.startDateTime)}',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -86,17 +88,6 @@ class OlympiadCard extends GetView<HomeController> {
                         ),
                       ],
                     ),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       '${string("label_seats_left")} ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
-                    //       style: TextStyle(
-                    //         fontSize: 16,
-                    //         color: Colors.grey,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(height: 16),
                     // Action Buttons
                     Row(
@@ -104,7 +95,6 @@ class OlympiadCard extends GetView<HomeController> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            print("quiz id ${myOlympiad?.sId}");
                             controller.getTimeSlotForQuizRegistrationDetails(
                                 myOlympiad?.sId ?? '');
                             Get.to(
@@ -113,7 +103,10 @@ class OlympiadCard extends GetView<HomeController> {
                               ),
                             );
                           },
-                          child: Text(string("label_register")),
+                          child: Text(
+                            string("label_register"),
+                            style: AppStyles.tsWhiteRegular14,
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 AppColors.finowledgePurpleAccentColors,
@@ -144,7 +137,7 @@ class OlympiadCard extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Seats Left: ${(myOlympiad?.maxParticipant ?? 0) - (myOlympiad?.registrationsCount ?? 0)}',
+                'Seats Left: ${totalSpotLefts()}',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,

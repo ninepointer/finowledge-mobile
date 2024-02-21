@@ -64,7 +64,7 @@ class AuthRepository extends BaseRepository {
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
-  // Future<RepoResponse<List<FetchSchoolResponse>>> fetchSchoolList(
+  // Future<RepoResponse<List<fetchSchoolResponse>>> fetchSchoolList(
   //     Map<String, dynamic> data) async {
   //   String apiURL = AppUrls.schoollist;
   //   var response = await service.post(path: apiURL, data: data);
@@ -72,16 +72,16 @@ class AuthRepository extends BaseRepository {
   //       ? RepoResponse(error: response)
   //       : RepoResponse(
   //           data: (response as List<dynamic>)
-  //               .map((item) => FetchSchoolResponse.fromJson(item))
+  //               .map((item) => fetchSchoolResponse.fromJson(item))
   //               .toList());
   // }
-  Future<RepoResponse<FetchSchoolResponse>> fetchSchoolList(
+  Future<RepoResponse<fetchSchoolResponse>> fetchSchoolList(
       Map<String, dynamic> data) async {
     String apiURL = AppUrls.schoollist;
     var response = await service.post(path: apiURL, data: data);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: FetchSchoolResponse.fromJson(response));
+        : RepoResponse(data: fetchSchoolResponse.fromJson(response));
   }
 
   Future<RepoResponse<GenericResponse>> resendSignupOtp(

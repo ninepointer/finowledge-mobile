@@ -1,15 +1,15 @@
-class FetchSchoolResponse {
+class fetchSchoolResponse {
   String? status;
-  List<FetchSchoolList>? data;
+  List<fetchSchoolList>? data;
 
-  FetchSchoolResponse({this.status, this.data});
+  fetchSchoolResponse({this.status, this.data});
 
-  FetchSchoolResponse.fromJson(Map<String, dynamic> json) {
+  fetchSchoolResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <FetchSchoolList>[];
+      data = <fetchSchoolList>[];
       json['data'].forEach((v) {
-        data!.add(new FetchSchoolList.fromJson(v));
+        data!.add(new fetchSchoolList.fromJson(v));
       });
     }
   }
@@ -24,7 +24,7 @@ class FetchSchoolResponse {
   }
 }
 
-class FetchSchoolList {
+class fetchSchoolList {
   String? sId;
   String? schoolName;
   String? address;
@@ -32,7 +32,7 @@ class FetchSchoolList {
   String? state;
   String? schoolString;
 
-  FetchSchoolList(
+  fetchSchoolList(
       {this.sId,
       this.schoolName,
       this.address,
@@ -40,7 +40,7 @@ class FetchSchoolList {
       this.state,
       this.schoolString});
 
-  FetchSchoolList.fromJson(Map<String, dynamic> json) {
+  fetchSchoolList.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     schoolName = json['school_name'];
     address = json['address'];

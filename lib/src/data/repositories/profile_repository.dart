@@ -14,6 +14,15 @@ class ProfileRepository extends BaseRepository {
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
+  Future<RepoResponse<LoginDetailsResponse>> updateStudensDetails(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.updateStudentDetails;
+    var response = await service.patchAuthFormData(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: LoginDetailsResponse.fromJson(response));
+  }
+
   // Future<RepoResponse<VerifyKYCGenrateOTPResponse>> verifyKYCOtpGenrate(
   //     Map<String, dynamic> data) async {
   //   String apiURL = AppUrls.kycVerificationGenrateOtp;

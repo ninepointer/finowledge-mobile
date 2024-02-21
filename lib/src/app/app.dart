@@ -16,6 +16,7 @@ export '../data/data.dart';
 export '../modules/modules.dart';
 
 export 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -46,6 +47,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
     );
+
     return ScreenUtilInit(
       designSize: Size(446, 960),
       builder: () => GetMaterialApp(
