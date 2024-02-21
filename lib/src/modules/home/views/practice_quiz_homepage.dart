@@ -15,7 +15,20 @@ class _PracticeQuizHomeViewState extends State<PracticeQuizHomeView> {
     return SingleChildScrollView(
       child: Column(children: [
         SizedBox(
-          height: 20,
+          height: 10,
+        ),
+        Row(
+          children: [
+            Container(
+                margin: EdgeInsets.only(left: 8),
+                child: Text(
+                  "Open Quiz",
+                  style: AppStyles.tsBlackMedium14,
+                ))
+          ],
+        ),
+        SizedBox(
+          height: 10,
         ),
         Card(
           elevation: 3,
