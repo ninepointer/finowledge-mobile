@@ -26,7 +26,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                   height: 200,
                   width: 390,
                   decoration: BoxDecoration(
-                      color: Color(0xffA42fC1),
+                      color: AppColors.lightGreen,
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 Positioned(
@@ -43,7 +43,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                             offset: Offset(0, 1),
                             blurRadius: 5,
                             spreadRadius: 3,
-                            color: Color(0xffA42FC1).withOpacity(0.4),
+                            color: AppColors.lightGreen.withOpacity(0.4),
                           )
                         ]),
                     child: Padding(
@@ -75,7 +75,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                           Center(
                             child: Text(
                               "Question 1/10",
-                              style: TextStyle(color: Color(0xffA42FC1)),
+                              style: TextStyle(color: AppColors.lightGreen),
                             ),
                           ),
                           SizedBox(
@@ -97,7 +97,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                       child: Text(
                         "15",
                         style: TextStyle(
-                          color: Color(0xffA42FC1),
+                          color: AppColors.lightGreen,
                           fontSize: 25,
                         ),
                       ),
@@ -160,7 +160,7 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                         builder: (context) => CompletedQuizPage()));
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xffA42fC1),
+                primary: AppColors.lightGreen,
                 padding: EdgeInsets.all(16.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:stoxhero/src/app/app.dart';
 
 class OptionsForQuizPracticsWidget extends StatelessWidget {
   String options;
@@ -16,7 +17,7 @@ class OptionsForQuizPracticsWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 32,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(width: 3, color: Color(0xffA42FC1))),
+              border: Border.all(width: 3, color: AppColors.lightGreen)),
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 18),

@@ -18,7 +18,7 @@ class CompletedQuizPage extends StatelessWidget {
                   height: 340,
                   width: 410,
                   decoration: BoxDecoration(
-                      color: Color(0xffA42fC1),
+                      color: AppColors.lightGreen,
                       borderRadius: BorderRadius.circular(20)),
                   child: Center(
                     child: CircleAvatar(
@@ -47,14 +47,14 @@ class CompletedQuizPage extends StatelessWidget {
                                     text: '100',
                                     style: TextStyle(
                                         fontSize: 20,
-                                        color: Color(0xffA42fC1),
+                                        color: AppColors.lightGreen,
                                         fontWeight: FontWeight.bold),
                                     children: [
                                       TextSpan(
                                         text: 'pt',
                                         style: TextStyle(
                                           fontSize: 15,
-                                          color: Color(0xffA42fC1),
+                                          color: AppColors.lightGreen,
                                         ),
                                       ),
                                     ],
@@ -81,7 +81,7 @@ class CompletedQuizPage extends StatelessWidget {
                         BoxShadow(
                           blurRadius: 5,
                           spreadRadius: 3,
-                          color: Color(0xffA42fC1).withOpacity(0.7),
+                          color: AppColors.lightGreen.withOpacity(0.7),
                           offset: Offset(0, 1),
                         )
                       ],
@@ -106,7 +106,9 @@ class CompletedQuizPage extends StatelessWidget {
                                             width: 15,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen
+                                                // Color(0xffA42fC1)
+                                                ),
                                           ),
                                           SizedBox(
                                             width: 4,
@@ -116,7 +118,7 @@ class CompletedQuizPage extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 20,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen),
                                           )
                                         ],
                                       ),
@@ -135,7 +137,7 @@ class CompletedQuizPage extends StatelessWidget {
                                             width: 15,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen),
                                           ),
                                           SizedBox(
                                             width: 4,
@@ -145,7 +147,7 @@ class CompletedQuizPage extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 20,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen),
                                           )
                                         ],
                                       ),
@@ -172,7 +174,7 @@ class CompletedQuizPage extends StatelessWidget {
                                             width: 15,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen),
                                           ),
                                           SizedBox(
                                             width: 4,
@@ -201,7 +203,7 @@ class CompletedQuizPage extends StatelessWidget {
                                             width: 15,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color(0xffA42fC1)),
+                                                color: AppColors.lightGreen),
                                           ),
                                           SizedBox(
                                             width: 4,
@@ -245,7 +247,7 @@ class CompletedQuizPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xffA42fC1),
+                    primary: AppColors.lightGreen,
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -258,10 +260,11 @@ class CompletedQuizPage extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    // controller.selectedTabIndex.value == 3;
                     Get.to(() => HomeView());
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xffA42fC1),
+                    primary: AppColors.lightGreen,
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
