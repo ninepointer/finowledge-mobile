@@ -123,7 +123,12 @@ class CompletedQuizPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Text('Completion')
+                                    Text(
+                                      'Completion',
+                                      style: Get.isDarkMode
+                                          ? AppStyles.tsBlackRegular14
+                                          : AppStyles.tsBlackRegular14,
+                                    )
                                   ],
                                 ),
                                 Column(
@@ -152,7 +157,12 @@ class CompletedQuizPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Text('Total Question')
+                                    Text(
+                                      'Total Question',
+                                      style: Get.isDarkMode
+                                          ? AppStyles.tsBlackRegular14
+                                          : AppStyles.tsBlackRegular14,
+                                    )
                                   ],
                                 ),
                               ],
@@ -189,7 +199,12 @@ class CompletedQuizPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Text('Correct Question')
+                                    Text(
+                                      'Correct Question',
+                                      style: Get.isDarkMode
+                                          ? AppStyles.tsBlackRegular14
+                                          : AppStyles.tsBlackRegular14,
+                                    )
                                   ],
                                 ),
                                 Column(
@@ -218,7 +233,12 @@ class CompletedQuizPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Text('Wrong Question')
+                                    Text(
+                                      'Wrong Question',
+                                      style: Get.isDarkMode
+                                          ? AppStyles.tsBlackRegular14
+                                          : AppStyles.tsBlackRegular14,
+                                    )
                                   ],
                                 ),
                               ],
@@ -253,7 +273,12 @@ class CompletedQuizPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text("Leaderboard"),
+                  child: Text(
+                    "Leaderboard",
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
+                  ),
                 ),
               ),
               SizedBox(width: 16),
@@ -270,7 +295,12 @@ class CompletedQuizPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text("Home"),
+                  child: Text(
+                    "Home",
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
+                  ),
                 ),
               ),
             ],

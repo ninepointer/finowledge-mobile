@@ -23,7 +23,9 @@ class _PracticeQuizHomeViewState extends State<PracticeQuizHomeView> {
                 margin: EdgeInsets.only(left: 8),
                 child: Text(
                   "Open Quiz",
-                  style: AppStyles.tsBlackMedium14,
+                  style: Get.isDarkMode
+                      ? AppStyles.tsWhiteMedium14
+                      : AppStyles.tsBlackMedium14,
                 ))
           ],
         ),
@@ -42,7 +44,9 @@ class _PracticeQuizHomeViewState extends State<PracticeQuizHomeView> {
                     Flexible(
                       child: Text(
                         "Banking Quiz",
-                        style: AppStyles.tsBlackMedium16,
+                        style: Get.isDarkMode
+                            ? AppStyles.tsWhiteMedium16
+                            : AppStyles.tsBlackMedium16,
                       ),
                     ),
                   ],
@@ -57,21 +61,27 @@ class _PracticeQuizHomeViewState extends State<PracticeQuizHomeView> {
                       children: [
                         Text(
                           "20 Qs.",
-                          style: AppStyles.tsBlackRegular14,
+                          style: Get.isDarkMode
+                              ? AppStyles.tsWhiteRegular12
+                              : AppStyles.tsBlackRegular12,
                         ),
                         SizedBox(
                           width: 4,
                         ),
                         Text(
                           "12 mins.",
-                          style: AppStyles.tsBlackRegular14,
+                          style: Get.isDarkMode
+                              ? AppStyles.tsWhiteRegular12
+                              : AppStyles.tsBlackRegular12,
                         ),
                         SizedBox(
                           width: 4,
                         ),
                         Text(
                           '40 Marks',
-                          style: AppStyles.tsBlackRegular14,
+                          style: Get.isDarkMode
+                              ? AppStyles.tsWhiteRegular12
+                              : AppStyles.tsBlackRegular12,
                         )
                       ],
                     ),
@@ -81,9 +91,12 @@ class _PracticeQuizHomeViewState extends State<PracticeQuizHomeView> {
                       },
                       child: Text(
                         "Start Quiz",
-                        style: AppStyles.tsBlackMedium14.copyWith(
-                          color: AppColors.finowledgePurpleAccentColors,
-                        ),
+                        style: Get.isDarkMode
+                            ? AppStyles.tsBlackMedium14
+                                .copyWith(color: AppColors.primary)
+                            : AppStyles.tsBlackMedium14.copyWith(
+                                color: AppColors.finowledgePurpleAccentColors,
+                              ),
                       ),
                     ),
                   ],

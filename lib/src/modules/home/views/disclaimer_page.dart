@@ -27,7 +27,12 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Banking Quiz', style: AppStyles.tsBlackMedium18),
+                  Text(
+                    'Banking Quiz',
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium18
+                        : AppStyles.tsBlackMedium18,
+                  ),
                 ],
               ),
               SizedBox(height: 12.0),
@@ -36,11 +41,15 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                 children: [
                   Text(
                     "Duration: 12 Mins",
-                    style: AppStyles.tsBlackMedium14,
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
                   ),
                   Text(
                     "Maximum Marks: 40",
-                    style: AppStyles.tsBlackMedium14,
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
                   ),
                 ],
               ),
@@ -57,7 +66,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'The quiz consists of a total of 20 questions.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -75,7 +86,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'Each question has 4 options out of which only one is correct.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -92,7 +105,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'You have to finish the test in 12 minutes.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -109,7 +124,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'You will be awarded 2 marks for each correct answer and 0.5 will be deducted for each wrong answer.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -126,7 +143,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'There is no negative marking for the questions that you have not attempted.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -143,7 +162,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                   Flexible(
                     child: Text(
                       'You can write this quiz only once. Make sure that you complete the test before you submit the test and/or close the app.',
-                      style: AppStyles.tsBlackRegular16,
+                      style: Get.isDarkMode
+                          ? AppStyles.tsWhiteRegular16
+                          : AppStyles.tsBlackRegular16,
                     ),
                   ),
                 ],
@@ -151,7 +172,9 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               SizedBox(height: 20.0),
               Text(
                 'I have read all the instructions carefully and have understood them. I agree not to cheat or use unfair means in this examinations. I understand that using unfair means of any sort for my or someone else\'s advantage will lead to my immediate disqualification. The decision of Finowledge.com will be final in these matters and cannot be appealed.',
-                style: AppStyles.tsBlackRegular16,
+                style: Get.isDarkMode
+                    ? AppStyles.tsWhiteRegular16
+                    : AppStyles.tsBlackRegular16,
               ),
             ],
           ),
@@ -178,7 +201,12 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text("Agree and Continue"),
+                  child: Text(
+                    "Agree and Continue",
+                    style: Get.isDarkMode
+                        ? AppStyles.tsWhiteMedium14
+                        : AppStyles.tsBlackMedium14,
+                  ),
                 ),
               ),
             ],

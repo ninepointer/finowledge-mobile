@@ -81,7 +81,12 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                           SizedBox(
                             height: 25,
                           ),
-                          Text("What is UPI?"),
+                          Text(
+                            "What is UPI?",
+                            style: Get.isDarkMode
+                                ? AppStyles.tsBlackRegular14
+                                : AppStyles.tsBlackRegular14,
+                          ),
                         ],
                       ),
                     ),
@@ -166,7 +171,12 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              child: Text("Next"),
+              child: Text(
+                "Next",
+                style: Get.isDarkMode
+                    ? AppStyles.tsWhiteRegular16
+                    : AppStyles.tsBlackRegular16,
+              ),
             ),
           ),
         ),
