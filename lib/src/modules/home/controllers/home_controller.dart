@@ -29,6 +29,11 @@ class HomeController extends BaseController<DashboardRepository> {
   final userAllOlympiadList = <MyActiveOlympiadList>[].obs;
   final timeSlotForQuizRegistrationList = <TimeSlotForQuizList>[].obs;
   final registrationFinalPageData = RegistrationFinalResponse().obs;
+  final quizQuestionAndAnswer = QuizPracticeQuestionAndAnswerData().obs;
+  final listOfQuestionsWithOption = <QuizQuestions>[].obs;
+  final singleQuestionWithOption = QuizQuestions().obs;
+  int totalNoOfQuestion = 0;
+  int currentNumberOfQuestion = 0;
 
   final selectedTabIndex = 0.obs;
 
@@ -54,6 +59,39 @@ class HomeController extends BaseController<DashboardRepository> {
     await getMyActiveOlympiadDetails();
     await getUserAllOlympiadDetails();
     // await getDashboardCarousel();
+  }
+
+  Future postQuizUserInitilizationResponse(String quizId) async {
+    isLoading(true);
+
+    try {
+      final RepoResponse<QuizUserInilizationResponse> response =
+          await repository.fetchQuizResponse(quizId);
+      if (response.data != null) {
+        SnackbarHelper.showSnackbar(response.data?.status);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getQuizQuestionAndAnswerResponse(String quizId) async {
+    isLoading(true);
+
+    try {
+      final RepoResponse<QuizPracticeQuestionAndAnswerResponse> response =
+          await repository.fetchQuizQuestionsAndAnswers(quizId);
+      if (response.data != null) {
+        quizQuestionAndAnswer(response.data?.data);
+        listOfQuestionsWithOption(response.data?.data?.questions ?? []);
+        singleQuestionWithOption(response.data?.data?.questions?.first);
+        totalNoOfQuestion = response.data?.data?.questions?.length ?? 0;
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
   }
 
   Future saveUserProfilePhotoDetails(File? file) async {
@@ -103,23 +141,23 @@ class HomeController extends BaseController<DashboardRepository> {
     isLoading(false);
   }
 
-  Future getDashboardCarousel() async {
-    isLoading(true);
-    try {
-      final RepoResponse<DashboardCarouselResponse> response =
-          await repository.getDashboardCarousel();
-      if (response.data != null) {
-        if (response.data?.status?.toLowerCase() == "success") {
-          dashboardCarouselList(response.data?.data ?? []);
-        }
-      } else {
-        SnackbarHelper.showSnackbar(response.error?.message);
-      }
-    } catch (e) {
-      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-    }
-    isLoading(false);
-  }
+  // Future getDashboardCarousel() async {
+  //   isLoading(true);
+  //   try {
+  //     final RepoResponse<DashboardCarouselResponse> response =
+  //         await repository.getDashboardCarousel();
+  //     if (response.data != null) {
+  //       if (response.data?.status?.toLowerCase() == "success") {
+  //         dashboardCarouselList(response.data?.data ?? []);
+  //       }
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  //   isLoading(false);
+  // }
 
   Future getMyActiveOlympiadDetails() async {
     isLoading(true);

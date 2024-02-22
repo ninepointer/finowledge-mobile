@@ -56,4 +56,23 @@ class DashboardRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: RegistrationFinalResponse.fromJson(response));
   }
+
+  Future<RepoResponse<QuizUserInilizationResponse>> fetchQuizResponse(
+      String quizId) async {
+    String apiURL = AppUrls.quizResopnse(quizId);
+    var response = await service.postAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: QuizUserInilizationResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<QuizPracticeQuestionAndAnswerResponse>>
+      fetchQuizQuestionsAndAnswers(String quizId) async {
+    String apiURL = AppUrls.quizResopnse(quizId);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(
+            data: QuizPracticeQuestionAndAnswerResponse.fromJson(response));
+  }
 }

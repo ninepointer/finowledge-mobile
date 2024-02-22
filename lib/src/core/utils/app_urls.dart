@@ -55,4 +55,7 @@ class AppUrls {
 
   static String registrationComplate(String quizId) =>
       "/quiz/user/registration/$quizId";
+
+  ///quiz/response/${quizId}
+  static String quizResopnse(String quizId) => "/quiz/response/$quizId";
 }

@@ -9,6 +9,14 @@ class DisclaimerPage extends StatefulWidget {
 }
 
 class _DisclaimerPageState extends State<DisclaimerPage> {
+  late HomeController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<HomeController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,6 +200,8 @@ class _DisclaimerPageState extends State<DisclaimerPage> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    controller.postQuizUserInitilizationResponse(
+                        '65d470cf0f3ddaecf5ffca39');
                     Get.to(() => PracticeTestForQuizView());
                   },
                   style: ElevatedButton.styleFrom(
