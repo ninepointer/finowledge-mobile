@@ -27,6 +27,8 @@ class AuthController extends BaseController<AuthRepository> {
   final dobTextController = TextEditingController();
   final schoolNameTextController = TextEditingController();
 
+  final pinTextController = TextEditingController();
+
   final isLoading = false.obs;
   bool get isLoadingStatus => isLoading.value;
 
@@ -50,6 +52,9 @@ class AuthController extends BaseController<AuthRepository> {
   //List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
   final selectedCity = ''.obs;
   final selectedCityForState = "".obs;
+  final logInPinOtpController = TextEditingController();
+  final forgetNewPinController = TextEditingController();
+  final confirmForgetNewPinController = TextEditingController();
 
   List<String> states = [
     'Andaman & Nicobar',
@@ -123,6 +128,103 @@ class AuthController extends BaseController<AuthRepository> {
         }
       } else {
         Get.toNamed(AppRoutes.signup);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future studentSigninWithPin() async {
+    isLoading(true);
+    FocusScope.of(Get.context!).unfocus();
+    PhoneLoginWithPinRequest data = PhoneLoginWithPinRequest(
+      mobile: mobileTextController.text,
+      pin: pinTextController.text,
+    );
+    try {
+      final RepoResponse<StudentLoginWithPinResponse> response =
+          await repository.studentphoneLoginWithPin(
+        data.toJson(),
+      );
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          token(response.data?.token);
+          await AppStorage.setToken(response.data?.token);
+          Get.toNamed(AppRoutes.home);
+        }
+      } else {
+        // Get.toNamed(AppRoutes.signup);
+        SnackbarHelper.showSnackbar("${response.error?.message}");
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future studentLoginPinReset() async {
+    isLoading(true);
+    FocusScope.of(Get.context!).unfocus();
+    PhoneLoginRequest data = PhoneLoginRequest(
+      mobile: mobileTextController.text,
+    );
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.studentphoneLoginPinRest(
+        data.toJson(),
+      );
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          // token(response.data?.token);
+          // await AppStorage.setToken(response.data?.token);
+          Get.toNamed(AppRoutes.forgetLoginPin);
+        }
+      } else {
+        // Get.toNamed(AppRoutes.signup);
+        SnackbarHelper.showSnackbar("${response.error?.message}");
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future forgetStudentLoginPinReset(Function onSuccess) async {
+    isLoading(true);
+
+    FocusScope.of(Get.context!).unfocus();
+
+    // String deviceToken = await firebaseMessaging.getToken() ?? '-';
+    // print('DeviceToken : $deviceToken');
+
+    StudentPinResetRequest data = StudentPinResetRequest(
+      mobile: mobileTextController.text,
+      mobileOtp: logInPinOtpController.text,
+      pin: forgetNewPinController.text,
+      confirmPin: confirmForgetNewPinController.text,
+
+      // fcmTokenData: FcmTokenData(
+      //   token: deviceToken,
+      // ),
+    );
+
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.studentresetpin(
+        data.toJson(),
+      );
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          onSuccess.call();
+        } else {
+          SnackbarHelper.showSnackbar(response.error?.message);
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
       }
     } catch (e) {
       log(e.toString());

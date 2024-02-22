@@ -55,4 +55,10 @@ class AppUrls {
 
   static String registrationComplate(String quizId) =>
       "/quiz/user/registration/$quizId";
+
+  static const String studentPinLogin = "/studentpinlogin";
+
+  static const String studentPinReset = "/resetpinotp";
+
+  static const String studentResetPin = "/studentresetpin";
 }

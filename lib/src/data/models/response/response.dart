@@ -17,3 +17,4 @@ export 'time_slot_for_quiz_respoonse.dart';
 export 'fetch_school_list_response.dart';
 export 'school_user_grade_and_section_response.dart';
 export 'registration_final_page_response.dart';
+export 'student_login_with_pin_response.dart';

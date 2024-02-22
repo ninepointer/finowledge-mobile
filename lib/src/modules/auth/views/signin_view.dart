@@ -103,6 +103,34 @@ class _SignInViewState extends State<SignInView> {
                             },
                           ),
                         ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Text(
+                              //   "Login with pin?",
+                              //   style: Theme.of(context).textTheme.tsRegular16,
+                              //   textAlign: TextAlign.center,
+                              // ),
+                              // SizedBox(
+                              //   width: 10.w,
+                              // ),
+                              InkWell(
+                                onTap: () => Get.to(() => LoginInWithPinView()),
+                                child: Text(
+                                  "Login with pin?",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.lightGreen,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: AppColors.lightGreen,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),

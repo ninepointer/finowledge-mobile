@@ -94,5 +94,10 @@ class AppPages {
       page: () => FinowledgeLobbyView(),
       binding: FinowledgeBinding(),
     ),
+    GetPage(
+      name: AppRoutes.forgetLoginPin,
+      page: () => ForgetLoginPinView(),
+      binding: AuthBinding(),
+    ),
   ];
 }
