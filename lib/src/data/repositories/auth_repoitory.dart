@@ -37,6 +37,24 @@ class AuthRepository extends BaseRepository {
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
+  Future<RepoResponse<StudentLoginWithPinResponse>> studentphoneLoginWithPin(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.studentPinLogin;
+    var response = await service.post(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: StudentLoginWithPinResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<GenericResponse>> studentphoneLoginPinRest(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.studentPinReset;
+    var response = await service.post(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
+  }
+
   Future<RepoResponse<VerifyPhoneLoginResponse>> verifySigninOtp(
       Map<String, dynamic> data) async {
     String apiURL = AppUrls.verifyPhoneLogin;
@@ -44,6 +62,15 @@ class AuthRepository extends BaseRepository {
     return response is APIException
         ? RepoResponse(error: response)
         : RepoResponse(data: VerifyPhoneLoginResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<GenericResponse>> studentresetpin(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.studentResetPin;
+    var response = await service.patch(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
   Future<RepoResponse<VerifyPhoneLoginResponse>> verifySignupOtp(

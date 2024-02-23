@@ -23,6 +23,7 @@ class _SignInViewState extends State<SignInView> {
     super.initState();
     controller = Get.find<AuthController>();
     formKey = GlobalKey<FormState>();
+    controller.mobileTextController.clear();
     _initializeDynamicLink();
   }
 
@@ -101,6 +102,34 @@ class _SignInViewState extends State<SignInView> {
                               }
                               return null;
                             },
+                          ),
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Text(
+                              //   "Login with pin?",
+                              //   style: Theme.of(context).textTheme.tsRegular16,
+                              //   textAlign: TextAlign.center,
+                              // ),
+                              // SizedBox(
+                              //   width: 10.w,
+                              // ),
+                              InkWell(
+                                onTap: () => Get.to(() => LoginInWithPinView()),
+                                child: Text(
+                                  "Login with PIN?",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.lightGreen,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: AppColors.lightGreen,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

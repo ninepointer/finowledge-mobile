@@ -13,6 +13,7 @@ class VerifySignupRequest {
   String? campaignCode;
   FcmTokenData? fcmTokenData;
   String? section;
+  String? pin;
 
   VerifySignupRequest({
     this.mobile,
@@ -27,6 +28,7 @@ class VerifySignupRequest {
     this.campaignCode,
     this.fcmTokenData,
     this.section,
+    this.pin,
   });
 
   VerifySignupRequest.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class VerifySignupRequest {
     mobile = json["mobile"];
     mobileOtp = json['mobile_otp'];
     section = json['section'];
+    pin = json['pin'];
     fcmTokenData = json['fcmTokenData'] != null
         ? new FcmTokenData.fromJson(json['fcmTokenData'])
         : null;
@@ -59,6 +62,7 @@ class VerifySignupRequest {
     data["mobile"] = this.mobile;
     data['mobile_otp'] = this.mobileOtp;
     data['section'] = this.section;
+    data['pin'] = this.pin;
     if (this.fcmTokenData != null) {
       data['fcmTokenData'] = this.fcmTokenData!.toJson();
     }

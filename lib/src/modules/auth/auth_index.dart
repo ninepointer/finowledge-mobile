@@ -5,3 +5,5 @@ export 'controllers/auth_controller.dart';
 export 'views/finowledge_signin_page.dart';
 export 'views/finowledge_otp_view.dart';
 export 'views/finowledge_signup_view.dart';
+export 'views/login_with_pin_view.dart';
+export 'views/forget_login_pin_view.dart';

@@ -10,3 +10,5 @@ export 'fcm_toke_data_request.dart';
 export 'verify_kyc_genrate_otp_request.dart';
 export "verify_kyc_verify_otp_request.dart";
 export 'fetch_school_request.dart';
+export 'phone_login_with_pin_request.dart';
+export 'student_pin_reset_request.dart';

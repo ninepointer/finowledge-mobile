@@ -8,6 +8,7 @@ class SignupRequest {
   String? school;
   String? state;
   String? section;
+  String? pin;
   // String? state;
   // String? country;
   // String? referrerCode;
@@ -24,6 +25,7 @@ class SignupRequest {
     this.school = '',
     this.state = "",
     this.section = "",
+    this.pin = '',
     // this.state = "",
     // this.country = "",
     // this.referrerCode = "",
@@ -41,6 +43,7 @@ class SignupRequest {
     school = json['school'];
     state = json['state'];
     section = json['section'];
+    pin = json['pin'];
     // state = json['state'];
     // country = json['country'];
     // referrerCode = json['referrerCode'];
@@ -59,6 +62,7 @@ class SignupRequest {
     data['school'] = this.school;
     data['state'] = this.state;
     data['section'] = this.section;
+    data['pin'] = this.pin;
     // data['state'] = this.state;
     // data['country'] = this.country;
     // data['referrerCode'] = this.referrerCode;
