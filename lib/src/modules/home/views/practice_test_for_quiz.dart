@@ -156,6 +156,11 @@ class _PracticeTestForQuizViewState extends State<PracticeTestForQuizView> {
                                   style: TextStyle(color: AppColors.lightGreen),
                                 ),
                               ),
+
+                              Center(
+                                child: Text(
+                                    '(${controller.singleQuestionWithOption.value.type ?? ''})'),
+                              ),
                               SizedBox(
                                 height: 12,
                               ),
