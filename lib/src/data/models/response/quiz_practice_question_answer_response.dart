@@ -1,3 +1,5 @@
+import 'package:stoxhero/src/app/app.dart';
+
 class QuizPracticeQuestionAndAnswerResponse {
   String? status;
   QuizPracticeQuestionAndAnswerData? data;
@@ -117,6 +119,7 @@ class QuizOptions {
   String? title;
   String? sId;
   String? image;
+  final isSelected = false.obs;
 
   QuizOptions({this.title, this.sId, this.image});
 

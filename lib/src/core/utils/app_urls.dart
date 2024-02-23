@@ -62,6 +62,11 @@ class AppUrls {
 
   static const String studentResetPin = "/studentresetpin";
 
-  ///quiz/response/${quizId}
   static String quizResopnse(String quizId) => "/quiz/response/$quizId";
+
+  static String quizPracticeDetails(String quizId) =>
+      "/quiz/$quizId"; //Not implemented yet
+
+  static String insertUserQuizResponse(String quizId) =>
+      "/quiz/response/insertresponse/$quizId";
 }

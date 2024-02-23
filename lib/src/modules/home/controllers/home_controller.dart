@@ -2,6 +2,28 @@ import 'dart:io';
 import '../../../app/app.dart';
 import 'package:file_support/file_support.dart';
 
+enum QuestionType {
+  singleCorrect,
+  multipleCorrect,
+  imageSingleCorrect,
+  imageMultipleCorrect,
+}
+
+extension QuestionTypeExt on QuestionType {
+  String get name {
+    switch (this) {
+      case QuestionType.singleCorrect:
+        return 'Single Correct';
+      case QuestionType.multipleCorrect:
+        return 'Multiple Correct';
+      case QuestionType.imageSingleCorrect:
+        return 'Image Single Correct';
+      case QuestionType.imageMultipleCorrect:
+        return 'Image Multiple Correct';
+    }
+  }
+}
+
 class HomeBinding implements Bindings {
   @override
   void dependencies() => Get.put(HomeController());
@@ -34,6 +56,7 @@ class HomeController extends BaseController<DashboardRepository> {
   final singleQuestionWithOption = QuizQuestions().obs;
   int totalNoOfQuestion = 0;
   int currentNumberOfQuestion = 0;
+  List<String> optionId = [];
 
   final selectedTabIndex = 0.obs;
 
@@ -139,6 +162,24 @@ class HomeController extends BaseController<DashboardRepository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isLoading(false);
+  }
+
+  Future sendStudentQuizQuestionResponseDetails(
+      String quizId, String questionId, List<String> optionId) async {
+    Map<String, dynamic> data = {
+      'questionId': questionId,
+      'optionId': optionId,
+    };
+
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.quizInsertResponseSent(data, quizId);
+      if (response.data != null) {
+        // registrationFinalPageData(response.data);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
   }
 
   // Future getDashboardCarousel() async {

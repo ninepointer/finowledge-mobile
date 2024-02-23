@@ -57,6 +57,24 @@ class DashboardRepository extends BaseRepository {
         : RepoResponse(data: RegistrationFinalResponse.fromJson(response));
   }
 
+  Future<RepoResponse<GenericResponse>> quizPractice(
+      Map<String, dynamic> data, String quizId) async {
+    String apiURL = AppUrls.quizPracticeDetails(quizId);
+    var response = await service.patchAuth(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<GenericResponse>> quizInsertResponseSent(
+      Map<String, dynamic> data, String quizId) async {
+    String apiURL = AppUrls.insertUserQuizResponse(quizId);
+    var response = await service.patchAuth(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
+  }
+
   Future<RepoResponse<QuizUserInilizationResponse>> fetchQuizResponse(
       String quizId) async {
     String apiURL = AppUrls.quizResopnse(quizId);
