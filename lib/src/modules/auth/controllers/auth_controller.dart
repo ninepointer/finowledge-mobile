@@ -398,6 +398,7 @@ class AuthController extends BaseController<AuthRepository> {
       city: selectedCity.value,
       mobile: mobileTextController.text,
       mobileOtp: otpTextController.text,
+      pin: signupPinController.text,
       dob: DateFormat('yyyy-MM-dd').format(date),
       fcmTokenData: FcmTokenData(
         token: deviceToken,

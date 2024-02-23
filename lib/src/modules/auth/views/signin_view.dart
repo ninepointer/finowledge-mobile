@@ -23,6 +23,7 @@ class _SignInViewState extends State<SignInView> {
     super.initState();
     controller = Get.find<AuthController>();
     formKey = GlobalKey<FormState>();
+    controller.mobileTextController.clear();
     _initializeDynamicLink();
   }
 

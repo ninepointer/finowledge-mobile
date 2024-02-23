@@ -17,7 +17,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Reset pin"),
+        title: Text("Reset PIN"),
       ),
       body: SafeArea(
         child: Center(
@@ -50,7 +50,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
                           child: Column(
                             children: [
                               Row(
-                                children: [Text("Enter Your Otp here ")],
+                                children: [Text("Enter Your OTP")],
                               ),
                               SizedBox(
                                 height: 12,
@@ -114,7 +114,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
                                 height: 12,
                               ),
                               Row(
-                                children: [Text("Enter your pin ")],
+                                children: [Text("Enter Your PIN ")],
                               ),
                               SizedBox(
                                 height: 12,
@@ -174,11 +174,11 @@ class ForgetLoginPinView extends GetView<AuthController> {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              SfluizedBox(
                                 height: 12,
                               ),
                               Row(
-                                children: [Text("Confirm your pin ")],
+                                children: [Text("Confirm Your PIN ")],
                               ),
                               SizedBox(
                                 height: 12,
@@ -256,7 +256,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
                       : AppColors.lightGreen,
                   label: string("label_verify"),
                   onPressed: () {
-                    controller.forgetStudentLoginPinReset((success) {
+                    controller.forgetStudentLoginPinReset(() {
                       showDialog(
                         barrierDismissible: false,
                         context: context,
@@ -272,7 +272,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
                                   height: 20,
                                 ),
                                 Text(
-                                    "Congratulations! Your pin has been reset successfully"),
+                                    "Congratulations! Your PIN has been reset successfully"),
                               ],
                             ),
                             actions: [
