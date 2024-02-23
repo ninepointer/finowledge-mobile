@@ -48,10 +48,12 @@ class AuthController extends BaseController<AuthRepository> {
   final selectedClassId = ''.obs;
   final selectedSections = <String>[].obs;
   final selectedSection = ''.obs;
+  final signupPinController = TextEditingController();
 
   //List<String> classes = ['6th', '7th', '8th', "9th", "10th", "11th", "12th"];
   final selectedCity = ''.obs;
   final selectedCityForState = "".obs;
+  final selectedInputString = ''.obs;
   final logInPinOtpController = TextEditingController();
   final forgetNewPinController = TextEditingController();
   final confirmForgetNewPinController = TextEditingController();
@@ -152,7 +154,8 @@ class AuthController extends BaseController<AuthRepository> {
         if (response.data?.status?.toLowerCase() == "success") {
           token(response.data?.token);
           await AppStorage.setToken(response.data?.token);
-          Get.toNamed(AppRoutes.home);
+          await getUserDetails();
+          // Get.toNamed(AppRoutes.home);
         }
       } else {
         // Get.toNamed(AppRoutes.signup);
@@ -335,6 +338,8 @@ class AuthController extends BaseController<AuthRepository> {
       city: selectedCity.value,
       state: selectedState.value,
 
+      pin: signupPinController.text,
+
       // referrerCode: hasCampaignCode.value
       //     ? campaignCode.value
       //     : referralTextController.text,
@@ -498,8 +503,7 @@ class AuthController extends BaseController<AuthRepository> {
     FocusScope.of(Get.context!).unfocus();
 
     fetchSchoolRequest data = fetchSchoolRequest(
-        inputString: selectedSchoolSid.value, cityId: selectedCity.value);
-    //
+        inputString: selectedInputString.value, cityId: selectedCity.value);
 
     try {
       //  Future<RepoResponse<fetchSchoolResponse>> response =

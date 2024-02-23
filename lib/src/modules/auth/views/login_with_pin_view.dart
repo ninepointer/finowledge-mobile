@@ -24,6 +24,8 @@ class _LoginInWithPinViewState extends State<LoginInWithPinView> {
     super.initState();
     controller = Get.find<AuthController>();
     formKey = GlobalKey<FormState>();
+    controller.pinTextController.clear();
+
     _initializeDynamicLink();
   }
 
@@ -51,7 +53,7 @@ class _LoginInWithPinViewState extends State<LoginInWithPinView> {
                           child: Column(
                             children: [
                               Text(
-                                "Enter Your Mobile Number And Pin",
+                                "Enter Your Mobile Number And PIN",
                                 style: Theme.of(context)
                                     .textTheme
                                     .tsMedium24
@@ -116,7 +118,7 @@ class _LoginInWithPinViewState extends State<LoginInWithPinView> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text("Enter your 6 digits pin"),
+                                  Text("Enter your 6 digits PIN"),
                                 ],
                               ),
                               SizedBox(
@@ -199,7 +201,7 @@ class _LoginInWithPinViewState extends State<LoginInWithPinView> {
                                 }
                               },
                               child: Text(
-                                "Forget Pin?",
+                                "Forget PIN?",
                                 style: AppStyles.tsBlackMedium14
                                     .copyWith(color: AppColors.lightGreen),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stoxhero/src/app/app.dart';
@@ -304,6 +305,10 @@ class _SignupViewState extends State<SignupView> {
                                     },
                                     selectedItem:
                                         controller.selectedCityForState.value,
+                                    // onSaved: (newValue) async {
+                                    //   controller.selectedInputString(newValue);
+                                    //   await controller.fetchSchoolListDetails();
+                                    // },
                                   ),
                                 ),
                               ),
@@ -566,6 +571,28 @@ class _SignupViewState extends State<SignupView> {
                                         controller.selectedSection.value,
                                   ),
                                 ),
+                              ),
+                              CommonTextField(
+                                controller: controller.signupPinController,
+                                hintText: "Enter Your PIN",
+                                // focusNode: FocusNode(),
+                                prefixIcon: Icon(
+                                  Icons.password,
+                                  color: AppColors.grey,
+                                ),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(6),
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length == 0) {
+                                    return "PIN number is required";
+                                  }
+                                  return null;
+                                },
                               ),
                               // CommonDropdown(hint: hint, value: value, dropdownItems: dropdownItems, onChanged: onChanged)
                             ],

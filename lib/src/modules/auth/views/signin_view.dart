@@ -118,7 +118,7 @@ class _SignInViewState extends State<SignInView> {
                               InkWell(
                                 onTap: () => Get.to(() => LoginInWithPinView()),
                                 child: Text(
-                                  "Login with pin?",
+                                  "Login with PIN?",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: AppColors.lightGreen,
