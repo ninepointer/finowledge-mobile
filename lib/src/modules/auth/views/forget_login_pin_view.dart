@@ -174,7 +174,7 @@ class ForgetLoginPinView extends GetView<AuthController> {
                                   return null;
                                 },
                               ),
-                              SfluizedBox(
+                              SizedBox(
                                 height: 12,
                               ),
                               Row(
